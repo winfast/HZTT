@@ -1,0 +1,490 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04E4FC7E24EA73A800C5E5B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4FC7D24EA73A800C5E5B0 /* AppDelegate.swift */; };
+		04E4FC8724EA73AF00C5E5B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04E4FC8624EA73AF00C5E5B0 /* Assets.xcassets */; };
+		04E4FC8A24EA73AF00C5E5B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04E4FC8824EA73AF00C5E5B0 /* LaunchScreen.storyboard */; };
+		04E4FC9824EA7EE800C5E5B0 /* HZTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4FC9724EA7EE800C5E5B0 /* HZTabBarController.swift */; };
+		04E4FC9A24EA80D500C5E5B0 /* HZBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4FC9924EA80D500C5E5B0 /* HZBaseViewController.swift */; };
+		04E4FC9C24EA8D7B00C5E5B0 /* HZNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4FC9B24EA8D7B00C5E5B0 /* HZNavigationController.swift */; };
+		04E4FCA224EA94B600C5E5B0 /* HZHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4FCA124EA94B600C5E5B0 /* HZHomeViewController.swift */; };
+		04E4FCA424EA96DB00C5E5B0 /* HZColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4FCA324EA96DB00C5E5B0 /* HZColor.swift */; };
+		04E4FCA624EA998400C5E5B0 /* HZImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4FCA524EA998400C5E5B0 /* HZImage.swift */; };
+		C0D70ED209286186840E23D1 /* Pods_HZTT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B960D762B7832A7DA0C56283 /* Pods_HZTT.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		04E4FC7A24EA73A800C5E5B0 /* HZTT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HZTT.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		04E4FC7D24EA73A800C5E5B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		04E4FC8624EA73AF00C5E5B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		04E4FC8924EA73AF00C5E5B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		04E4FC8B24EA73AF00C5E5B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04E4FC9624EA7C9000C5E5B0 /* HZTT-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HZTT-Bridging-Header.h"; sourceTree = "<group>"; };
+		04E4FC9724EA7EE800C5E5B0 /* HZTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZTabBarController.swift; sourceTree = "<group>"; };
+		04E4FC9924EA80D500C5E5B0 /* HZBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZBaseViewController.swift; sourceTree = "<group>"; };
+		04E4FC9B24EA8D7B00C5E5B0 /* HZNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZNavigationController.swift; sourceTree = "<group>"; };
+		04E4FCA124EA94B600C5E5B0 /* HZHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeViewController.swift; sourceTree = "<group>"; };
+		04E4FCA324EA96DB00C5E5B0 /* HZColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZColor.swift; sourceTree = "<group>"; };
+		04E4FCA524EA998400C5E5B0 /* HZImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZImage.swift; sourceTree = "<group>"; };
+		0D0F67B14D652898A24E16DA /* Pods-HZTT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZTT.debug.xcconfig"; path = "Target Support Files/Pods-HZTT/Pods-HZTT.debug.xcconfig"; sourceTree = "<group>"; };
+		A8FFFD6C6B940C9A5C44B88E /* Pods-HZTT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZTT.release.xcconfig"; path = "Target Support Files/Pods-HZTT/Pods-HZTT.release.xcconfig"; sourceTree = "<group>"; };
+		B960D762B7832A7DA0C56283 /* Pods_HZTT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HZTT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04E4FC7724EA73A800C5E5B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0D70ED209286186840E23D1 /* Pods_HZTT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04E4FC7124EA73A800C5E5B0 = {
+			isa = PBXGroup;
+			children = (
+				04E4FC7C24EA73A800C5E5B0 /* HZTT */,
+				04E4FC7B24EA73A800C5E5B0 /* Products */,
+				E9CA2D7ACC975197B1DD3C4C /* Pods */,
+				92C15AEDA21570FC267589F8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		04E4FC7B24EA73A800C5E5B0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04E4FC7A24EA73A800C5E5B0 /* HZTT.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		04E4FC7C24EA73A800C5E5B0 /* HZTT */ = {
+			isa = PBXGroup;
+			children = (
+				04E4FC9524EA7A7600C5E5B0 /* Base */,
+				04E4FC9424EA7A6E00C5E5B0 /* Command */,
+				04E4FC9224EA7A6E00C5E5B0 /* Tools */,
+				04E4FC9324EA7A6E00C5E5B0 /* ViewControllers */,
+				04E4FC7D24EA73A800C5E5B0 /* AppDelegate.swift */,
+				04E4FC8624EA73AF00C5E5B0 /* Assets.xcassets */,
+				04E4FC8824EA73AF00C5E5B0 /* LaunchScreen.storyboard */,
+				04E4FC8B24EA73AF00C5E5B0 /* Info.plist */,
+			);
+			path = HZTT;
+			sourceTree = "<group>";
+		};
+		04E4FC9224EA7A6E00C5E5B0 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				04E4FCA324EA96DB00C5E5B0 /* HZColor.swift */,
+				04E4FCA524EA998400C5E5B0 /* HZImage.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		04E4FC9324EA7A6E00C5E5B0 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				04E4FC9E24EA949700C5E5B0 /* 首页 */,
+				04E4FC9D24EA949700C5E5B0 /* 个人中心 */,
+				04E4FCA024EA949700C5E5B0 /* 话题 */,
+				04E4FC9F24EA949700C5E5B0 /* 生活 */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		04E4FC9424EA7A6E00C5E5B0 /* Command */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Command;
+			sourceTree = "<group>";
+		};
+		04E4FC9524EA7A7600C5E5B0 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				04E4FC9624EA7C9000C5E5B0 /* HZTT-Bridging-Header.h */,
+				04E4FC9724EA7EE800C5E5B0 /* HZTabBarController.swift */,
+				04E4FC9924EA80D500C5E5B0 /* HZBaseViewController.swift */,
+				04E4FC9B24EA8D7B00C5E5B0 /* HZNavigationController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		04E4FC9D24EA949700C5E5B0 /* 个人中心 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "个人中心";
+			sourceTree = "<group>";
+		};
+		04E4FC9E24EA949700C5E5B0 /* 首页 */ = {
+			isa = PBXGroup;
+			children = (
+				04E4FCA124EA94B600C5E5B0 /* HZHomeViewController.swift */,
+			);
+			path = "首页";
+			sourceTree = "<group>";
+		};
+		04E4FC9F24EA949700C5E5B0 /* 生活 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "生活";
+			sourceTree = "<group>";
+		};
+		04E4FCA024EA949700C5E5B0 /* 话题 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "话题";
+			sourceTree = "<group>";
+		};
+		92C15AEDA21570FC267589F8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B960D762B7832A7DA0C56283 /* Pods_HZTT.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E9CA2D7ACC975197B1DD3C4C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0D0F67B14D652898A24E16DA /* Pods-HZTT.debug.xcconfig */,
+				A8FFFD6C6B940C9A5C44B88E /* Pods-HZTT.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		04E4FC7924EA73A800C5E5B0 /* HZTT */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04E4FC8E24EA73AF00C5E5B0 /* Build configuration list for PBXNativeTarget "HZTT" */;
+			buildPhases = (
+				7489D255D08A5BAD119D0AA9 /* [CP] Check Pods Manifest.lock */,
+				04E4FC7624EA73A800C5E5B0 /* Sources */,
+				04E4FC7724EA73A800C5E5B0 /* Frameworks */,
+				04E4FC7824EA73A800C5E5B0 /* Resources */,
+				15B3C702047006B791F15628 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HZTT;
+			productName = HZTT;
+			productReference = 04E4FC7A24EA73A800C5E5B0 /* HZTT.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04E4FC7224EA73A800C5E5B0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = HZ;
+				LastSwiftUpdateCheck = 1150;
+				LastUpgradeCheck = 1150;
+				ORGANIZATIONNAME = Galanz;
+				TargetAttributes = {
+					04E4FC7924EA73A800C5E5B0 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+				};
+			};
+			buildConfigurationList = 04E4FC7524EA73A800C5E5B0 /* Build configuration list for PBXProject "HZTT" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04E4FC7124EA73A800C5E5B0;
+			productRefGroup = 04E4FC7B24EA73A800C5E5B0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04E4FC7924EA73A800C5E5B0 /* HZTT */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		04E4FC7824EA73A800C5E5B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04E4FC8A24EA73AF00C5E5B0 /* LaunchScreen.storyboard in Resources */,
+				04E4FC8724EA73AF00C5E5B0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		15B3C702047006B791F15628 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HZTT/Pods-HZTT-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HZTT/Pods-HZTT-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HZTT/Pods-HZTT-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7489D255D08A5BAD119D0AA9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HZTT-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04E4FC7624EA73A800C5E5B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04E4FCA624EA998400C5E5B0 /* HZImage.swift in Sources */,
+				04E4FC9A24EA80D500C5E5B0 /* HZBaseViewController.swift in Sources */,
+				04E4FC9824EA7EE800C5E5B0 /* HZTabBarController.swift in Sources */,
+				04E4FCA224EA94B600C5E5B0 /* HZHomeViewController.swift in Sources */,
+				04E4FC9C24EA8D7B00C5E5B0 /* HZNavigationController.swift in Sources */,
+				04E4FC7E24EA73A800C5E5B0 /* AppDelegate.swift in Sources */,
+				04E4FCA424EA96DB00C5E5B0 /* HZColor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		04E4FC8824EA73AF00C5E5B0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04E4FC8924EA73AF00C5E5B0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		04E4FC8C24EA73AF00C5E5B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		04E4FC8D24EA73AF00C5E5B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		04E4FC8F24EA73AF00C5E5B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D0F67B14D652898A24E16DA /* Pods-HZTT.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 579P9269QX;
+				INFOPLIST_FILE = HZTT/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.galanz.HZTT.HZTT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/HZTT/Base/HZTT-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		04E4FC9024EA73AF00C5E5B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8FFFD6C6B940C9A5C44B88E /* Pods-HZTT.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 579P9269QX;
+				INFOPLIST_FILE = HZTT/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.galanz.HZTT.HZTT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/HZTT/Base/HZTT-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04E4FC7524EA73A800C5E5B0 /* Build configuration list for PBXProject "HZTT" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04E4FC8C24EA73AF00C5E5B0 /* Debug */,
+				04E4FC8D24EA73AF00C5E5B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04E4FC8E24EA73AF00C5E5B0 /* Build configuration list for PBXNativeTarget "HZTT" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04E4FC8F24EA73AF00C5E5B0 /* Debug */,
+				04E4FC9024EA73AF00C5E5B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04E4FC7224EA73A800C5E5B0 /* Project object */;
+}
