@@ -8,15 +8,20 @@
 
 import UIKit
 import SnapKit
+import RxCocoa
+import RxSwift
 
 class HZHomeViewController: HZBaseViewController {
 	
 	var tableView: UITableView!
 	
+	var closeBtn: UIButton!
+	//let disposeBag :DisposeBag! = Disposable()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.viewLayout()
+		self.dataRequest()
     }
 	
 	func viewLayout() -> Void {
@@ -35,6 +40,17 @@ class HZHomeViewController: HZBaseViewController {
 		self.tableView.snp.makeConstraints { (make) in
 			make.edges.equalTo(0)
 		}
+	}
+	
+	func dataRequest() -> Void {
+		var param = ["category":"sy",
+					 "subType":0,
+					 "pageNumber":1
+		] as [String:Any]
+		
+		HZHomeNetworkManager.shared.getPostList(param).subscribe(onNext: { (value :[HZHomeCellViewModel]) in
+			
+		}, onError: nil, onCompleted: nil, onDisposed: nil)
 	}
 }
 

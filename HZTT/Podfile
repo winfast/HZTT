@@ -10,12 +10,12 @@ target 'HZTT' do
   use_frameworks!
 	
 	pod 'Alamofire'
-	pod 'SwiftyJSON','~> 5.0'
+	pod 'SwiftyJSON'
 	pod 'SVProgressHUD'
 	pod 'MBProgressHUD'
 	#pod 'LKDBHelper', '~> 2.4.2'
-	pod 'RxSwift', '~> 5'
-	pod 'RxCocoa', '~> 5'
+	pod 'RxSwift'
+	pod 'RxCocoa'
 	#pod 'RxDataSources', '~> 1.0.4'
 	pod 'SnapKit'
 	pod 'Moya/RxSwift'
