@@ -13,6 +13,7 @@ class HZTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
+		self.tabBar.isTranslucent = false;
 		self.initTabar()
         // Do any additional setup after loading the view.
     }
@@ -53,7 +54,7 @@ class HZTabBarController: UITabBarController {
 			let appName = Bundle.main.infoDictionary!["CFBundleExecutable"] as! String
 			let cls = NSClassFromString(appName + "." + vcNamesArray[index]) as! HZBaseViewController.Type
 			let vc:UIViewController! = cls.init();
-			let barItem = UITabBarItem(title: itemTitlesArray[index], image: UIImage.init(named: icon_normalsArray[index]), selectedImage: UIImage.init(named: icon_selectedsArray[index]))
+			let barItem = UITabBarItem(title: itemTitlesArray[index], image: UIImage.init(named: icon_normalsArray[index])?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage.init(named: icon_selectedsArray[index])?.withRenderingMode(.alwaysOriginal))
 			vc.tabBarItem = barItem
 			vc.title = itemTitlesArray[index]
 			barItem.tag = index

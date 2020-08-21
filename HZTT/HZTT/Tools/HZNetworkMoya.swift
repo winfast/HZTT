@@ -16,6 +16,7 @@ import SwiftyJSON
 enum HZHomeNetworkMoya {
 	case getPostList(_ param: [String:Any])
 	case detail(_ param: [String:Any])
+	case comment(_ param: [String:Any])
 }
 
 extension HZHomeNetworkMoya: TargetType {
@@ -26,6 +27,8 @@ extension HZHomeNetworkMoya: TargetType {
 		case let .getPostList(param):
 			parammter = param
 		case let .detail(param):
+			parammter = param
+		case let .comment(param):
 			parammter = param
 		default:
 			parammter = [:]
@@ -43,6 +46,8 @@ extension HZHomeNetworkMoya: TargetType {
 			return "getPostList.php"
 		case .detail:
 			return "detail.php"
+		case .comment:
+			return "comment.php"
 		default:
 			return ""
 		}
@@ -51,7 +56,7 @@ extension HZHomeNetworkMoya: TargetType {
 	//请求方式
 	var method: Moya.Method {
 		switch self {
-		case .getPostList,.detail:
+		case .getPostList,.detail,.comment:
 			return .post
 		default:
 			return .get

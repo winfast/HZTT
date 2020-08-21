@@ -9,7 +9,7 @@
 import UIKit
 
 class HZBaseViewController: UIViewController {
-
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		

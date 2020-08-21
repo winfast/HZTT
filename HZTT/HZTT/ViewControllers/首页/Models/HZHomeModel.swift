@@ -14,13 +14,13 @@ import RxCocoa
 class HZUser: NSObject {
 	
 	var lastLaunchDate: String?
-	var avatar_thumb: String?
+	@objc dynamic var avatar_thumb: String?
 	var avatar: String?
 	var user_id: String?
 	var bornDate: String?
 	var fanCnt :Int?
 	var name: String?
-	var nickName: String?
+	@objc dynamic var nickName: String?
 	var status: Int?
 	var ID: Int?
 	var praise: Int?
@@ -64,16 +64,13 @@ class HZHomeModel: NSObject {
 	@objc dynamic var readCnt: Int = 0
 	@objc dynamic var uid: String?
 	@objc dynamic var user: HZUser?
+	@objc dynamic var type: String?
 	
 	static func homeMoldeWithJson(jsonValue: JSON) -> HZHomeModel  {
 		let homeModel = HZHomeModel.init()
 		homeModel.praiseCnt = jsonValue["praiseCnt"].intValue
 		let imageStr = jsonValue["images"].stringValue
-		
 		let imagesArray = imageStr.split(separator: ",")
-//		homeModel.images = imagesArray.compactMap({ (value) -> String? in
-//			return String(value)
-//		})
 		homeModel.images = imagesArray.compactMap { "\($0)" }
 		homeModel.postDate = jsonValue["postDate"].stringValue
 		homeModel.content = jsonValue["content"].stringValue
@@ -83,6 +80,7 @@ class HZHomeModel: NSObject {
 		homeModel.uid = jsonValue["uid"].stringValue
 		let userJson = JSON(jsonValue["user"].dictionary as Any)
 		homeModel.user = HZUser.userWithJson(jsonValue:userJson)
+		homeModel.type = jsonValue["type"].stringValue
 		return homeModel
 	}
 }

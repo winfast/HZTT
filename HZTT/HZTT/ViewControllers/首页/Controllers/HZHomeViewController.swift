@@ -7,65 +7,95 @@
 //
 
 import UIKit
-import SnapKit
-import RxCocoa
-import RxSwift
+
+import JXSegmentedView
 
 class HZHomeViewController: HZBaseViewController {
 	
-	var tableView: UITableView!
+	let segmentedView = JXSegmentedView()
+	let titlesId = [
+				"最新":"0",
+				"热门":"1",
+	//          "新鲜事":"10",∂∂∂
+				"打听":"11",
+				"吐槽":"12",
+				"公告":"13",
+			]
+	var segmentedDataSource: JXSegmentedTitleDataSource?
+	lazy var listContainerView: JXSegmentedListContainerView! = {
+		return JXSegmentedListContainerView(dataSource: self)
+	}()
 	
-	var closeBtn: UIButton!
-	//let disposeBag :DisposeBag! = Disposable()
+	
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.viewLayout()
-		self.dataRequest()
+		
     }
 	
 	func viewLayout() -> Void {
-		
 		self.navigationController?.navigationBar.shadowImage = imageWithColor(color: UIColorWith24Hex(rgbValue: 0xFF0000))
-		self.navigationItem.title = "";
+		self.navigationItem.title = ""
+
+		let titles = ["最新","热门",
+					  //"新鲜事",
+					  "打听","吐槽","公告"]
 		
-		self.tableView = UITableView.init(frame: CGRect.zero, style: UITableView.Style.plain)
-		self.tableView.delegate = self
-		self.tableView.dataSource = self
-		self.tableView.separatorColor = UIColor.gray
-		self.tableView.tableFooterView = UIView.init()
-		self.tableView.rowHeight = UITableView.automaticDimension
-		self.tableView.estimatedRowHeight = 150
-		self.view.addSubview(self.tableView!)
-		self.tableView.snp.makeConstraints { (make) in
+		self.segmentedDataSource = JXSegmentedTitleDataSource()
+		self.segmentedDataSource?.isItemTransitionEnabled = true;
+		self.segmentedDataSource?.titles = titles
+		self.segmentedDataSource?.itemWidth = 50
+		self.segmentedDataSource?.itemSpacing = 10
+		self.segmentedDataSource?.isItemSpacingAverageEnabled = false
+		self.segmentedDataSource?.titleNormalFont = HZFont(fontSize: 16)
+		self.segmentedDataSource?.titleSelectedFont = HZFont(fontSize: 16)
+		self.segmentedDataSource?.titleSelectedColor = UIColorWith24Hex(rgbValue: 0xff4500)
+		self.segmentedView.dataSource = self.segmentedDataSource;
+		self.segmentedView.delegate = self;
+		self.segmentedView.contentEdgeInsetLeft = 0;
+		let indicator: JXSegmentedIndicatorLineView = JXSegmentedIndicatorLineView()
+		indicator.indicatorWidth = 30
+		indicator.verticalOffset = 5
+		indicator.indicatorHeight = 2;
+		indicator.indicatorCornerRadius = 1;
+		indicator.indicatorColor = UIColorWith24Hex(rgbValue: 0xff4500)
+		self.segmentedView.indicators = [indicator]
+		
+		let bgView: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0.0, width: Double(HZSCreenWidth()), height: 44.0))
+		self.segmentedView.frame = bgView.bounds
+		bgView.addSubview(self.segmentedView)
+//		self.segmentedView.snp.makeConstraints { (make) in
+//			make.edges.equalTo(0)
+//		}
+		self.navigationItem.titleView = bgView
+
+		self.segmentedView.listContainer = self.listContainerView
+		self.view.addSubview(self.listContainerView)
+		self.listContainerView.backgroundColor = UIColor.red
+		self.listContainerView.snp.makeConstraints { (make) in
 			make.edges.equalTo(0)
 		}
 	}
-	
-	func dataRequest() -> Void {
-		var param = ["category":"sy",
-					 "subType":0,
-					 "pageNumber":1
-		] as [String:Any]
-		
-		HZHomeNetworkManager.shared.getPostList(param).subscribe(onNext: { (value :[HZHomeCellViewModel]) in
-			
-		}, onError: nil, onCompleted: nil, onDisposed: nil)
-	}
 }
 
-extension HZHomeViewController :UITableViewDelegate, UITableViewDataSource {
-	
-	func numberOfSections(in tableView: UITableView) -> Int {
-		return 0
-	}
-	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 0
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
-		return UITableViewCell()
-	}
+extension HZHomeViewController: JXSegmentedViewDelegate {
+    func segmentedView(_ segmentedView: JXSegmentedView, didClickSelectedItemAt index: Int) {
+       // navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
+    }
+}
+
+extension HZHomeViewController: JXSegmentedListContainerViewDataSource {
+    func numberOfLists(in listContainerView: JXSegmentedListContainerView) -> Int {
+        if let titleDataSource = segmentedView.dataSource as? JXSegmentedBaseDataSource {
+            return titleDataSource.dataSource.count
+        }
+        return 0
+    }
+
+    func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
+		let title: String! = self.segmentedDataSource?.titles[index] ?? "最新"
+		let vc: HZHomeListViewController = HZHomeListViewController.init(self.titlesId[title]!)
+        return vc
+    }
 }

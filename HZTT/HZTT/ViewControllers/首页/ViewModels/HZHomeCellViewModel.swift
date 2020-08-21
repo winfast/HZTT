@@ -14,14 +14,18 @@ class HZHomeCellViewModel: NSObject {
 	
 	@objc dynamic var homeModel: HZHomeModel?
 	
-	open var praiseCnt: Int?
-	open var images: Array<String>?
-	open var postDate: String?
-	open var content: String?
-	open var pid :String?
-	open var status: Int?
-	open var readCnt: Int?
-	open var uid: String?
+	@objc dynamic open var praiseCnt: Int = 0
+	@objc dynamic open var images: Array<String>?
+	@objc dynamic open var postDate: String?
+	@objc dynamic open var content: String?
+	@objc dynamic open var pid :String?
+	@objc dynamic open var status: Int = 0
+	@objc dynamic open var readCnt: Int = 0
+	@objc dynamic open var uid: String?
+	
+	@objc dynamic open var avatar_thumb: String?
+	@objc dynamic open var nickName: String?
+	@objc dynamic var type: String?
 	
 	var disposeBag: DisposeBag = DisposeBag()
 
@@ -36,8 +40,8 @@ class HZHomeCellViewModel: NSObject {
 	
 	init(model: HZHomeModel) {
 		super.init()
-		self.createRAC()
 		self.homeModel = model
+		self.createRAC()
 	}
 	
 	func createRAC() -> Void {
@@ -51,35 +55,49 @@ class HZHomeCellViewModel: NSObject {
 //		uidBehaviorRelay = BehaviorRelay<String>(value: (homeModel?.uid)!)
 		
 		self.rx.observe(Int.self, "homeModel.praiseCnt").distinctUntilChanged().subscribe(onNext: { [weak self](value :Int?) in
-			self?.praiseCnt = value
+			self?.praiseCnt = value ?? 0
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(Array<String>.self, "images").distinctUntilChanged().subscribe(onNext: { [weak self](value :Array<String>?) in
+		self.rx.observe(Array<String>.self, "homeModel.images").distinctUntilChanged().subscribe(onNext: { [weak self](value :Array<String>?) in
 			self?.images = value
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "postDate").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
+		self.rx.observe(String.self, "homeModel.postDate").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
 			self?.postDate = value
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "content").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
-			self?.content = value
+		self.rx.observe(String.self, "homeModel.content").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
+			var ss = value ?? ""
+			ss = ss.replacingOccurrences(of: "\n", with: " ")
+			self?.content = ss
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "pid").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
+		self.rx.observe(String.self, "homeModel.pid").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
 			self?.pid = value
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(Int.self, "status").distinctUntilChanged().subscribe(onNext: { [weak self](value :Int?) in
-			self?.status = value
+		self.rx.observe(Int.self, "homeModel.status").distinctUntilChanged().subscribe(onNext: { [weak self](value :Int?) in
+			self?.status = value ?? 0
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(Int.self, "readCnt").distinctUntilChanged().subscribe(onNext: { [weak self](value :Int?) in
-			self?.readCnt = value
+		self.rx.observe(Int.self, "homeModel.readCnt").distinctUntilChanged().subscribe(onNext: { [weak self](value :Int?) in
+			self?.readCnt = value ?? 0
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "uid").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
+		self.rx.observe(String.self, "homeModel.uid").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
 			self?.uid = value
+		}).disposed(by: disposeBag)
+		
+		self.rx.observe(String.self, "homeModel.type").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
+			self?.type = value
+		}).disposed(by: disposeBag)
+		
+		self.rx.observe(String.self, "homeModel.user.nickName").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
+			self?.nickName = value
+		}).disposed(by: disposeBag)
+		
+		self.rx.observe(String.self, "homeModel.user.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
+			self?.avatar_thumb = value
 		}).disposed(by: disposeBag)
 	}
 
