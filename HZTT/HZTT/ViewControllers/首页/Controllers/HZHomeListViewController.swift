@@ -52,13 +52,14 @@ class HZHomeListViewController: HZBaseViewController {
 		}
 		
 		self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { [weak self] in
-			self?.messageList!.removeAll();
+			self?.tableView.mj_footer.isHidden = false
+			self?.tableView.mj_footer.state = .idle
 			self?.dataRequest()
 		})
 		
-		let footer: MJRefreshAutoNormalFooter = MJRefreshAutoNormalFooter.init(refreshingBlock: {
-			self.dataRequest(pageNumber: self.messageList!.count/20 == 0 ? 1 : self.messageList!.count/20)
-		});
+		let footer: MJRefreshAutoNormalFooter = MJRefreshAutoNormalFooter.init(refreshingBlock: { [weak self] in
+			self?.dataRequest(pageNumber: ((self?.messageList!.count)!/20 == 0 ? 1 : (self?.messageList!.count)!/20))
+		})
 		footer.setTitle("已经是最后一条数据", for: .noMoreData)
 		self.tableView.mj_footer = footer
 		self.tableView.ex_prepareToShow()
@@ -66,6 +67,9 @@ class HZHomeListViewController: HZBaseViewController {
     }
     
 	func dataRequest(pageNumber: Int = 1) -> Void {
+		if 1 == pageNumber {
+			self.messageList.removeAll();
+		}
 		let param = ["category":"sy",
 					 "subType":Int(self.type)!,
 					 "pageNumber":pageNumber
@@ -80,6 +84,7 @@ class HZHomeListViewController: HZBaseViewController {
 			}
 			self?.messageList = (self?.messageList)! + value
 			if self?.messageList!.count == 0 {
+				self?.tableView.mj_footer.isHidden = true
 				self?.tableView.mj_footer.state = .noMoreData
 			} else {
 				if value.count < 20 {

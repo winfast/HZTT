@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 		self.initWindow()
 		self.initTabar()
+		self.initKeyboard()
 		return true
 	}
 	
@@ -30,6 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let tabBarController = HZTabBarController.init()
 		self.window?.rootViewController = tabBarController
 		self.window?.makeKeyAndVisible()
+	}
+	
+	func initKeyboard() -> Void {
+		IQKeyboardManager.shared.enable = true
+		//控制点击背景是否收起键盘
+		IQKeyboardManager.shared.shouldResignOnTouchOutside = true
 	}
 }
 

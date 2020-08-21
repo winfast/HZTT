@@ -13,6 +13,7 @@
 		042F2DCC24EF500B0069FB39 /* HZCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F2DCB24EF500B0069FB39 /* HZCommentTableViewCell.swift */; };
 		042F2DCE24EF6B2C0069FB39 /* HZCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F2DCD24EF6B2C0069FB39 /* HZCommentModel.swift */; };
 		042F2DD124EF6C220069FB39 /* HZCommentCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F2DD024EF6C220069FB39 /* HZCommentCellViewModel.swift */; };
+		042F2DD324EFBCF20069FB39 /* HZComplainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F2DD224EFBCF20069FB39 /* HZComplainViewController.swift */; };
 		047BF2C524EB6017002A39F3 /* HZHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2C424EB6017002A39F3 /* HZHomeViewController.swift */; };
 		047BF2CA24EB6088002A39F3 /* HZHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2C924EB6088002A39F3 /* HZHomeTableViewCell.swift */; };
 		047BF2CC24EB689A002A39F3 /* HZFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2CB24EB689A002A39F3 /* HZFont.swift */; };
@@ -43,6 +44,7 @@
 		042F2DCB24EF500B0069FB39 /* HZCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZCommentTableViewCell.swift; sourceTree = "<group>"; };
 		042F2DCD24EF6B2C0069FB39 /* HZCommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZCommentModel.swift; sourceTree = "<group>"; };
 		042F2DD024EF6C220069FB39 /* HZCommentCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZCommentCellViewModel.swift; sourceTree = "<group>"; };
+		042F2DD224EFBCF20069FB39 /* HZComplainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZComplainViewController.swift; sourceTree = "<group>"; };
 		047BF2C424EB6017002A39F3 /* HZHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZHomeViewController.swift; sourceTree = "<group>"; };
 		047BF2C924EB6088002A39F3 /* HZHomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeTableViewCell.swift; sourceTree = "<group>"; };
 		047BF2CB24EB689A002A39F3 /* HZFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZFont.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				047BF2C424EB6017002A39F3 /* HZHomeViewController.swift */,
 				04E31BD024ED3441002CF93E /* HZHomeListViewController.swift */,
 				042E881C24EE1A46000053A0 /* HZHomeDetailViewController.swift */,
+				042F2DD224EFBCF20069FB39 /* HZComplainViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				047BF2D424EBA34C002A39F3 /* HZHomeModel.swift in Sources */,
 				042F2DCA24EE83940069FB39 /* HZHomeDetailNetworkManager.swift in Sources */,
 				047BF2C524EB6017002A39F3 /* HZHomeViewController.swift in Sources */,
+				042F2DD324EFBCF20069FB39 /* HZComplainViewController.swift in Sources */,
 				04E4FCA424EA96DB00C5E5B0 /* HZColor.swift in Sources */,
 				04E31BCF24ED23F7002CF93E /* HZConstant.swift in Sources */,
 				047BF2D724EBA5C2002A39F3 /* HZHomeNetworkManager.swift in Sources */,

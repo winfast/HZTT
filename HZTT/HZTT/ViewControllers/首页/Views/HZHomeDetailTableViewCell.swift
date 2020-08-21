@@ -29,6 +29,9 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 	open var upvoteBtn: UIButton!
 	open var noticeLabel: UILabel!
 	
+	typealias HZClickHomeDetailCellBtnBlock = (_ btn :UIButton?) -> Void
+	open var clickBtnBlock :HZClickHomeDetailCellBtnBlock?
+	
 	@objc dynamic open var viewModel: HZHomeCellViewModel?;  //KVO监听
 	var disposeBag = DisposeBag()
 	
@@ -41,8 +44,7 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		viewsLayout()
 		createRAC()
 	}
-
-
+	
 	func viewsLayout() -> Void {
 		self.selectionStyle = .none
 		
@@ -137,12 +139,19 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		upvoteBtn.layer.cornerRadius = 10
 		upvoteBtn.setImage(UIImage.init(named: "comment_like_icon_night"), for: .normal)
 		upvoteBtn.layer.borderColor = UIColor.lightGray.cgColor
-		upvoteBtn.layer.borderWidth = 0.5
+		upvoteBtn.layer.borderWidth = 1
 		upvoteBtn.titleLabel?.font = HZFont(fontSize: 11)
+		upvoteBtn.tag = 0
 		upvoteBtn.setTitleColor(UIColorWith24Hex(rgbValue: 0x696969), for: .normal)
 		upvoteBtn.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -5, bottom: 0, right: 0)
 		upvoteBtn.titleEdgeInsets = UIEdgeInsets.init(top: 0, left: 5, bottom: 0, right: 0)
 		upvoteBtn.backgroundColor = UIColor.clear
+		self.upvoteBtn.rx.tap.subscribe { [weak self] (value) in
+			if self?.clickBtnBlock == nil {
+				return
+			}
+			self?.clickBtnBlock!(self?.upvoteBtn)
+		}.disposed(by: disposeBag)
 		self.contentView.addSubview(upvoteBtn)
 		upvoteBtn.snp.makeConstraints { (make) in
 			make.right.equalTo(-30);
@@ -154,11 +163,17 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		complainBtn.layer.cornerRadius = 10
 		complainBtn.titleLabel?.font = HZFont(fontSize: 11)
 		complainBtn.setTitle("举报", for: .normal)
+		complainBtn.tag = 1
 		complainBtn.setTitleColor(UIColorWith24Hex(rgbValue: 0x696969), for: .normal)
 		complainBtn.layer.borderColor = UIColor.lightGray.cgColor
-		complainBtn.layer.borderWidth = 1
-
+		complainBtn.layer.borderWidth = 0.5
 		complainBtn.backgroundColor = UIColor.clear
+		self.complainBtn.rx.tap.subscribe { [weak self] (value) in
+			if self?.clickBtnBlock == nil {
+				return
+			}
+			self?.clickBtnBlock!(self?.complainBtn)
+		}.disposed(by: disposeBag)
 		self.contentView.addSubview(complainBtn)
 		complainBtn.snp.makeConstraints { (make) in
 			make.right.equalTo(upvoteBtn.snp.left).offset(-30);

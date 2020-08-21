@@ -13,6 +13,9 @@
 #import "HBDNavigationBar/HBDNavigationBar.h"
 #import "HBDNavigationBar/HBDNavigationController.h"
 #import "HBDNavigationBar/UIViewController+HBD.h"
+@import SnapKit;
+@import IQKeyboardManagerSwift;
+
 
 
 #endif /* HZTT_Bridging_Header_h_h */
