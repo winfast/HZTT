@@ -66,11 +66,11 @@ class HZHomeDetailViewController: HZBaseViewController {
 //					 "type":"0"
 //		]
 		
-		let param = ["pid":self.pid as Any,
-					 "category":self.category as Any,
+		let param = ["pid":self.pid!,
+					 "category":self.category!,
 					 "type":"get",
 					 "pageNumber":1
-		]
+			] as [String : Any]
 //		let param = ["category":"sy",
 //					 "subType":12,
 //					 "pageNumber":1

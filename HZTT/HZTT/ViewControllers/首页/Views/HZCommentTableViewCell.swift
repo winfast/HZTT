@@ -22,6 +22,7 @@ class HZCommentTableViewCell: UITableViewCell {
 	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
+		self.viewLayout()
 	}
 	
 	
@@ -73,9 +74,10 @@ class HZCommentTableViewCell: UITableViewCell {
 		self.upvoteBtn.setTitleColor(UIColorWith24Hex(rgbValue: 0xB8B8B8), for: .normal)
 		self.upvoteBtn.setTitle("举报", for: .normal)
 		self.contentView.addSubview(self.upvoteBtn)
-		
-		
+		self.upvoteBtn.snp.makeConstraints { (make) in
+			make.right.equalTo(self.contentView.snp.right).offset(-20);
+			make.height.width.equalTo(CGSize.init(width: 50, height: 30));
+			make.bottom.equalTo(self.contentView.snp.bottom)
+		}
 	}
-
-
 }
