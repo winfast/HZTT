@@ -166,13 +166,48 @@ class HZHomeTableViewCell: UITableViewCell {
 	}
 	
 	func createRAC() -> Void {
-		self.rx.observe(String.self, "viewModel.nickName").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
-			self?.userNameLabel.text = value
-		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "viewModel.postDate").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
-			self?.userTimeLabel.text = value
-		}).disposed(by: disposeBag)
+		let nickNameObserve = self.rx.observe(String.self, "viewModel.nickName").distinctUntilChanged()
+		let nameObserve = self.rx.observe(String.self, "viewModel.name").distinctUntilChanged()
+		
+		Observable.combineLatest(nickNameObserve, nameObserve).subscribe(onNext: { [weak self] value in
+			let nickName = value.0;
+			let name = value.1
+			if name?.lengthOfBytes(using: .utf8) == 0 {
+				self?.userNameLabel.text = nickName
+			} else {
+				self?.userNameLabel.text = name
+			}
+			
+		}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+		
+//		Observable.combineLatest(nickNameObserve, nameObserve) { strElement, intElement in
+//			//"\(strElement) \(intElement)"
+//		}
+//		.subscribe(onNext: { print($0 + $1) })
+//		.disposed(by: disposeBag)
+		
+//		Observable.combineLatest(nickNameObserve, nameObserve).subscribe { [weak self] (nickName, name) in
+//			let first: String = nickName ?? ""
+//			let second: String =  name ?? ""
+//			if second.lengthOfBytes(using: .utf8) > 0 {
+//				self?.userNameLabel.text = second
+//			} else {
+//				self?.userNameLabel.text = first
+//			}
+//		}.disposed(by: disposeBag)
+//
+//		self.rx.observe(String.self, "viewModel.nickName").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
+//			self?.userNameLabel.text = value
+//		}).disposed(by: disposeBag)
+		
+		
+		
+		self.rx.observe(String.self, "viewModel.postDate").distinctUntilChanged().bind(to: self.userTimeLabel.rx.text).disposed(by: disposeBag)
+		
+//		self.rx.observe(String.self, "viewModel.postDate").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
+//			self?.userTimeLabel.text = value
+//		}).disposed(by: disposeBag)
 		
 		self.rx.observe(String.self, "viewModel.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
 			if value?.lengthOfBytes(using: .utf8) ?? 0 > 0 {
@@ -181,7 +216,9 @@ class HZHomeTableViewCell: UITableViewCell {
 		}).disposed(by: disposeBag)
 		
 		self.rx.observe(String.self, "viewModel.content").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
-			self?.messageTitleLabel.text = value
+			var ss = value ?? ""
+			ss = ss.replacingOccurrences(of: "\n", with: " ")
+			self?.messageTitleLabel.text = ss
 		}).disposed(by: disposeBag)
 		
 		self.rx.observe(Int.self, "viewModel.readCnt").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in

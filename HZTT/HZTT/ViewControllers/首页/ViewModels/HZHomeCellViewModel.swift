@@ -25,7 +25,9 @@ class HZHomeCellViewModel: NSObject {
 	
 	@objc dynamic open var avatar_thumb: String?
 	@objc dynamic open var nickName: String?
+	@objc dynamic open var name: String?
 	@objc dynamic var type: String?
+	@objc dynamic var fanCnt :String?
 	
 	var disposeBag: DisposeBag = DisposeBag()
 
@@ -67,9 +69,7 @@ class HZHomeCellViewModel: NSObject {
 		}).disposed(by: disposeBag)
 		
 		self.rx.observe(String.self, "homeModel.content").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
-			var ss = value ?? ""
-			ss = ss.replacingOccurrences(of: "\n", with: " ")
-			self?.content = ss
+			self?.content = value
 		}).disposed(by: disposeBag)
 		
 		self.rx.observe(String.self, "homeModel.pid").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
@@ -96,8 +96,16 @@ class HZHomeCellViewModel: NSObject {
 			self?.nickName = value
 		}).disposed(by: disposeBag)
 		
+		self.rx.observe(String.self, "homeModel.user.name").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
+			self?.name = value
+		}).disposed(by: disposeBag)
+		
 		self.rx.observe(String.self, "homeModel.user.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
 			self?.avatar_thumb = value
+		}).disposed(by: disposeBag)
+		
+		self.rx.observe(String.self, "homeModel.user.fanCnt").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
+			self?.fanCnt = value
 		}).disposed(by: disposeBag)
 	}
 

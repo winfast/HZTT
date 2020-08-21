@@ -61,33 +61,44 @@ class HZHomeDetailViewController: HZBaseViewController {
     }
 	
 	func dataRequest() -> Void {
-//		let param = ["pid":self.pid as Any,
-//					 "category":self.category as Any,
-//					 "type":"0"
-//		]
+		self.detailDataRequest()
+		self.commentDataRequest(1)
+	}
+	
+	
+	func commentDataRequest(_ pageNumber: Int = 1) -> Void {
 		
 		let param = ["pid":self.pid!,
 					 "category":self.category!,
 					 "type":"get",
-					 "pageNumber":1
+					 "pageNumber":pageNumber
 			] as [String : Any]
-//		let param = ["category":"sy",
-//					 "subType":12,
-//					 "pageNumber":1
-//			] as [String : Any]
 		
 		HZHomeDetailNetworkManager.shared.comment(param).subscribe(onNext: { [weak self] (value :[Any]) in
-		//	self.tableView.ex
-//			if self?.tableView.mj_header?.isRefreshing() == true {
-//				self?.tableView.mj_header?.endRefreshing()
-//			}
-//			
-//			if self?.tableView.mj_footer?.isRefreshing() == true {
-//				self?.tableView.mj_footer?.endRefreshing()
-//			}
-//			self?.tableView.reloadData()
-//			self!.tableView.ex_makeViewVisible()
-		}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+			//	self.tableView.ex
+			//			if self?.tableView.mj_header?.isRefreshing() == true {
+			//				self?.tableView.mj_header?.endRefreshing()
+			//			}
+			//
+			//			if self?.tableView.mj_footer?.isRefreshing() == true {
+			//				self?.tableView.mj_footer?.endRefreshing()
+			//			}
+			//			self?.tableView.reloadData()
+			//			self!.tableView.ex_makeViewVisible()
+			}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+	}
+	
+	func detailDataRequest() -> Void {
+		let param = ["pid":self.pid!,
+					 "category":self.category!,
+					 "type":"0",
+			] as [String : Any]
+		
+		HZHomeDetailNetworkManager.shared.detail(param).subscribe(onNext: { [weak self] (value :HZHomeCellViewModel) in
+			self?.tableView.ex_makeViewVisible()
+			self?.cellViewModel = value
+			self?.tableView.reloadData()
+			}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 	}
 
 }
@@ -137,7 +148,7 @@ extension HZHomeDetailViewController :UITableViewDelegate, UITableViewDataSource
 			headerView.addSubview(titleLabel);
 			titleLabel.snp.makeConstraints { (make) in
 				make.left.equalTo(10)
-				make.centerY.equalTo(0);
+				make.centerY.equalTo(headerView.snp.centerY);
 			}
 			return headerView
 		}

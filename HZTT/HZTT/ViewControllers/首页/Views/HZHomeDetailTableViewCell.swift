@@ -95,9 +95,9 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		firstImgaeView.contentMode = UIView.ContentMode.scaleToFill;
 		self.contentView.addSubview(firstImgaeView)
 		firstImgaeView.snp.makeConstraints { (make) in
-			make.left.equalTo(self.messageTitleLabel.snp.left)
+			make.left.equalTo(self.contentView.snp.left).offset(10)
 			make.top.equalTo(self.messageTitleLabel.snp.bottom).offset(10)
-			make.width.equalTo((HZSCreenWidth() - 20 - 3 * 2 - 8)/3.0)
+			make.width.equalTo((HZSCreenWidth() - 20 - 2 * 2)/3.0)
 			make.height.equalTo(firstImgaeView.snp.width).multipliedBy(113/118.0);
 		}
 		
@@ -106,7 +106,7 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		secondImageView.contentMode = UIView.ContentMode.scaleToFill;
 		self.contentView.addSubview(secondImageView)
 		secondImageView.snp.makeConstraints { (make) in
-			make.left.equalTo(self.firstImgaeView.snp.right).offset(3)
+			make.left.equalTo(self.firstImgaeView.snp.right).offset(2)
 			make.top.equalTo(self.firstImgaeView.snp.top)
 			make.width.equalTo(firstImgaeView.snp.width)
 			make.height.equalTo(firstImgaeView.snp.height)
@@ -117,7 +117,7 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		thirdImgaeView.contentMode = UIView.ContentMode.scaleToFill;
 		self.contentView.addSubview(thirdImgaeView)
 		thirdImgaeView.snp.makeConstraints { (make) in
-			make.left.equalTo(self.secondImageView.snp.right).offset(3)
+			make.left.equalTo(self.secondImageView.snp.right).offset(2)
 			make.top.equalTo(self.firstImgaeView.snp.top)
 			make.width.equalTo(firstImgaeView.snp.width)
 			make.height.equalTo(firstImgaeView.snp.height)
@@ -134,10 +134,14 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		}
 		
 		upvoteBtn = UIButton.init(type: .custom)
-		upvoteBtn.setTitle("举报", for: .normal)
 		upvoteBtn.layer.cornerRadius = 10
+		upvoteBtn.setImage(UIImage.init(named: "comment_like_icon_night"), for: .normal)
 		upvoteBtn.layer.borderColor = UIColor.lightGray.cgColor
 		upvoteBtn.layer.borderWidth = 0.5
+		upvoteBtn.titleLabel?.font = HZFont(fontSize: 11)
+		upvoteBtn.setTitleColor(UIColorWith24Hex(rgbValue: 0x696969), for: .normal)
+		upvoteBtn.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -5, bottom: 0, right: 0)
+		upvoteBtn.titleEdgeInsets = UIEdgeInsets.init(top: 0, left: 5, bottom: 0, right: 0)
 		upvoteBtn.backgroundColor = UIColor.clear
 		self.contentView.addSubview(upvoteBtn)
 		upvoteBtn.snp.makeConstraints { (make) in
@@ -148,11 +152,12 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		
 		complainBtn = UIButton.init(type: .custom)
 		complainBtn.layer.cornerRadius = 10
-		complainBtn.setImage(UIImage.init(named: "comment_like_icon_night"), for: .normal)
+		complainBtn.titleLabel?.font = HZFont(fontSize: 11)
+		complainBtn.setTitle("举报", for: .normal)
+		complainBtn.setTitleColor(UIColorWith24Hex(rgbValue: 0x696969), for: .normal)
 		complainBtn.layer.borderColor = UIColor.lightGray.cgColor
 		complainBtn.layer.borderWidth = 1
-		complainBtn.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -5, bottom: 0, right: 0)
-		complainBtn.titleEdgeInsets = UIEdgeInsets.init(top: 0, left: 5, bottom: 0, right: 0)
+
 		complainBtn.backgroundColor = UIColor.clear
 		self.contentView.addSubview(complainBtn)
 		complainBtn.snp.makeConstraints { (make) in
@@ -164,7 +169,7 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		noticeLabel = UILabel.init()
 		noticeLabel.textColor = UIColor.lightGray
 		noticeLabel.font = HZFont(fontSize: 12.0)
-		noticeLabel.textAlignment = .center
+		noticeLabel.textAlignment = .left
 		noticeLabel.numberOfLines = 2
 		noticeLabel.text = "提示: 平台不对该信息承担任何责任，请自己谨慎看待。若发现虚假信息等违法行为请迅速举报。";
 		self.contentView.addSubview(noticeLabel)
@@ -177,9 +182,18 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 	}
 	
 	func createRAC() -> Void {
-		self.rx.observe(String.self, "viewModel.nickName").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
-			self?.userNameLabel.text = value
-		}).disposed(by: disposeBag)
+		let nickNameObserve = self.rx.observe(String.self, "viewModel.nickName").distinctUntilChanged()
+		let nameObserve = self.rx.observe(String.self, "viewModel.name").distinctUntilChanged()
+		Observable.combineLatest(nickNameObserve, nameObserve).subscribe(onNext: { [weak self] value in
+			let nickName = value.0;
+			let name = value.1
+			if name?.lengthOfBytes(using: .utf8) == 0 {
+				self?.userNameLabel.text = nickName
+			} else {
+				self?.userNameLabel.text = name
+			}
+			
+		}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 		
 		self.rx.observe(String.self, "viewModel.postDate").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
 			self?.userTimeLabel.text = value
@@ -191,8 +205,16 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 			}
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "viewModel.content").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
-			self?.messageTitleLabel.text = value
+		self.rx.observe(String.self, "viewModel.content").distinctUntilChanged().filter({ (value) -> Bool in
+			return value != nil ? true: false
+		}).subscribe(onNext: { [weak self] (value) in
+			let paragraphStyle = NSMutableParagraphStyle.init()
+			paragraphStyle.lineSpacing = 5;
+			paragraphStyle.lineBreakMode = .byWordWrapping;
+			paragraphStyle.firstLineHeadIndent = 32
+			let dic: [NSAttributedString.Key:Any] = [NSAttributedString.Key.font: HZFont(fontSize: 17), NSAttributedString.Key.paragraphStyle:paragraphStyle, NSAttributedString.Key.kern: 1]
+			let attr = NSAttributedString.init(string: value!, attributes: dic)
+			self?.messageTitleLabel.attributedText = attr
 		}).disposed(by: disposeBag)
 		
 		self.rx.observe(Int.self, "viewModel.readCnt").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
@@ -200,6 +222,8 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 			let stringValue = x > 0 ? "\(x)" : ""
 			self?.readCountLbael.text = "阅读" + stringValue
 		}).disposed(by: disposeBag)
+		
+		self.rx.observe(String.self, "viewModel.fanCnt").distinctUntilChanged().bind(to: self.upvoteBtn.rx.title(for: .normal)).disposed(by: disposeBag)
 		
 		self.rx.observe(Array<String>.self, "viewModel.images").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
 			let x = value ?? []

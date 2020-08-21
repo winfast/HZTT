@@ -14,7 +14,7 @@ class HZCommentTableViewCell: UITableViewCell {
 	var userNameLabel: UILabel!
 	var commentContentLabel: UILabel!
 	var commentTimeLabel: UILabel!
-	var upvoteBtn: UIButton!
+	var complainBtn: UIButton!
 	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -23,6 +23,7 @@ class HZCommentTableViewCell: UITableViewCell {
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		self.viewLayout()
+		//self.createRAC()
 	}
 	
 	
@@ -69,15 +70,19 @@ class HZCommentTableViewCell: UITableViewCell {
 			make.bottom.lessThanOrEqualTo(self.contentView.snp.bottom).offset(-8)
 		}
 		
-		self.upvoteBtn = UIButton.init(type: .custom)
-		self.upvoteBtn.backgroundColor = UIColor.clear
-		self.upvoteBtn.setTitleColor(UIColorWith24Hex(rgbValue: 0xB8B8B8), for: .normal)
-		self.upvoteBtn.setTitle("举报", for: .normal)
-		self.contentView.addSubview(self.upvoteBtn)
-		self.upvoteBtn.snp.makeConstraints { (make) in
+		self.complainBtn = UIButton.init(type: .custom)
+		self.complainBtn.backgroundColor = UIColor.clear
+		self.complainBtn.setTitleColor(UIColorWith24Hex(rgbValue: 0xB8B8B8), for: .normal)
+		self.complainBtn.setTitle("举报", for: .normal)
+		self.contentView.addSubview(self.complainBtn)
+		self.complainBtn.snp.makeConstraints { (make) in
 			make.right.equalTo(self.contentView.snp.right).offset(-20);
 			make.height.width.equalTo(CGSize.init(width: 50, height: 30));
 			make.bottom.equalTo(self.contentView.snp.bottom)
 		}
 	}
+	
+//	func createRAC() -> Void {
+//		self.rx.observe(String.self, "").distinctUntilChanged().bind(to: <#T##ObserverType...##ObserverType#>)
+//	}
 }

@@ -72,7 +72,7 @@ class HZHomeViewController: HZBaseViewController {
 
 		self.segmentedView.listContainer = self.listContainerView
 		self.view.addSubview(self.listContainerView)
-		self.listContainerView.backgroundColor = UIColor.red
+		self.listContainerView.backgroundColor = UIColor.white
 		self.listContainerView.snp.makeConstraints { (make) in
 			make.edges.equalTo(0)
 		}

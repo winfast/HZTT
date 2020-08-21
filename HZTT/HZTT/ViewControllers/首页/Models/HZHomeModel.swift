@@ -18,8 +18,8 @@ class HZUser: NSObject {
 	var avatar: String?
 	var user_id: String?
 	var bornDate: String?
-	var fanCnt :Int?
-	var name: String?
+	@objc dynamic var fanCnt :String?
+	@objc dynamic var name: String?
 	@objc dynamic var nickName: String?
 	var status: Int?
 	var ID: Int?
@@ -38,7 +38,7 @@ class HZUser: NSObject {
 		userModel.avatar = jsonValue["avatar"].stringValue
 		userModel.user_id = jsonValue["user_id"].stringValue
 		userModel.bornDate = jsonValue["bornDate"].stringValue
-		userModel.fanCnt = jsonValue["fanCnt"].intValue
+		userModel.fanCnt = jsonValue["fanCnt"].stringValue
 		userModel.name = jsonValue["name"].stringValue
 		userModel.nickName = jsonValue["nickName"].stringValue
 		userModel.status = jsonValue["status"].intValue
@@ -84,5 +84,6 @@ class HZHomeModel: NSObject {
 		return homeModel
 	}
 }
+
 
 
