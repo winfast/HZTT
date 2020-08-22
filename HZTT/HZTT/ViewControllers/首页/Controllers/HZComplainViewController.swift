@@ -8,6 +8,8 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import RxCocoa
+import RxSwift
 
 class HZComplainViewController: HZBaseViewController {
 	
@@ -51,7 +53,8 @@ class HZComplainViewController: HZBaseViewController {
 		self.tableView.dataSource = self
 		self.tableView.rowHeight = UITableView.automaticDimension
 		self.tableView.estimatedRowHeight = 80
-		self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "UITableViewCell")
+        self.tableView.register(HZComplainTableViewCell.classForCoder(), forCellReuseIdentifier: "HZComplainTableViewCell")
+        self.tableView.register(HZComplainTextFieldTableViewCell.classForCoder(), forCellReuseIdentifier: "HZComplainTextFieldTableViewCell")
 		self.view.addSubview(self.tableView)
 		self.tableView.snp.makeConstraints { (make) in
 			make.edges.equalTo(0)
@@ -90,9 +93,15 @@ extension HZComplainViewController :UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell :UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell")!
-		cell.backgroundColor = UIColor.white
-		return cell
+        if 0 == indexPath.section {
+            let cell :HZComplainTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZComplainTableViewCell") as! HZComplainTableViewCell
+            cell.backgroundColor = UIColor.white
+            return cell
+        } else {
+            let cell :HZComplainTextFieldTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZComplainTextFieldTableViewCell") as! HZComplainTextFieldTableViewCell
+            cell.backgroundColor = UIColor.white
+            return cell
+        }
 	}
 	
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -132,6 +141,53 @@ class HZComplainTableViewCell : UITableViewCell {
 	
 	func viewsLayout() -> Void {
 		self.textView = IQTextView.init(frame: CGRect.zero)
-		//self.textView.attr = "请输入举报原因"
+        self.textView.placeholder = "请输入举报原因"
+        self.textView.textContainerInset = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
+        self.textView.textColor = UIColor.black
+        self.textView.snp.makeConstraints { (make) in
+            make.top.equalTo(0)
+            make.left.equalTo(10)
+            make.right.equalTo(self.contentView.snp.right).offset(-10)
+            make.height.equalTo(200)
+        }
+        
+        self.textLenthLabel = UILabel.init()
+        self.textLenthLabel?.textColor = UIColor.gray
+        self.textLenthLabel?.text = "200个字以内"
+        self.contentView.addSubview(self.textLenthLabel!)
+        self.textLenthLabel?.snp.makeConstraints({ (make) in
+            make.right.equalTo(self.textView.snp.right).offset(-30)
+            make.bottom.lessThanOrEqualTo(0).priority(900)
+            make.top.equalTo(self.textView.snp.bottom)
+        })
 	}
+}
+
+
+class HZComplainTextFieldTableViewCell : UITableViewCell {
+    
+    var textField: UITextField!
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.viewLayout()
+    }
+    
+    func viewLayout() -> Void {
+        textField = UITextField.init()
+        textField.placeholder = "请输入你的联系方式"
+        textField.clearButtonMode = .whileEditing
+        textField.textColor = UIColor.black
+        self.contentView.addSubview(self.textField)
+        self.textLenthLabel?.snp.makeConstraints({ (make) in
+            make.right.equalTo(self.textView.snp.right).offset(-20)
+            make.left.equalTo(self.contentView.snp.left).offset(20)
+            make.bottom.lessThanOrEqualTo(0).priority(900)
+            make.top.equalTo(self.textView.snp.bottom)
+        })
+    }
 }
