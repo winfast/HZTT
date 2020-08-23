@@ -18,7 +18,7 @@ class HZTopicViewController: HZBaseViewController {
     ]
     var segmentedDataSource: JXSegmentedTitleDataSource?
     lazy var listContainerView: JXSegmentedListContainerView! = {
-        return JXSegmentedListContainerView(dataSource: self as! JXSegmentedListContainerViewDataSource)
+        return JXSegmentedListContainerView(dataSource: self)
     }()
 
     override func viewDidLoad() {
