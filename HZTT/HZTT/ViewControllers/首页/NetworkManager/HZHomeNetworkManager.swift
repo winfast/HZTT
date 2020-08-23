@@ -36,7 +36,7 @@ class HZHomeNetworkManager: NSObject {
 		//let json = JSON(data)
 		let json = JSON(data)
 		let dicts :[String:Any]? = json.dictionaryObject;
-		if dicts!["status"] as! Int == 200 {
+		if dicts!["status"] as? Int == 200 {
 			var homeCellViewModelsArray :Array<HZHomeCellViewModel> = []
 			if let homeArray = dicts!["body"] as? [[String:Any]] {
 				for index in 0..<homeArray.count {

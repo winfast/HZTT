@@ -53,8 +53,8 @@ class HZComplainViewController: HZBaseViewController {
 		self.tableView.dataSource = self
 		self.tableView.rowHeight = UITableView.automaticDimension
 		self.tableView.estimatedRowHeight = 80
-        self.tableView.register(HZComplainTableViewCell.classForCoder(), forCellReuseIdentifier: "HZComplainTableViewCell")
-        self.tableView.register(HZComplainTextFieldTableViewCell.classForCoder(), forCellReuseIdentifier: "HZComplainTextFieldTableViewCell")
+        self.tableView.register(HZComplainTableViewCell.self, forCellReuseIdentifier: "HZComplainTableViewCell")
+        self.tableView.register(HZComplainTextFieldTableViewCell.self, forCellReuseIdentifier: "HZComplainTextFieldTableViewCell")
 		self.view.addSubview(self.tableView)
 		self.tableView.snp.makeConstraints { (make) in
 			make.edges.equalTo(0)

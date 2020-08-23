@@ -43,9 +43,9 @@ class HZTabBarController: UITabBarController {
 		
 		let vcNamesArray :Array<String> = [
 			"HZHomeViewController",
+			"HZTopicViewController",
 			"HZBaseViewController",
-			"HZBaseViewController",
-			"HZBaseViewController",
+			"HZLivelihoodViewController",
 			"HZBaseViewController",
 		]
 		
