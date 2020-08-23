@@ -67,7 +67,7 @@ class HZTopicViewController: HZBaseViewController {
         indicator.indicatorColor = UIColorWith24Hex(rgbValue: 0xff4500)
         self.segmentedView.indicators = [indicator]
         
-        let bgView: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0.0, width: Double(HZSCreenWidth()), height: 44.0))
+        let bgView: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0.0, width: 110, height: 44.0))
         self.segmentedView.frame = bgView.bounds
         bgView.addSubview(self.segmentedView)
         self.navigationItem.titleView = bgView
