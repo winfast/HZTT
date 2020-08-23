@@ -33,7 +33,7 @@ class HZLivelihoodHeaderView: UIView {
     func viewsLayout() -> Void {
         let flowerLayout = UICollectionViewFlowLayout.init()
         //let width: Double = (Double(HZSCreenWidth) - Double(3 * 20.0))/4.0
-        flowerLayout.itemSize = CGSize.init(width:(HZSCreenWidth() - 20 * 3.0 - 10*2)/4.0, height: 90)
+        flowerLayout.itemSize = CGSize.init(width:(HZSCreenWidth() - 20 * 3.0 - 10*2)/4.0, height: 80)
         flowerLayout.minimumLineSpacing = 10
         flowerLayout.minimumInteritemSpacing = 20
         self.collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: flowerLayout)
@@ -42,7 +42,7 @@ class HZLivelihoodHeaderView: UIView {
         self.collectionView.layer.borderWidth = 0.5
         self.collectionView.backgroundColor = UIColor.white
         self.collectionView.layer.borderColor = UIColorWith24Hex(rgbValue: 0x999999).cgColor
-        self.collectionView.contentInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 10)
+        self.collectionView.contentInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 10, right: 10)
         self.collectionView.register(HZLivelihoodCollectionViewCell.classForCoder(), forCellWithReuseIdentifier:"HZLivelihoodCollectionViewCell")
         self.addSubview(self.collectionView)
         self.collectionView.snp.makeConstraints { (make) in
@@ -102,7 +102,7 @@ class HZLivelihoodCollectionViewCell: UICollectionViewCell {
         self.contentView.addSubview(self.contentLabel)
         self.contentLabel.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.contentView.snp.centerX)
-            make.bottom.equalTo(self.contentView.snp.bottom).offset(-20)
+            make.bottom.equalTo(self.contentView.snp.bottom).offset(-10)
         }
     }
 }

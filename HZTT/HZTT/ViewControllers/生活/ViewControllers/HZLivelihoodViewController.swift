@@ -27,7 +27,7 @@ class HZLivelihoodViewController: HZBaseViewController {
     
     func viewsLayout() -> Void {
         self.view.backgroundColor = UIColor.white
-        self.headerView = HZLivelihoodHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: HZSCreenWidth(), height: 190))
+        self.headerView = HZLivelihoodHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: HZSCreenWidth(), height: 180))
         self.headerView.dataSource = [
             ["imageName": "item_new_01", "title":"吃喝玩乐"],
             ["imageName": "item_new_02", "title":"求职招聘"],
