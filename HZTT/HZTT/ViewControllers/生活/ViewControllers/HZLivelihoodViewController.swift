@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class HZLivelihoodViewController: HZBaseViewController {
 
@@ -27,7 +28,7 @@ class HZLivelihoodViewController: HZBaseViewController {
     
     func viewsLayout() -> Void {
         self.view.backgroundColor = UIColor.white
-        self.headerView = HZLivelihoodHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: HZSCreenWidth(), height: 180))
+        self.headerView = HZLivelihoodHeaderView.init(frame: CGRect.init(x: 0, y: 0, width: HZSCreenWidth(), height: 170))
         self.headerView.dataSource = [
             ["imageName": "item_new_01", "title":"吃喝玩乐"],
             ["imageName": "item_new_02", "title":"求职招聘"],
@@ -45,11 +46,31 @@ class HZLivelihoodViewController: HZBaseViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.tableHeaderView = self.headerView
+        self.tableView.tableFooterView = UIView.init()
         self.view.addSubview(self.tableView)
         self.tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
+        
+        let footer = MJRefreshAutoNormalFooter.init {
+            let pageNumber = self.messageList.count/20 == 0 ? 1 : self.messageList.count/20
+            self.dataRequest(pageNumber)
+        }
+        self.tableView.mj_footer = footer
+        
+        self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+            self.messageList.removeAll()
+            self.dataRequest()
+        })
+        
+        self.tableView.ex_makeViewVisible()
     }
+    
+    func dataRequest(_ pageNumber: Int = 1) -> Void {
+        
+    }
+    
+    
 }
 
 extension HZLivelihoodViewController : UITableViewDelegate, UITableViewDataSource {
