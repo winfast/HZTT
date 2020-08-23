@@ -79,23 +79,22 @@ class HZHomeViewController: HZBaseViewController {
 	}
 }
 
-extension HZHomeViewController: JXSegmentedViewDelegate {
+extension HZHomeViewController: JXSegmentedViewDelegate, JXSegmentedListContainerViewDataSource {
     func segmentedView(_ segmentedView: JXSegmentedView, didClickSelectedItemAt index: Int) {
        // navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
     }
-}
-
-extension HZHomeViewController: JXSegmentedListContainerViewDataSource {
+    
     func numberOfLists(in listContainerView: JXSegmentedListContainerView) -> Int {
         if let titleDataSource = segmentedView.dataSource as? JXSegmentedBaseDataSource {
             return titleDataSource.dataSource.count
         }
         return 0
     }
-
+    
     func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
-		let title: String! = self.segmentedDataSource?.titles[index] ?? "最新"
-		let vc: HZHomeListViewController = HZHomeListViewController.init(self.titlesId[title]!)
+        let title: String! = self.segmentedDataSource?.titles[index] ?? "最新"
+        let vc: HZHomeListViewController = HZHomeListViewController.init(self.titlesId[title]!)
         return vc
     }
 }
+

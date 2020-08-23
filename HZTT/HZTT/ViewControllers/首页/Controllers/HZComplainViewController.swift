@@ -183,11 +183,11 @@ class HZComplainTextFieldTableViewCell : UITableViewCell {
         textField.clearButtonMode = .whileEditing
         textField.textColor = UIColor.black
         self.contentView.addSubview(self.textField)
-        self.textLenthLabel?.snp.makeConstraints({ (make) in
-            make.right.equalTo(self.textView.snp.right).offset(-20)
+        self.textField?.snp.makeConstraints({ (make) in
+            make.right.equalTo(self.contentView.snp.right).offset(-20)
             make.left.equalTo(self.contentView.snp.left).offset(20)
             make.bottom.lessThanOrEqualTo(0).priority(900)
-            make.top.equalTo(self.textView.snp.bottom)
+            make.top.equalTo(self.contentView.snp.bottom)
         })
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JXSegmentedView
 
 class HZTopicViewController: HZBaseViewController {
     
@@ -17,7 +18,7 @@ class HZTopicViewController: HZBaseViewController {
     ]
     var segmentedDataSource: JXSegmentedTitleDataSource?
     lazy var listContainerView: JXSegmentedListContainerView! = {
-        return JXSegmentedListContainerView(dataSource: self)
+        return JXSegmentedListContainerView(dataSource: self as! JXSegmentedListContainerViewDataSource)
     }()
 
     override func viewDidLoad() {
@@ -77,6 +78,27 @@ class HZTopicViewController: HZBaseViewController {
             make.edges.equalTo(0)
         }
     }
-    
-
 }
+
+extension HZTopicViewController: JXSegmentedViewDelegate, JXSegmentedListContainerViewDataSource {
+
+    func segmentedView(_ segmentedView: JXSegmentedView, didClickSelectedItemAt index: Int) {
+        // navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
+         navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
+    }
+    
+    func numberOfLists(in listContainerView: JXSegmentedListContainerView) -> Int {
+        if let titleDataSource = segmentedView.dataSource as? JXSegmentedBaseDataSource {
+            return titleDataSource.dataSource.count
+        }
+        return 0
+    }
+
+    func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
+        let title: String! = self.segmentedDataSource?.titles[index] ?? "最新"
+        let vc: HZHomeListViewController = HZHomeListViewController.init(self.titlesId[title]!)
+        return vc
+    }
+}
+
+
