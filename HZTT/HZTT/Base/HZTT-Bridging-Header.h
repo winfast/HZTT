@@ -15,6 +15,9 @@
 #import "HBDNavigationBar/UIViewController+HBD.h"
 @import SnapKit;
 @import IQKeyboardManagerSwift;
+@import RxSwift;
+@import SwiftyJSON;
+@import RxCocoa;
 
 
 

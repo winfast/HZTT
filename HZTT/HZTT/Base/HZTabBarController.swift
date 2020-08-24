@@ -46,7 +46,7 @@ class HZTabBarController: UITabBarController {
 			"HZTopicViewController",
 			"HZBaseViewController",
 			"HZLivelihoodViewController",
-			"MeVC",
+			"HZBaseViewController",
 		]
 		
 		var viewControllers: Array<UIViewController> = Array.init()

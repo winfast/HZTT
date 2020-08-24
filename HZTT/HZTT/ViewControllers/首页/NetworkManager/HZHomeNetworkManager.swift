@@ -12,6 +12,7 @@ import RxSwift
 import Moya
 import SwiftyJSON
 
+
 class HZHomeNetworkManager: NSObject {
 	static let shared = HZHomeNetworkManager()
 	private let provider = MoyaProvider<HZHomeNetworkMoya>()

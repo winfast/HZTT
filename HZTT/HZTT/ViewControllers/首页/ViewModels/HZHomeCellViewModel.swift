@@ -68,7 +68,7 @@ class HZHomeCellViewModel: NSObject {
 			self?.postDate = value
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "homeModel.content").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
+		self.rx.observe(String.self, "homeModel.content").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
 			self?.content = value
 		}).disposed(by: disposeBag)
 		
@@ -91,7 +91,7 @@ class HZHomeCellViewModel: NSObject {
 		self.rx.observe(String.self, "homeModel.type").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
 			self?.type = value
 		}).disposed(by: disposeBag)
-		
+	
 		self.rx.observe(String.self, "homeModel.user.nickName").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
 			self?.nickName = value
 		}).disposed(by: disposeBag)

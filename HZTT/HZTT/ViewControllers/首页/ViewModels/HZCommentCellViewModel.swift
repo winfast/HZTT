@@ -74,10 +74,6 @@ class HZCommentCellViewModel: NSObject {
 		self.rx.observe(String.self, "commentModel.u_avatar").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
 				self?.u_avatar = value
 			}).disposed(by: disposeBag)
-		
-		
-		
-
 	}
 
 }
