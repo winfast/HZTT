@@ -20,9 +20,9 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 	open var messageTitleLabel: UILabel!
 
 	//中间三张图片 不一定有
-	open var firstImgaeView: UIImageView!
+	open var firstImageView: UIImageView!
 	open var secondImageView: UIImageView!
-	open var thirdImgaeView: UIImageView!
+	open var thirdImageView: UIImageView!
 	
 	open var readCountLbael: UILabel!
 	open var complainBtn: UIButton!
@@ -91,16 +91,16 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 			make.right.equalTo(self.contentView.snp.right).offset(-8)
 		}
 		
-		firstImgaeView = UIImageView.init()
-		firstImgaeView.isHidden = true
-		firstImgaeView.backgroundColor = UIColor.clear
-		firstImgaeView.contentMode = UIView.ContentMode.scaleToFill;
-		self.contentView.addSubview(firstImgaeView)
-		firstImgaeView.snp.makeConstraints { (make) in
+		firstImageView = UIImageView.init()
+		firstImageView.isHidden = true
+		firstImageView.backgroundColor = UIColor.clear
+		firstImageView.contentMode = UIView.ContentMode.scaleToFill;
+		self.contentView.addSubview(firstImageView)
+		firstImageView.snp.makeConstraints { (make) in
 			make.left.equalTo(self.contentView.snp.left).offset(10)
 			make.top.equalTo(self.messageTitleLabel.snp.bottom).offset(10)
 			make.width.equalTo((HZSCreenWidth() - 20 - 2 * 2)/3.0)
-			make.height.equalTo(firstImgaeView.snp.width).multipliedBy(113/118.0);
+			make.height.equalTo(firstImageView.snp.width).multipliedBy(113/118.0);
 		}
 		
 		secondImageView = UIImageView.init()
@@ -108,21 +108,21 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		secondImageView.contentMode = UIView.ContentMode.scaleToFill;
 		self.contentView.addSubview(secondImageView)
 		secondImageView.snp.makeConstraints { (make) in
-			make.left.equalTo(self.firstImgaeView.snp.right).offset(2)
-			make.top.equalTo(self.firstImgaeView.snp.top)
-			make.width.equalTo(firstImgaeView.snp.width)
-			make.height.equalTo(firstImgaeView.snp.height)
+			make.left.equalTo(self.firstImageView.snp.right).offset(2)
+			make.top.equalTo(self.firstImageView.snp.top)
+			make.width.equalTo(firstImageView.snp.width)
+			make.height.equalTo(firstImageView.snp.height)
 		}
 		
-		thirdImgaeView = UIImageView.init()
-		thirdImgaeView.backgroundColor = UIColor.clear
-		thirdImgaeView.contentMode = UIView.ContentMode.scaleToFill;
-		self.contentView.addSubview(thirdImgaeView)
-		thirdImgaeView.snp.makeConstraints { (make) in
+		thirdImageView = UIImageView.init()
+		thirdImageView.backgroundColor = UIColor.clear
+		thirdImageView.contentMode = UIView.ContentMode.scaleToFill;
+		self.contentView.addSubview(thirdImageView)
+		thirdImageView.snp.makeConstraints { (make) in
 			make.left.equalTo(self.secondImageView.snp.right).offset(2)
-			make.top.equalTo(self.firstImgaeView.snp.top)
-			make.width.equalTo(firstImgaeView.snp.width)
-			make.height.equalTo(firstImgaeView.snp.height)
+			make.top.equalTo(self.firstImageView.snp.top)
+			make.width.equalTo(firstImageView.snp.width)
+			make.height.equalTo(firstImageView.snp.height)
 		}
 		
 		readCountLbael = UILabel.init()
@@ -132,7 +132,7 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		self.contentView.addSubview(readCountLbael)
 		readCountLbael.snp.makeConstraints { (make) in
 			make.left.equalTo(self.messageTitleLabel.snp.left)
-			make.top.equalTo(self.firstImgaeView.snp.bottom).offset(15)
+			make.top.equalTo(self.firstImageView.snp.bottom).offset(15)
 		}
 		
 		upvoteBtn = UIButton.init(type: .custom)
@@ -242,9 +242,9 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		
 		self.rx.observe(Array<String>.self, "viewModel.images").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
 			let x = value ?? []
-			self?.firstImgaeView.isHidden = true
+			self?.firstImageView.isHidden = true
 			self?.secondImageView.isHidden = true
-			self?.thirdImgaeView.isHidden = true
+			self?.thirdImageView.isHidden = true
 			if x.count == 0 {
 				self?.readCountLbael.snp.remakeConstraints { (make) in
 					make.left.equalTo(self!.messageTitleLabel.snp.left)
@@ -254,20 +254,20 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 			}else {
 				self?.readCountLbael.snp.remakeConstraints { (make) in
 					make.left.equalTo(self!.messageTitleLabel.snp.left)
-					make.top.equalTo(self!.firstImgaeView.snp.bottom).offset(15)
+					make.top.equalTo(self!.firstImageView.snp.bottom).offset(15)
 					make.bottom.lessThanOrEqualTo(-15).priority(900)
 				}
 				for index in 0..<x.count {
 					let imagePath = x[index]
 					if index == 0 {
-						self?.firstImgaeView.isHidden = false;
-						self?.firstImgaeView.kf.setImage(with: URL.init(string:imagePath))
+						self?.firstImageView.isHidden = false;
+						self?.firstImageView.kf.setImage(with: URL.init(string:imagePath))
 					} else if index == 1 {
 						self?.secondImageView.isHidden = false;
 						self?.secondImageView.kf.setImage(with: URL.init(string:imagePath))
 					} else if index == 2 {
-						self?.thirdImgaeView.isHidden = false;
-						self?.thirdImgaeView.kf.setImage(with: URL.init(string:imagePath))
+						self?.thirdImageView.isHidden = false;
+						self?.thirdImageView.kf.setImage(with: URL.init(string:imagePath))
 					}
 				}
 			}

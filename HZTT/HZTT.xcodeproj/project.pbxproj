@@ -14,6 +14,11 @@
 		042F2DCE24EF6B2C0069FB39 /* HZCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F2DCD24EF6B2C0069FB39 /* HZCommentModel.swift */; };
 		042F2DD124EF6C220069FB39 /* HZCommentCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F2DD024EF6C220069FB39 /* HZCommentCellViewModel.swift */; };
 		042F2DD324EFBCF20069FB39 /* HZComplainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F2DD224EFBCF20069FB39 /* HZComplainViewController.swift */; };
+		0446B84924F35DA60079BC2C /* HZTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446B84824F35DA60079BC2C /* HZTopicViewController.swift */; };
+		0446B84E24F35DAC0079BC2C /* HZLivelihoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446B84B24F35DAC0079BC2C /* HZLivelihoodViewController.swift */; };
+		0446B84F24F35DAC0079BC2C /* HZLivelihoodHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446B84D24F35DAC0079BC2C /* HZLivelihoodHeaderView.swift */; };
+		0446B85124F365AD0079BC2C /* HZLivelihoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446B85024F365AD0079BC2C /* HZLivelihoodTableViewCell.swift */; };
+		0446B85624F3B7960079BC2C /* HZLivelihoodTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446B85524F3B7960079BC2C /* HZLivelihoodTypeViewController.swift */; };
 		047BF2C524EB6017002A39F3 /* HZHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2C424EB6017002A39F3 /* HZHomeViewController.swift */; };
 		047BF2CA24EB6088002A39F3 /* HZHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2C924EB6088002A39F3 /* HZHomeTableViewCell.swift */; };
 		047BF2CC24EB689A002A39F3 /* HZFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2CB24EB689A002A39F3 /* HZFont.swift */; };
@@ -45,6 +50,11 @@
 		042F2DCD24EF6B2C0069FB39 /* HZCommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZCommentModel.swift; sourceTree = "<group>"; };
 		042F2DD024EF6C220069FB39 /* HZCommentCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZCommentCellViewModel.swift; sourceTree = "<group>"; };
 		042F2DD224EFBCF20069FB39 /* HZComplainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZComplainViewController.swift; sourceTree = "<group>"; };
+		0446B84824F35DA60079BC2C /* HZTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZTopicViewController.swift; sourceTree = "<group>"; };
+		0446B84B24F35DAC0079BC2C /* HZLivelihoodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZLivelihoodViewController.swift; sourceTree = "<group>"; };
+		0446B84D24F35DAC0079BC2C /* HZLivelihoodHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZLivelihoodHeaderView.swift; sourceTree = "<group>"; };
+		0446B85024F365AD0079BC2C /* HZLivelihoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZLivelihoodTableViewCell.swift; sourceTree = "<group>"; };
+		0446B85524F3B7960079BC2C /* HZLivelihoodTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZLivelihoodTypeViewController.swift; sourceTree = "<group>"; };
 		047BF2C424EB6017002A39F3 /* HZHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZHomeViewController.swift; sourceTree = "<group>"; };
 		047BF2C924EB6088002A39F3 /* HZHomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeTableViewCell.swift; sourceTree = "<group>"; };
 		047BF2CB24EB689A002A39F3 /* HZFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZFont.swift; sourceTree = "<group>"; };
@@ -85,6 +95,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0446B84724F35DA60079BC2C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0446B84824F35DA60079BC2C /* HZTopicViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0446B84A24F35DAC0079BC2C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0446B84B24F35DAC0079BC2C /* HZLivelihoodViewController.swift */,
+				0446B85524F3B7960079BC2C /* HZLivelihoodTypeViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0446B84C24F35DAC0079BC2C /* VIews */ = {
+			isa = PBXGroup;
+			children = (
+				0446B84D24F35DAC0079BC2C /* HZLivelihoodHeaderView.swift */,
+				0446B85024F365AD0079BC2C /* HZLivelihoodTableViewCell.swift */,
+			);
+			path = VIews;
+			sourceTree = "<group>";
+		};
 		047BF2C324EB6017002A39F3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +268,8 @@
 		04E4FC9F24EA949700C5E5B0 /* 生活 */ = {
 			isa = PBXGroup;
 			children = (
+				0446B84A24F35DAC0079BC2C /* ViewControllers */,
+				0446B84C24F35DAC0079BC2C /* VIews */,
 			);
 			path = "生活";
 			sourceTree = "<group>";
@@ -239,6 +277,7 @@
 		04E4FCA024EA949700C5E5B0 /* 话题 */ = {
 			isa = PBXGroup;
 			children = (
+				0446B84724F35DA60079BC2C /* ViewControllers */,
 			);
 			path = "话题";
 			sourceTree = "<group>";
@@ -378,13 +417,18 @@
 				047BF2CC24EB689A002A39F3 /* HZFont.swift in Sources */,
 				047BF2CE24EB7445002A39F3 /* HZScreen.swift in Sources */,
 				04E31BCD24ED08EA002CF93E /* UIView+Extension.swift in Sources */,
+				0446B85124F365AD0079BC2C /* HZLivelihoodTableViewCell.swift in Sources */,
 				047BF2D224EBA33C002A39F3 /* HZHomeCellViewModel.swift in Sources */,
 				04E4FCA624EA998400C5E5B0 /* HZImage.swift in Sources */,
 				04E4FC9A24EA80D500C5E5B0 /* HZBaseViewController.swift in Sources */,
+				0446B84924F35DA60079BC2C /* HZTopicViewController.swift in Sources */,
 				047BF2D024EBA331002A39F3 /* HZHomeViewModel.swift in Sources */,
+				0446B85624F3B7960079BC2C /* HZLivelihoodTypeViewController.swift in Sources */,
+				0446B84E24F35DAC0079BC2C /* HZLivelihoodViewController.swift in Sources */,
 				047BF2CA24EB6088002A39F3 /* HZHomeTableViewCell.swift in Sources */,
 				04E4FC9824EA7EE800C5E5B0 /* HZTabBarController.swift in Sources */,
 				042F2DCE24EF6B2C0069FB39 /* HZCommentModel.swift in Sources */,
+				0446B84F24F35DAC0079BC2C /* HZLivelihoodHeaderView.swift in Sources */,
 				042E881D24EE1A46000053A0 /* HZHomeDetailViewController.swift in Sources */,
 				04E31BD124ED3441002CF93E /* HZHomeListViewController.swift in Sources */,
 				04E4FC9C24EA8D7B00C5E5B0 /* HZNavigationController.swift in Sources */,

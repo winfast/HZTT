@@ -33,11 +33,15 @@ extension HZHomeNetworkMoya: TargetType {
 		default:
 			parammter = [:]
 		}
+		//添加常量
+		parammter.updateValue("c6cdb6faa9c224637ba1f5b61a19c1c1", forKey: "t")
+		parammter.updateValue("1f431f1d98f169be4d2aaee70e14bfda", forKey: "uid")
 		return .requestParameters(parameters: parammter, encoding: URLEncoding.default)
 	}
 	
 	var headers: [String : String]? {
-		return [:]
+		//添加常量
+		return ["Authorization":"c6cdb6faa9c224637ba1f5b61a19c1c1"]
 	}
 	
 	var path: String {
