@@ -34,7 +34,7 @@ class HZNavigationController: HBDNavigationController {
 		backBtn.frame = CGRect.init(x: 0, y: 0, width: 44, height: 44)
 		backBtn.setImage(UIImage (named: "leftbackicon_sdk_login"), for: .normal)
 		backBtn.contentHorizontalAlignment = .left
-		backBtn.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -10, bottom: 0, right: 0)
+		//backBtn.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -5, bottom: 0, right: 0)
 		backBtn.addTarget(self, action: #selector(clickBackBtn), for: .touchUpInside)
 		let leftItem :UIBarButtonItem = UIBarButtonItem.init(customView: backBtn)
 		return leftItem

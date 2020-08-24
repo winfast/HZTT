@@ -52,8 +52,6 @@ class HZLivelihoodTypeViewController: HZBaseViewController {
 			strongself.messageList.removeAll()
 			strongself.dataRequest()
 		})
-		
-		
 	}
 	
 	func dataRequest(_ pageNumber: Int = 1) -> Void {
@@ -88,7 +86,9 @@ class HZLivelihoodTypeViewController: HZBaseViewController {
 
 extension HZLivelihoodTypeViewController : UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		
+		let pid = self.messageList[indexPath.row].pid
+		let vc: HZHomeDetailViewController = HZHomeDetailViewController.init(pid, category: "life")
+		self.navigationController?.pushViewController(vc, animated: true)
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -101,6 +101,7 @@ extension HZLivelihoodTypeViewController : UITableViewDelegate, UITableViewDataS
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell: HZLivelihoodTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZLivelihoodTableViewCell") as! HZLivelihoodTableViewCell
+		cell.selectionStyle = .none
 		cell.viewModel = self.messageList[indexPath.row]
 		return cell
 	}

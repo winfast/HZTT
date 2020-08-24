@@ -100,7 +100,7 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 			make.left.equalTo(self.contentView.snp.left).offset(10)
 			make.top.equalTo(self.messageTitleLabel.snp.bottom).offset(10)
 			make.width.equalTo((HZSCreenWidth() - 20 - 2 * 2)/3.0)
-			make.height.equalTo(firstImageView.snp.width).multipliedBy(113/118.0);
+			make.height.equalTo(firstImageView.snp.width).multipliedBy(153.0/130);
 		}
 		
 		secondImageView = UIImageView.init()
@@ -132,7 +132,7 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		self.contentView.addSubview(readCountLbael)
 		readCountLbael.snp.makeConstraints { (make) in
 			make.left.equalTo(self.messageTitleLabel.snp.left)
-			make.top.equalTo(self.firstImageView.snp.bottom).offset(15)
+			make.top.equalTo(self.firstImageView.snp.bottom).offset(15 + 20)
 		}
 		
 		upvoteBtn = UIButton.init(type: .custom)
@@ -248,13 +248,13 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 			if x.count == 0 {
 				self?.readCountLbael.snp.remakeConstraints { (make) in
 					make.left.equalTo(self!.messageTitleLabel.snp.left)
-					make.top.equalTo(self!.messageTitleLabel.snp.bottom).offset(15)
+					make.top.equalTo(self!.messageTitleLabel.snp.bottom).offset(15 + 20)
 					make.bottom.lessThanOrEqualTo(-15).priority(900)
 				}
 			}else {
 				self?.readCountLbael.snp.remakeConstraints { (make) in
 					make.left.equalTo(self!.messageTitleLabel.snp.left)
-					make.top.equalTo(self!.firstImageView.snp.bottom).offset(15)
+					make.top.equalTo(self!.firstImageView.snp.bottom).offset(20)
 					make.bottom.lessThanOrEqualTo(-15).priority(900)
 				}
 				for index in 0..<x.count {

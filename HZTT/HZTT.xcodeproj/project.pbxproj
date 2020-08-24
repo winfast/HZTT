@@ -20,6 +20,7 @@
 		0446B85124F365AD0079BC2C /* HZLivelihoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446B85024F365AD0079BC2C /* HZLivelihoodTableViewCell.swift */; };
 		0446B85624F3B7960079BC2C /* HZLivelihoodTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446B85524F3B7960079BC2C /* HZLivelihoodTypeViewController.swift */; };
 		0446B85C24F3BD430079BC2C /* MeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446B85B24F3BD430079BC2C /* MeVC.swift */; };
+		0446B86024F3C5190079BC2C /* HZLivelihoodDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446B85F24F3C5190079BC2C /* HZLivelihoodDetailTableViewCell.swift */; };
 		047BF2C524EB6017002A39F3 /* HZHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2C424EB6017002A39F3 /* HZHomeViewController.swift */; };
 		047BF2CA24EB6088002A39F3 /* HZHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2C924EB6088002A39F3 /* HZHomeTableViewCell.swift */; };
 		047BF2CC24EB689A002A39F3 /* HZFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2CB24EB689A002A39F3 /* HZFont.swift */; };
@@ -57,6 +58,7 @@
 		0446B85024F365AD0079BC2C /* HZLivelihoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZLivelihoodTableViewCell.swift; sourceTree = "<group>"; };
 		0446B85524F3B7960079BC2C /* HZLivelihoodTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZLivelihoodTypeViewController.swift; sourceTree = "<group>"; };
 		0446B85B24F3BD430079BC2C /* MeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeVC.swift; sourceTree = "<group>"; };
+		0446B85F24F3C5190079BC2C /* HZLivelihoodDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZLivelihoodDetailTableViewCell.swift; sourceTree = "<group>"; };
 		047BF2C424EB6017002A39F3 /* HZHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZHomeViewController.swift; sourceTree = "<group>"; };
 		047BF2C924EB6088002A39F3 /* HZHomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeTableViewCell.swift; sourceTree = "<group>"; };
 		047BF2CB24EB689A002A39F3 /* HZFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZFont.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			children = (
 				0446B84D24F35DAC0079BC2C /* HZLivelihoodHeaderView.swift */,
 				0446B85024F365AD0079BC2C /* HZLivelihoodTableViewCell.swift */,
+				0446B85F24F3C5190079BC2C /* HZLivelihoodDetailTableViewCell.swift */,
 			);
 			path = VIews;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				047BF2D224EBA33C002A39F3 /* HZHomeCellViewModel.swift in Sources */,
 				04E4FCA624EA998400C5E5B0 /* HZImage.swift in Sources */,
 				04E4FC9A24EA80D500C5E5B0 /* HZBaseViewController.swift in Sources */,
+				0446B86024F3C5190079BC2C /* HZLivelihoodDetailTableViewCell.swift in Sources */,
 				0446B84924F35DA60079BC2C /* HZTopicViewController.swift in Sources */,
 				047BF2D024EBA331002A39F3 /* HZHomeViewModel.swift in Sources */,
 				0446B85624F3B7960079BC2C /* HZLivelihoodTypeViewController.swift in Sources */,

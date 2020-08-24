@@ -59,6 +59,7 @@ class HZHomeDetailViewController: HZBaseViewController {
 		self.tableView.rowHeight = UITableView.automaticDimension
 		self.tableView.estimatedRowHeight = 150
 		self.tableView.register(HZHomeDetailTableViewCell.self, forCellReuseIdentifier: "HZHomeDetailTableViewCell")
+		self.tableView.register(HZLivelihoodDetailTableViewCell.self, forCellReuseIdentifier: "HZLivelihoodDetailTableViewCell")
 		self.tableView.register(HZCommentTableViewCell.self, forCellReuseIdentifier: "HZCommentTableViewCell")
 		self.view.addSubview(self.tableView!)
 		self.tableView.snp.makeConstraints { (make) in
@@ -181,19 +182,36 @@ extension HZHomeDetailViewController :UITableViewDelegate, UITableViewDataSource
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		if indexPath.section == 0 {
-			let cell: HZHomeDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZHomeDetailTableViewCell") as! HZHomeDetailTableViewCell
-			cell.viewModel = self.cellViewModel
-			cell.clickBtnBlock = { [weak self] (button: UIButton?)->Void in
-				guard let weakself = self else {
-					return
+			if self.category == "life" {
+				let cell: HZLivelihoodDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZLivelihoodDetailTableViewCell") as! HZLivelihoodDetailTableViewCell
+				cell.viewModel = self.cellViewModel
+				cell.clickBtnBlock = { [weak self] (button: UIButton?)->Void in
+					guard let weakself = self else {
+						return
+					}
+					if button?.tag == 0 {
+						
+					} else {
+						weakself.showComplainViewController()
+					}
 				}
-				if button?.tag == 0 {
-					
-				} else {
-					weakself.showComplainViewController()
+				return cell
+			} else  {
+				let cell: HZHomeDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZHomeDetailTableViewCell") as! HZHomeDetailTableViewCell
+				
+				cell.viewModel = self.cellViewModel
+				cell.clickBtnBlock = { [weak self] (button: UIButton?)->Void in
+					guard let weakself = self else {
+						return
+					}
+					if button?.tag == 0 {
+						
+					} else {
+						weakself.showComplainViewController()
+					}
 				}
+				return cell
 			}
-			return cell
 		} else {
 			let cell: HZCommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZCommentTableViewCell") as! HZCommentTableViewCell
 			cell.viewModel = self.commentDataArray[indexPath.row]
