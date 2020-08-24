@@ -89,6 +89,7 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 				subType = nil
 			}
 			if subType == nil {
+				strongSelf.isHidden = true
 				strongSelf.messageTypeBtn.setTitle(nil, for: .normal)
 				strongSelf.messageTitleLabel.snp.remakeConstraints { (make) in
 					make.left.equalTo(10)
@@ -96,6 +97,7 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 					make.right.equalTo(strongSelf.contentView.snp.right).offset(-30)
 				}
 			} else {
+				strongSelf.isHidden = false
 				strongSelf.messageTypeBtn.setTitle(subType, for: .normal)
 				strongSelf.messageTitleLabel.snp.remakeConstraints { (make) in
 					make.left.equalTo(10)
