@@ -25,7 +25,7 @@ func HZNavBarHeight() -> CGFloat {
 }
 
 func HZAdpatedWidth(x: CGFloat) -> CGFloat {
-    return CGFloat(ceill(Float80(Double(x)))) * (HZSCreenWidth()/375.0)
+    return CGFloat(ceill(Double(x))) * (HZSCreenWidth()/375.0)
 }
 
 

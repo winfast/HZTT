@@ -11,6 +11,7 @@
 		00E83E1C24F3B34100DBE0C5 /* HZLivelihoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E83E1924F3B34100DBE0C5 /* HZLivelihoodViewController.swift */; };
 		00E83E1D24F3B34100DBE0C5 /* HZLivelihoodHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E83E1B24F3B34100DBE0C5 /* HZLivelihoodHeaderView.swift */; };
 		00E83E2324F3B45700DBE0C5 /* MeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E83E2024F3B45700DBE0C5 /* MeVC.swift */; };
+		00E83E2724F3B9FA00DBE0C5 /* UIView+Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E83E2624F3B9FA00DBE0C5 /* UIView+Toast.swift */; };
 		042E881D24EE1A46000053A0 /* HZHomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E881C24EE1A46000053A0 /* HZHomeDetailViewController.swift */; };
 		042E89F624EE54E6000053A0 /* HZHomeDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E89F524EE54E6000053A0 /* HZHomeDetailTableViewCell.swift */; };
 		042F2DCA24EE83940069FB39 /* HZHomeDetailNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F2DC924EE83940069FB39 /* HZHomeDetailNetworkManager.swift */; };
@@ -46,6 +47,7 @@
 		00E83E1924F3B34100DBE0C5 /* HZLivelihoodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZLivelihoodViewController.swift; sourceTree = "<group>"; };
 		00E83E1B24F3B34100DBE0C5 /* HZLivelihoodHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZLivelihoodHeaderView.swift; sourceTree = "<group>"; };
 		00E83E2024F3B45700DBE0C5 /* MeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeVC.swift; sourceTree = "<group>"; };
+		00E83E2624F3B9FA00DBE0C5 /* UIView+Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Toast.swift"; sourceTree = "<group>"; };
 		042E881C24EE1A46000053A0 /* HZHomeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailViewController.swift; sourceTree = "<group>"; };
 		042E89F524EE54E6000053A0 /* HZHomeDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailTableViewCell.swift; sourceTree = "<group>"; };
 		042F2DC924EE83940069FB39 /* HZHomeDetailNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailNetworkManager.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				047BF2CD24EB7445002A39F3 /* HZScreen.swift */,
 				047BF2D824EBAD63002A39F3 /* HZNetworkMoya.swift */,
 				04E31BCE24ED23F7002CF93E /* HZConstant.swift */,
+				00E83E2624F3B9FA00DBE0C5 /* UIView+Toast.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				047BF2D224EBA33C002A39F3 /* HZHomeCellViewModel.swift in Sources */,
 				04E4FCA624EA998400C5E5B0 /* HZImage.swift in Sources */,
 				04E4FC9A24EA80D500C5E5B0 /* HZBaseViewController.swift in Sources */,
+				00E83E2724F3B9FA00DBE0C5 /* UIView+Toast.swift in Sources */,
 				00E83E1724F3B33500DBE0C5 /* HZTopicViewController.swift in Sources */,
 				047BF2D024EBA331002A39F3 /* HZHomeViewModel.swift in Sources */,
 				00E83E1C24F3B34100DBE0C5 /* HZLivelihoodViewController.swift in Sources */,
