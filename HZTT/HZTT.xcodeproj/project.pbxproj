@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00E83E1724F3B33500DBE0C5 /* HZTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E83E1624F3B33500DBE0C5 /* HZTopicViewController.swift */; };
+		00E83E1C24F3B34100DBE0C5 /* HZLivelihoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E83E1924F3B34100DBE0C5 /* HZLivelihoodViewController.swift */; };
+		00E83E1D24F3B34100DBE0C5 /* HZLivelihoodHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E83E1B24F3B34100DBE0C5 /* HZLivelihoodHeaderView.swift */; };
+		00E83E2324F3B45700DBE0C5 /* MeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E83E2024F3B45700DBE0C5 /* MeVC.swift */; };
 		042E881D24EE1A46000053A0 /* HZHomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E881C24EE1A46000053A0 /* HZHomeDetailViewController.swift */; };
 		042E89F624EE54E6000053A0 /* HZHomeDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E89F524EE54E6000053A0 /* HZHomeDetailTableViewCell.swift */; };
 		042F2DCA24EE83940069FB39 /* HZHomeDetailNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F2DC924EE83940069FB39 /* HZHomeDetailNetworkManager.swift */; };
@@ -38,6 +42,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00E83E1624F3B33500DBE0C5 /* HZTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZTopicViewController.swift; sourceTree = "<group>"; };
+		00E83E1924F3B34100DBE0C5 /* HZLivelihoodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZLivelihoodViewController.swift; sourceTree = "<group>"; };
+		00E83E1B24F3B34100DBE0C5 /* HZLivelihoodHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZLivelihoodHeaderView.swift; sourceTree = "<group>"; };
+		00E83E2024F3B45700DBE0C5 /* MeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeVC.swift; sourceTree = "<group>"; };
 		042E881C24EE1A46000053A0 /* HZHomeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailViewController.swift; sourceTree = "<group>"; };
 		042E89F524EE54E6000053A0 /* HZHomeDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailTableViewCell.swift; sourceTree = "<group>"; };
 		042F2DC924EE83940069FB39 /* HZHomeDetailNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailNetworkManager.swift; sourceTree = "<group>"; };
@@ -85,6 +93,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00E83E1524F3B33500DBE0C5 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				00E83E1624F3B33500DBE0C5 /* HZTopicViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		00E83E1824F3B34100DBE0C5 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				00E83E1924F3B34100DBE0C5 /* HZLivelihoodViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		00E83E1A24F3B34100DBE0C5 /* VIews */ = {
+			isa = PBXGroup;
+			children = (
+				00E83E1B24F3B34100DBE0C5 /* HZLivelihoodHeaderView.swift */,
+			);
+			path = VIews;
+			sourceTree = "<group>";
+		};
+		00E83E1E24F3B45700DBE0C5 /* 个人中心 */ = {
+			isa = PBXGroup;
+			children = (
+				00E83E1F24F3B45700DBE0C5 /* ViewControllers */,
+				00E83E2124F3B45700DBE0C5 /* Model */,
+				00E83E2224F3B45700DBE0C5 /* View */,
+			);
+			path = "个人中心";
+			sourceTree = "<group>";
+		};
+		00E83E1F24F3B45700DBE0C5 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				00E83E2024F3B45700DBE0C5 /* MeVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		00E83E2124F3B45700DBE0C5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		00E83E2224F3B45700DBE0C5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		047BF2C324EB6017002A39F3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,8 +247,8 @@
 		04E4FC9324EA7A6E00C5E5B0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				00E83E1E24F3B45700DBE0C5 /* 个人中心 */,
 				04E4FC9E24EA949700C5E5B0 /* 首页 */,
-				04E4FC9D24EA949700C5E5B0 /* 个人中心 */,
 				04E4FCA024EA949700C5E5B0 /* 话题 */,
 				04E4FC9F24EA949700C5E5B0 /* 生活 */,
 			);
@@ -210,13 +274,6 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		04E4FC9D24EA949700C5E5B0 /* 个人中心 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "个人中心";
-			sourceTree = "<group>";
-		};
 		04E4FC9E24EA949700C5E5B0 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +289,8 @@
 		04E4FC9F24EA949700C5E5B0 /* 生活 */ = {
 			isa = PBXGroup;
 			children = (
+				00E83E1824F3B34100DBE0C5 /* ViewControllers */,
+				00E83E1A24F3B34100DBE0C5 /* VIews */,
 			);
 			path = "生活";
 			sourceTree = "<group>";
@@ -239,6 +298,7 @@
 		04E4FCA024EA949700C5E5B0 /* 话题 */ = {
 			isa = PBXGroup;
 			children = (
+				00E83E1524F3B33500DBE0C5 /* ViewControllers */,
 			);
 			path = "话题";
 			sourceTree = "<group>";
@@ -381,10 +441,13 @@
 				047BF2D224EBA33C002A39F3 /* HZHomeCellViewModel.swift in Sources */,
 				04E4FCA624EA998400C5E5B0 /* HZImage.swift in Sources */,
 				04E4FC9A24EA80D500C5E5B0 /* HZBaseViewController.swift in Sources */,
+				00E83E1724F3B33500DBE0C5 /* HZTopicViewController.swift in Sources */,
 				047BF2D024EBA331002A39F3 /* HZHomeViewModel.swift in Sources */,
+				00E83E1C24F3B34100DBE0C5 /* HZLivelihoodViewController.swift in Sources */,
 				047BF2CA24EB6088002A39F3 /* HZHomeTableViewCell.swift in Sources */,
 				04E4FC9824EA7EE800C5E5B0 /* HZTabBarController.swift in Sources */,
 				042F2DCE24EF6B2C0069FB39 /* HZCommentModel.swift in Sources */,
+				00E83E1D24F3B34100DBE0C5 /* HZLivelihoodHeaderView.swift in Sources */,
 				042E881D24EE1A46000053A0 /* HZHomeDetailViewController.swift in Sources */,
 				04E31BD124ED3441002CF93E /* HZHomeListViewController.swift in Sources */,
 				04E4FC9C24EA8D7B00C5E5B0 /* HZNavigationController.swift in Sources */,
@@ -395,6 +458,7 @@
 				047BF2D424EBA34C002A39F3 /* HZHomeModel.swift in Sources */,
 				042F2DCA24EE83940069FB39 /* HZHomeDetailNetworkManager.swift in Sources */,
 				047BF2C524EB6017002A39F3 /* HZHomeViewController.swift in Sources */,
+				00E83E2324F3B45700DBE0C5 /* MeVC.swift in Sources */,
 				042F2DD324EFBCF20069FB39 /* HZComplainViewController.swift in Sources */,
 				04E4FCA424EA96DB00C5E5B0 /* HZColor.swift in Sources */,
 				04E31BCF24ED23F7002CF93E /* HZConstant.swift in Sources */,
@@ -538,7 +602,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 579P9269QX;
+				DEVELOPMENT_TEAM = DQFEA2B5H2;
 				INFOPLIST_FILE = HZTT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -560,7 +624,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 579P9269QX;
+				DEVELOPMENT_TEAM = DQFEA2B5H2;
 				INFOPLIST_FILE = HZTT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
