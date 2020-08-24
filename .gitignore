@@ -1,0 +1,10 @@
+*.xcuserstate
+*.xcuserdatad/
+*.xcworkspacedata
+xcuserdata/
+xcshareddata/
+.metadata/
+HZTT/Pods/
+HZTT/Podfile.lock
+app/
+Gemfile.lock
