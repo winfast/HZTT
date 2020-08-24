@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0075D63124F3CB7100902F77 /* MBProgressHudToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075D63024F3CB7100902F77 /* MBProgressHudToast.swift */; };
 		042E881D24EE1A46000053A0 /* HZHomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E881C24EE1A46000053A0 /* HZHomeDetailViewController.swift */; };
 		042E89F624EE54E6000053A0 /* HZHomeDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E89F524EE54E6000053A0 /* HZHomeDetailTableViewCell.swift */; };
 		042F2DCA24EE83940069FB39 /* HZHomeDetailNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F2DC924EE83940069FB39 /* HZHomeDetailNetworkManager.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0075D63024F3CB7100902F77 /* MBProgressHudToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBProgressHudToast.swift; sourceTree = "<group>"; };
 		042E881C24EE1A46000053A0 /* HZHomeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailViewController.swift; sourceTree = "<group>"; };
 		042E89F524EE54E6000053A0 /* HZHomeDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailTableViewCell.swift; sourceTree = "<group>"; };
 		042F2DC924EE83940069FB39 /* HZHomeDetailNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailNetworkManager.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				047BF2CD24EB7445002A39F3 /* HZScreen.swift */,
 				047BF2D824EBAD63002A39F3 /* HZNetworkMoya.swift */,
 				04E31BCE24ED23F7002CF93E /* HZConstant.swift */,
+				0075D63024F3CB7100902F77 /* MBProgressHudToast.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				047BF2CC24EB689A002A39F3 /* HZFont.swift in Sources */,
 				047BF2CE24EB7445002A39F3 /* HZScreen.swift in Sources */,
 				04E31BCD24ED08EA002CF93E /* UIView+Extension.swift in Sources */,
+				0075D63124F3CB7100902F77 /* MBProgressHudToast.swift in Sources */,
 				0446B85124F365AD0079BC2C /* HZLivelihoodTableViewCell.swift in Sources */,
 				047BF2D224EBA33C002A39F3 /* HZHomeCellViewModel.swift in Sources */,
 				04E4FCA624EA998400C5E5B0 /* HZImage.swift in Sources */,
@@ -594,7 +598,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 579P9269QX;
+				DEVELOPMENT_TEAM = DQFEA2B5H2;
 				INFOPLIST_FILE = HZTT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -616,7 +620,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 579P9269QX;
+				DEVELOPMENT_TEAM = DQFEA2B5H2;
 				INFOPLIST_FILE = HZTT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
