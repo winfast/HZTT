@@ -31,7 +31,7 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 		}
 		
 		messageTitleLabel.numberOfLines = 2;
-		messageTitleLabel.font = HZFont(fontSize: 18)
+		messageTitleLabel.font = HZBFont(fontSize: 18)
 		messageTitleLabel.snp.remakeConstraints { (make) in
 			make.top.equalTo(self.messageTypeBtn.snp.bottom).offset(25)
 			make.left.equalTo(self.messageTypeBtn.snp.left)
@@ -73,7 +73,7 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 			let contentValue: String = contentJson["content"].stringValue
 			let typeValue: String = contentJson["type"].stringValue
 		
-			strongSelf.messageTitleLabel.text = title
+			strongSelf.messageTitleLabel.text = "\"" + title + "\""
 			strongSelf.messageContentLabel.text = contentValue.replacingOccurrences(of: "&&", with: "\n")
 			var subType: String?
 			switch type {
@@ -89,7 +89,7 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 				subType = nil
 			}
 			if subType == nil {
-				strongSelf.isHidden = true
+				strongSelf.messageTypeBtn.isHidden = true
 				strongSelf.messageTypeBtn.setTitle(nil, for: .normal)
 				strongSelf.messageTitleLabel.snp.remakeConstraints { (make) in
 					make.left.equalTo(10)
@@ -97,7 +97,7 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 					make.right.equalTo(strongSelf.contentView.snp.right).offset(-30)
 				}
 			} else {
-				strongSelf.isHidden = false
+				strongSelf.messageTypeBtn.isHidden = false
 				strongSelf.messageTypeBtn.setTitle(subType, for: .normal)
 				strongSelf.messageTitleLabel.snp.remakeConstraints { (make) in
 					make.left.equalTo(10)

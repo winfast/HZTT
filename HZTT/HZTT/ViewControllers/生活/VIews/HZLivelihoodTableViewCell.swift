@@ -147,7 +147,7 @@ class HZLivelihoodTableViewCell: UITableViewCell {
 		}
 		
 		self.closeBtn.backgroundColor = .clear
-		self.closeBtn.setImage(UIImage.init(named: ""), for: .normal)
+		self.closeBtn.setImage(UIImage.init(named: "dislikeicon_details"), for: .normal)
 		self.contentView.addSubview(self.closeBtn)
 		self.closeBtn.rx.tap.subscribe(onNext: { [weak self] (value) in
 			guard let strongself = self else {return}

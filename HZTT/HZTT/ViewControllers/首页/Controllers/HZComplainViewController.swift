@@ -144,6 +144,7 @@ class HZComplainTableViewCell : UITableViewCell {
         self.textView.placeholder = "请输入举报原因"
         self.textView.textContainerInset = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
         self.textView.textColor = UIColor.black
+		self.contentView.addSubview(self.textView)
         self.textView.snp.makeConstraints { (make) in
             make.top.equalTo(0)
             make.left.equalTo(10)

@@ -182,8 +182,9 @@ extension HZHomeDetailViewController :UITableViewDelegate, UITableViewDataSource
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		if indexPath.section == 0 {
-			if self.category == "life" {
-				let cell: HZLivelihoodDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZLivelihoodDetailTableViewCell") as! HZLivelihoodDetailTableViewCell
+			if self.category == "sy" {
+				let cell: HZHomeDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZHomeDetailTableViewCell") as! HZHomeDetailTableViewCell
+				
 				cell.viewModel = self.cellViewModel
 				cell.clickBtnBlock = { [weak self] (button: UIButton?)->Void in
 					guard let weakself = self else {
@@ -197,8 +198,7 @@ extension HZHomeDetailViewController :UITableViewDelegate, UITableViewDataSource
 				}
 				return cell
 			} else  {
-				let cell: HZHomeDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZHomeDetailTableViewCell") as! HZHomeDetailTableViewCell
-				
+				let cell: HZLivelihoodDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZLivelihoodDetailTableViewCell") as! HZLivelihoodDetailTableViewCell
 				cell.viewModel = self.cellViewModel
 				cell.clickBtnBlock = { [weak self] (button: UIButton?)->Void in
 					guard let weakself = self else {

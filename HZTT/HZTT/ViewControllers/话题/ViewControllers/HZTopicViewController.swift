@@ -23,6 +23,7 @@ class HZTopicViewController: HZBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		self.initNavigationRightItem()
         self.viewsLayout()
 
         // Do any additional setup after loading the view.
@@ -58,7 +59,8 @@ class HZTopicViewController: HZBaseViewController {
         self.segmentedDataSource?.titleSelectedColor = UIColorWith24Hex(rgbValue: 0xff4500)
         self.segmentedView.dataSource = self.segmentedDataSource;
         self.segmentedView.delegate = self;
-        self.segmentedView.contentEdgeInsetLeft = 0;
+        self.segmentedView.contentEdgeInsetLeft = 0
+		self.segmentedView.contentEdgeInsetRight = 0
         let indicator: JXSegmentedIndicatorLineView = JXSegmentedIndicatorLineView()
         indicator.indicatorWidth = 30
         indicator.verticalOffset = 5
@@ -67,7 +69,7 @@ class HZTopicViewController: HZBaseViewController {
         indicator.indicatorColor = UIColorWith24Hex(rgbValue: 0xff4500)
         self.segmentedView.indicators = [indicator]
         
-        let bgView: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0.0, width: 110, height: 44.0))
+        let bgView: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0.0, width: 50 * 2 + 10 * 1, height: 44.0))
         self.segmentedView.frame = bgView.bounds
         bgView.addSubview(self.segmentedView)
         self.navigationItem.titleView = bgView
@@ -96,7 +98,9 @@ extension HZTopicViewController: JXSegmentedViewDelegate, JXSegmentedListContain
 
     func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
         let title: String! = self.segmentedDataSource?.titles[index] ?? "最新"
-        let vc: HZHomeListViewController = HZHomeListViewController.init(self.titlesId[title]!)
+        let vc: HZTopicListViewController = HZTopicListViewController.init()
+		vc.type = self.titlesId[title]
+		vc.category = "friend"
         return vc
     }
 }
