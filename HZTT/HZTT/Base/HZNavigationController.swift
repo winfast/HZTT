@@ -13,12 +13,11 @@ class HZNavigationController: HBDNavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
+        // Do any additional setup after loading the view.
 		let apperance = UINavigationBar.appearance()
-		apperance.barTintColor = UIColor.white
+		apperance.barTintColor = UIColorWith24Hex(rgbValue: 0xFFFFFF)
 		apperance.tintColor = UIColorWith24Hex(rgbValue: 0x000000)
 		self.navigationBar.isTranslucent = true;
-
-        // Do any additional setup after loading the view.
     }
 	
 	override func pushViewController(_ viewController: UIViewController, animated: Bool) {

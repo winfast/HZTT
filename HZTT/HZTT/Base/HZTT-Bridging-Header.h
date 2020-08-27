@@ -13,6 +13,8 @@
 #import "HBDNavigationBar/HBDNavigationBar.h"
 #import "HBDNavigationBar/HBDNavigationController.h"
 #import "HBDNavigationBar/UIViewController+HBD.h"
+#import "TZImagePickerController/TZImagePickerController.h"
+
 @import SnapKit;
 @import IQKeyboardManagerSwift;
 @import RxSwift;

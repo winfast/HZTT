@@ -29,9 +29,9 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 	open var upvoteBtn: UIButton!
 	open var noticeLabel: UILabel!
 	
-	typealias HZClickHomeDetailCellBtnBlock = (_ btn :UIButton?) -> Void
+	typealias HZClickHomeDetailCellBtnBlock = (_ btn :UIView?) -> Void
 	open var clickBtnBlock :HZClickHomeDetailCellBtnBlock?
-	
+		
 	@objc dynamic open var viewModel: HZHomeCellViewModel?;  //KVO监听
 	var disposeBag = DisposeBag()
 	
@@ -95,6 +95,10 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		firstImageView.isHidden = true
 		firstImageView.backgroundColor = UIColor.clear
 		firstImageView.contentMode = UIView.ContentMode.scaleToFill;
+		firstImageView.tag = 100
+		firstImageView.isUserInteractionEnabled = true
+		let tap: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(clickImageView))
+		firstImageView.addGestureRecognizer(tap)
 		self.contentView.addSubview(firstImageView)
 		firstImageView.snp.makeConstraints { (make) in
 			make.left.equalTo(self.contentView.snp.left).offset(10)
@@ -105,7 +109,11 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		
 		secondImageView = UIImageView.init()
 		secondImageView.backgroundColor = UIColor.clear
+		secondImageView.isUserInteractionEnabled = true
 		secondImageView.contentMode = UIView.ContentMode.scaleToFill;
+		secondImageView.tag = 101
+		let tapSecondImage: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(clickImageView))
+		secondImageView.addGestureRecognizer(tapSecondImage)
 		self.contentView.addSubview(secondImageView)
 		secondImageView.snp.makeConstraints { (make) in
 			make.left.equalTo(self.firstImageView.snp.right).offset(2)
@@ -116,7 +124,11 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		
 		thirdImageView = UIImageView.init()
 		thirdImageView.backgroundColor = UIColor.clear
+		thirdImageView.isUserInteractionEnabled = true
 		thirdImageView.contentMode = UIView.ContentMode.scaleToFill;
+		thirdImageView.tag = 102
+		let tapThirdImageView: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(clickImageView))
+		thirdImageView.addGestureRecognizer(tapThirdImageView)
 		self.contentView.addSubview(thirdImageView)
 		thirdImageView.snp.makeConstraints { (make) in
 			make.left.equalTo(self.secondImageView.snp.right).offset(2)
@@ -273,6 +285,13 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 			}
 			self?.layoutIfNeeded()
 		}).disposed(by: disposeBag)
+	}
+	
+	@objc func clickImageView(_ sender: UITapGestureRecognizer) -> Void {
+		if self.clickBtnBlock == nil {
+			return
+		}
+		self.clickBtnBlock!(sender.view)
 	}
 
     override func setSelected(_ selected: Bool, animated: Bool) {

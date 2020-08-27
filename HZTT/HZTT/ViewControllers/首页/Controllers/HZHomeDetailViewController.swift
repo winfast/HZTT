@@ -11,6 +11,7 @@ import SnapKit
 import RxCocoa
 import RxSwift
 import MJRefresh
+import SKPhotoBrowser
 
 class HZHomeDetailViewController: HZBaseViewController {
 	
@@ -186,29 +187,67 @@ extension HZHomeDetailViewController :UITableViewDelegate, UITableViewDataSource
 				let cell: HZHomeDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZHomeDetailTableViewCell") as! HZHomeDetailTableViewCell
 				
 				cell.viewModel = self.cellViewModel
-				cell.clickBtnBlock = { [weak self] (button: UIButton?)->Void in
+				cell.clickBtnBlock = { [weak self] (button: UIView?)->Void in
 					guard let weakself = self else {
 						return
 					}
-					if button?.tag == 0 {
+					if (button?.tag)! >= 100 {
+						//进入Brower
+						var images :[SKPhoto] = []
+						for imagePathItem in weakself.cellViewModel!.images! {
+							let photo = SKPhoto.photoWithImageURL(imagePathItem)
+							images.append(photo)
+						}
 						
+						SKPhotoBrowserOptions.enableZoomBlackArea = false
+						SKPhotoBrowserOptions.displayAction = false   //隐藏ToolBar
+						SKPhotoBrowserOptions.displayBackAndForwardButton = false
+						//SKPhotoBrowserOptions.displayToolbar = false
+						let imageView = button as! UIImageView
+						let browser = SKPhotoBrowser.init(originImage: imageView.image!, photos: images, animatedFromView: imageView)
+						browser.currentPageIndex = (button?.tag)! - 100
+						weakself.present(browser, animated: true, completion: nil)
 					} else {
-						weakself.showComplainViewController()
+						if button?.tag == 0 {
+							
+						} else {
+							weakself.showComplainViewController()
+						}
 					}
 				}
+				
 				return cell
 			} else  {
 				let cell: HZLivelihoodDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZLivelihoodDetailTableViewCell") as! HZLivelihoodDetailTableViewCell
 				cell.viewModel = self.cellViewModel
-				cell.clickBtnBlock = { [weak self] (button: UIButton?)->Void in
+				cell.clickBtnBlock = { [weak self] (button: UIView?)->Void in
 					guard let weakself = self else {
 						return
 					}
-					if button?.tag == 0 {
+					if (button?.tag)! >= 100 {
+						//进入Brower
+						var images :[SKPhoto] = []
+						for imagePathItem in weakself.cellViewModel!.images! {
+							let photo = SKPhoto.photoWithImageURL(imagePathItem)
+							images.append(photo)
+						}
 						
+						SKPhotoBrowserOptions.enableZoomBlackArea = false
+						SKPhotoBrowserOptions.displayAction = false   //隐藏ToolBar
+						SKPhotoBrowserOptions.displayBackAndForwardButton = false
+						//SKPhotoBrowserOptions.displayToolbar = false
+						let imageView = button as! UIImageView
+						let browser = SKPhotoBrowser.init(originImage: imageView.image!, photos: images, animatedFromView: imageView)
+						browser.currentPageIndex = (button?.tag)! - 100
+						weakself.present(browser, animated: true, completion: nil)
 					} else {
-						weakself.showComplainViewController()
+						if button?.tag == 0 {
+							
+						} else {
+							weakself.showComplainViewController()
+						}
 					}
+					
 				}
 				return cell
 			}

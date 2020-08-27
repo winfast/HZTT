@@ -29,6 +29,9 @@ target 'HZTT' do
 		# 导航栏
 	pod 'HBDNavigationBar'
 	
+	#图片选择器
+	pod 'TZImagePickerController'
+	pod 'SKPhotoBrowser'
 	
 	
 

@@ -17,6 +17,8 @@ class HZComplainViewController: HZBaseViewController {
 	var category :String?
 	
 	var tableView: UITableView!
+	
+	var complainText: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +69,7 @@ class HZComplainViewController: HZBaseViewController {
 	}
 	
 	@objc func clickRightBtn(_sender: UIButton) -> Void {
+		self.view.endEditing(true)
 		self.navigationController?.dismiss(animated: true, completion: nil)
 	}
 
@@ -96,6 +99,16 @@ extension HZComplainViewController :UITableViewDelegate, UITableViewDataSource {
         if 0 == indexPath.section {
             let cell :HZComplainTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZComplainTableViewCell") as! HZComplainTableViewCell
             cell.backgroundColor = UIColor.white
+			cell.textView.rx.text.asObservable().subscribe(onNext: { (value) in
+				self.complainText = value
+			}).disposed(by: cell.disposeBag)
+			
+//			cell.textView.rx.text.subscribe { (value) in
+//				self.complainText = (value.event.element!!)
+//				print(self.complainText)
+//			}.disposed(by:cell.disposeBag)
+			
+			
             return cell
         } else {
             let cell :HZComplainTextFieldTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZComplainTextFieldTableViewCell") as! HZComplainTextFieldTableViewCell
@@ -130,6 +143,8 @@ class HZComplainTableViewCell : UITableViewCell {
 	var textView: IQTextView!
 	var textLenthLabel: UILabel?
 	
+	var disposeBag : DisposeBag = DisposeBag()
+	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
@@ -139,26 +154,36 @@ class HZComplainTableViewCell : UITableViewCell {
 		self.viewsLayout()
 	}
 	
+	override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
+
+	
 	func viewsLayout() -> Void {
+		self.selectionStyle = .none
+		
 		self.textView = IQTextView.init(frame: CGRect.zero)
         self.textView.placeholder = "请输入举报原因"
-        self.textView.textContainerInset = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
+		self.textView.font = HZFont(fontSize: 15)
+       // self.textView.textContainerInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 10, right: 10)
         self.textView.textColor = UIColor.black
 		self.contentView.addSubview(self.textView)
         self.textView.snp.makeConstraints { (make) in
-            make.top.equalTo(0)
+            make.top.equalTo(10)
             make.left.equalTo(10)
             make.right.equalTo(self.contentView.snp.right).offset(-10)
             make.height.equalTo(200)
         }
-        
+
         self.textLenthLabel = UILabel.init()
-        self.textLenthLabel?.textColor = UIColor.gray
+        self.textLenthLabel?.textColor = UIColor.lightGray
         self.textLenthLabel?.text = "200个字以内"
+		self.textLenthLabel?.font = HZFont(fontSize: 15)
         self.contentView.addSubview(self.textLenthLabel!)
         self.textLenthLabel?.snp.makeConstraints({ (make) in
             make.right.equalTo(self.textView.snp.right).offset(-30)
-            make.bottom.lessThanOrEqualTo(0).priority(900)
+            make.bottom.lessThanOrEqualTo(-5).priority(900)
             make.top.equalTo(self.textView.snp.bottom)
         })
 	}
@@ -177,6 +202,11 @@ class HZComplainTextFieldTableViewCell : UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.viewLayout()
     }
+	
+//	override func prepareForReuse() {
+//        super.prepareForReuse()
+//        disposeBag = DisposeBag()
+//    }
     
     func viewLayout() -> Void {
         textField = UITextField.init()
@@ -188,7 +218,8 @@ class HZComplainTextFieldTableViewCell : UITableViewCell {
             make.right.equalTo(self.contentView.snp.right).offset(-20)
             make.left.equalTo(self.contentView.snp.left).offset(20)
             make.bottom.lessThanOrEqualTo(0).priority(900)
-            make.top.equalTo(self.contentView.snp.bottom)
+			make.height.equalTo(44)
+            make.top.equalTo(self.contentView.snp.top)
         })
     }
 }

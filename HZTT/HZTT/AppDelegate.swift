@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func initKeyboard() -> Void {
 		IQKeyboardManager.shared.enable = true
+		IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "完成"
 		//控制点击背景是否收起键盘
 		IQKeyboardManager.shared.shouldResignOnTouchOutside = true
 	}

@@ -39,7 +39,9 @@ class HZTopicViewController: HZBaseViewController {
     }
     
     @objc func clickRightBtn(_ sender: UIButton) -> Void {
-        
+		let vc: HZCreateTopicViewController = HZCreateTopicViewController.init()
+		let nav: HZNavigationController = HZNavigationController.init(rootViewController: vc)
+		self.navigationController?.present(nav, animated: true, completion: nil)
     }
     
     func viewsLayout() -> Void {

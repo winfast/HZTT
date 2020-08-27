@@ -55,7 +55,7 @@ class HZTopicListViewController: HZBaseViewController {
 		let param = ["category":self.category!,
 					 "subType":Int(self.type)!,
 					 "pageNumber":pageNumber as Any
-		] as [String:Any]
+			] as [String:Any]
 		
 		HZHomeNetworkManager.shared.getPostList(param).subscribe(onNext: { [weak self] (value :[HZHomeCellViewModel]) in
 			if self?.tableView.mj_header.isRefreshing() == true {
