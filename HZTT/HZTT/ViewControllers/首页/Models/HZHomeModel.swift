@@ -65,6 +65,7 @@ class HZHomeModel: NSObject {
 	@objc dynamic var uid: String?
 	@objc dynamic var user: HZUser?
 	@objc dynamic var type: String?
+	@objc dynamic var sc: String?
 	
 	static func homeMoldeWithJson(jsonValue: JSON) -> HZHomeModel  {
 		let homeModel = HZHomeModel.init()
@@ -81,6 +82,7 @@ class HZHomeModel: NSObject {
 		let userJson = JSON(jsonValue["user"].dictionary as Any)
 		homeModel.user = HZUser.userWithJson(jsonValue:userJson)
 		homeModel.type = jsonValue["type"].stringValue
+		homeModel.sc = jsonValue["sc"].stringValue
 		return homeModel
 	}
 }

@@ -17,6 +17,7 @@ enum HZHomeNetworkMoya {
 	case getPostList(_ param: [String:Any])
 	case detail(_ param: [String:Any])
 	case comment(_ param: [String:Any])
+	case publish(_ param: [String:Any])
 }
 
 extension HZHomeNetworkMoya: TargetType {
@@ -34,15 +35,15 @@ extension HZHomeNetworkMoya: TargetType {
 			parammter = [:]
 		}
 		//添加常量
-		//parammter.updateValue("ea27d51c1193b238f0c1ee9304ec5471", forKey: "t")
-		//parammter.updateValue("1f431f1d98f169be4d2aaee70e14bfda", forKey: "uid")
+		parammter.updateValue("ea27d51c1193b238f0c1ee9304ec5471", forKey: "t")
+		parammter.updateValue("1f431f1d98f169be4d2aaee70e14bfda", forKey: "uid")
 		return .requestParameters(parameters: parammter, encoding: URLEncoding.default)
 	}
 	
 	var headers: [String : String]? {
 		//添加常量
-		return [:]
-		//return ["Authorization":"ea27d51c1193b238f0c1ee9304ec5471"]
+		//return [:]
+		return ["Authorization":"ea27d51c1193b238f0c1ee9304ec5471"]
 	}
 	
 	var path: String {
@@ -53,6 +54,8 @@ extension HZHomeNetworkMoya: TargetType {
 			return "detail.php"
 		case .comment:
 			return "comment.php"
+		case .publish:
+			return "publish.php"
 		default:
 			return ""
 		}
@@ -62,6 +65,8 @@ extension HZHomeNetworkMoya: TargetType {
 	var method: Moya.Method {
 		switch self {
 		case .getPostList,.detail,.comment:
+			return .post
+		case .publish:
 			return .post
 		default:
 			return .get

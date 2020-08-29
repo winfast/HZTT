@@ -35,6 +35,7 @@
 		047BF2D424EBA34C002A39F3 /* HZHomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2D324EBA34C002A39F3 /* HZHomeModel.swift */; };
 		047BF2D724EBA5C2002A39F3 /* HZHomeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2D624EBA5C2002A39F3 /* HZHomeNetworkManager.swift */; };
 		047BF2D924EBAD63002A39F3 /* HZNetworkMoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2D824EBAD63002A39F3 /* HZNetworkMoya.swift */; };
+		048D233C24F8E69D00B7236E /* HZAddCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D233B24F8E69D00B7236E /* HZAddCommentView.swift */; };
 		04E31BCD24ED08EA002CF93E /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E31BCC24ED08EA002CF93E /* UIView+Extension.swift */; };
 		04E31BCF24ED23F7002CF93E /* HZConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E31BCE24ED23F7002CF93E /* HZConstant.swift */; };
 		04E31BD124ED3441002CF93E /* HZHomeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E31BD024ED3441002CF93E /* HZHomeListViewController.swift */; };
@@ -46,6 +47,7 @@
 		04E4FC9C24EA8D7B00C5E5B0 /* HZNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4FC9B24EA8D7B00C5E5B0 /* HZNavigationController.swift */; };
 		04E4FCA424EA96DB00C5E5B0 /* HZColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4FCA324EA96DB00C5E5B0 /* HZColor.swift */; };
 		04E4FCA624EA998400C5E5B0 /* HZImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4FCA524EA998400C5E5B0 /* HZImage.swift */; };
+		04F4917A24F9FC5700125236 /* HZReleaseNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4917924F9FC5700125236 /* HZReleaseNewsViewController.swift */; };
 		C0D70ED209286186840E23D1 /* Pods_HZTT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B960D762B7832A7DA0C56283 /* Pods_HZTT.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +80,7 @@
 		047BF2D324EBA34C002A39F3 /* HZHomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeModel.swift; sourceTree = "<group>"; };
 		047BF2D624EBA5C2002A39F3 /* HZHomeNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeNetworkManager.swift; sourceTree = "<group>"; };
 		047BF2D824EBAD63002A39F3 /* HZNetworkMoya.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZNetworkMoya.swift; sourceTree = "<group>"; };
+		048D233B24F8E69D00B7236E /* HZAddCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZAddCommentView.swift; sourceTree = "<group>"; };
 		04E31BCC24ED08EA002CF93E /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		04E31BCE24ED23F7002CF93E /* HZConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZConstant.swift; sourceTree = "<group>"; };
 		04E31BD024ED3441002CF93E /* HZHomeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeListViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 		04E4FC9B24EA8D7B00C5E5B0 /* HZNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZNavigationController.swift; sourceTree = "<group>"; };
 		04E4FCA324EA96DB00C5E5B0 /* HZColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZColor.swift; sourceTree = "<group>"; };
 		04E4FCA524EA998400C5E5B0 /* HZImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZImage.swift; sourceTree = "<group>"; };
+		04F4917924F9FC5700125236 /* HZReleaseNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZReleaseNewsViewController.swift; sourceTree = "<group>"; };
 		0D0F67B14D652898A24E16DA /* Pods-HZTT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZTT.debug.xcconfig"; path = "Target Support Files/Pods-HZTT/Pods-HZTT.debug.xcconfig"; sourceTree = "<group>"; };
 		A8FFFD6C6B940C9A5C44B88E /* Pods-HZTT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZTT.release.xcconfig"; path = "Target Support Files/Pods-HZTT/Pods-HZTT.release.xcconfig"; sourceTree = "<group>"; };
 		B960D762B7832A7DA0C56283 /* Pods_HZTT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HZTT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +190,7 @@
 				047BF2C924EB6088002A39F3 /* HZHomeTableViewCell.swift */,
 				042E89F524EE54E6000053A0 /* HZHomeDetailTableViewCell.swift */,
 				042F2DCB24EF500B0069FB39 /* HZCommentTableViewCell.swift */,
+				048D233B24F8E69D00B7236E /* HZAddCommentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -268,9 +273,11 @@
 		04E4FC9324EA7A6E00C5E5B0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				04F4917724F9FB3300125236 /* 登录 */,
 				04E4FC9E24EA949700C5E5B0 /* 首页 */,
 				04E4FC9D24EA949700C5E5B0 /* 个人中心 */,
 				04E4FCA024EA949700C5E5B0 /* 话题 */,
+				04F4917824F9FC1900125236 /* 发布动态 */,
 				04E4FC9F24EA949700C5E5B0 /* 生活 */,
 			);
 			path = ViewControllers;
@@ -333,6 +340,21 @@
 				0446B84724F35DA60079BC2C /* ViewControllers */,
 			);
 			path = "话题";
+			sourceTree = "<group>";
+		};
+		04F4917724F9FB3300125236 /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "登录";
+			sourceTree = "<group>";
+		};
+		04F4917824F9FC1900125236 /* 发布动态 */ = {
+			isa = PBXGroup;
+			children = (
+				04F4917924F9FC5700125236 /* HZReleaseNewsViewController.swift */,
+			);
+			path = "发布动态";
 			sourceTree = "<group>";
 		};
 		92C15AEDA21570FC267589F8 /* Frameworks */ = {
@@ -479,6 +501,7 @@
 				0446B86024F3C5190079BC2C /* HZLivelihoodDetailTableViewCell.swift in Sources */,
 				0446B84924F35DA60079BC2C /* HZTopicViewController.swift in Sources */,
 				047BF2D024EBA331002A39F3 /* HZHomeViewModel.swift in Sources */,
+				04F4917A24F9FC5700125236 /* HZReleaseNewsViewController.swift in Sources */,
 				0446B87124F5FD3D0079BC2C /* HZCreateTopicViewController.swift in Sources */,
 				0446B85624F3B7960079BC2C /* HZLivelihoodTypeViewController.swift in Sources */,
 				0446B84E24F35DAC0079BC2C /* HZLivelihoodViewController.swift in Sources */,
@@ -487,6 +510,7 @@
 				0446B85C24F3BD430079BC2C /* MeVC.swift in Sources */,
 				042F2DCE24EF6B2C0069FB39 /* HZCommentModel.swift in Sources */,
 				0446B84F24F35DAC0079BC2C /* HZLivelihoodHeaderView.swift in Sources */,
+				048D233C24F8E69D00B7236E /* HZAddCommentView.swift in Sources */,
 				042E881D24EE1A46000053A0 /* HZHomeDetailViewController.swift in Sources */,
 				04E31BD124ED3441002CF93E /* HZHomeListViewController.swift in Sources */,
 				0446B87324F631B30079BC2C /* HZCreateTopicTableViewCell.swift in Sources */,

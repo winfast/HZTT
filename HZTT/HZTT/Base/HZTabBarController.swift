@@ -12,6 +12,7 @@ class HZTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		self.view.backgroundColor = .white;
 		
 		self.tabBar.isTranslucent = false;
 		self.initTabar()

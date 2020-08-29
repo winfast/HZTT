@@ -19,9 +19,16 @@ class HZHomeDetailViewController: HZBaseViewController {
 	var iconImageView: UIImageView!
 	var pid: String!
 	var category: String!
-	@objc dynamic var cellViewModel: HZHomeCellViewModel?
 	var commentDataArray: [HZCommentCellViewModel]! = []
 	var disposeBag = DisposeBag()
+	
+	//底部
+	var addCommentBtn: UIButton?
+	var showCommentLabel: UIButton?
+	var commentBadgeLabel: UILabel?
+	var likeBtn: UIButton?
+	
+	@objc dynamic var cellViewModel: HZHomeCellViewModel?
 	
 	init(_ pid: String!, category: String! = "sy") {
 		super.init(nibName: nil, bundle: nil)
@@ -47,9 +54,22 @@ class HZHomeDetailViewController: HZBaseViewController {
 		bgView.addSubview(iconImageView)
 		self.navigationItem.titleView = bgView;
 		
-		
 		let rightBtn: UIBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "more_toolbar_press"), style: UIBarButtonItem.Style.done, target: self, action: #selector(clickRightBtn))
 		self.navigationItem.rightBarButtonItem = rightBtn
+		
+		let toolBar: UIToolbar = UIToolbar.init()
+		toolBar.barTintColor = UIColor (red: 250/255.0, green: 251/255.0, blue: 253/255.0, alpha: 1)
+		self.view.addSubview(toolBar)
+		toolBar.snp.makeConstraints { (make) in
+			make.bottom.left.right.equalTo(0)
+			if HZStatusBarHeight() > 20.0 {
+				make.height.equalTo(49 + 34)
+				
+			} else {
+				make.height.equalTo(49)
+			}
+		}
+		self.toolBarLayout(toolBar)
 		
         // Do any additional setup after loading the view.
 		self.tableView = UITableView.init(frame: CGRect.zero, style: .grouped)
@@ -64,11 +84,9 @@ class HZHomeDetailViewController: HZBaseViewController {
 		self.tableView.register(HZCommentTableViewCell.self, forCellReuseIdentifier: "HZCommentTableViewCell")
 		self.view.addSubview(self.tableView!)
 		self.tableView.snp.makeConstraints { (make) in
-			make.edges.equalTo(0)
+			make.top.left.right.equalTo(0)
+			make.bottom.equalTo(toolBar.snp.top).offset(-1)
 		}
-		self.tableView.ex_prepareToShow()
-		self.dataRequest()
-		self.createRAC()
 		
 		let footer: MJRefreshAutoNormalFooter = MJRefreshAutoNormalFooter.init(refreshingBlock: { [weak self] in
 			self?.commentDataRequest((self?.commentDataArray!.count)!/20 == 0 ? 1 : (self?.commentDataArray!.count)!/20)
@@ -80,7 +98,81 @@ class HZHomeDetailViewController: HZBaseViewController {
 			self?.tableView.mj_footer.state = .idle
 			self?.commentDataRequest()
 		});
+		
+
+		self.tableView.ex_prepareToShow()
+		self.dataRequest()
+		self.createRAC()
     }
+	
+	func toolBarLayout(_ toolBar: UIToolbar) -> Void {
+		
+		var height = 49;
+		if HZStatusBarHeight() > 20.0 {
+			height = 49 + 34
+		}
+		
+		self.addCommentBtn = UIButton.init(type: .custom)
+		self.addCommentBtn?.frame = CGRect.init(x: 0, y: 10, width: 120, height: height - 10 * 2)
+		self.addCommentBtn?.setTitle("我要评论...", for: .normal)
+		self.addCommentBtn?.setTitleColor(UIColor.darkGray, for: .normal)
+		self.addCommentBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+		self.addCommentBtn?.layer.cornerRadius = 5
+		self.addCommentBtn?.layer.masksToBounds = true
+		self.addCommentBtn?.backgroundColor = UIColor.white
+		self.addCommentBtn?.setImage(UIImage (named: "writeicon_review_dynamic"), for: .normal);
+		self.addCommentBtn?.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 50)
+		self.addCommentBtn?.titleEdgeInsets = UIEdgeInsets.init(top: 0, left: -10, bottom: 0, right: 0)
+		self.addCommentBtn?.tag = 100
+		self.addCommentBtn?.addTarget(self, action: #selector(clickAddCommentBtn), for: .touchUpInside)
+		let addCommentItem = UIBarButtonItem.init(customView: self.addCommentBtn!)
+		
+		self.showCommentLabel = UIButton (frame: CGRect (x: 0, y: 0, width: 60, height: height))
+		showCommentLabel?.setTitleColor(UIColor.darkGray, for: .normal)
+		showCommentLabel?.layer.cornerRadius = 5
+		showCommentLabel?.layer.masksToBounds = true
+		showCommentLabel?.clipsToBounds = false
+		showCommentLabel?.setImage(UIImage (named: "tab_comment"), for: .normal);
+		showCommentLabel?.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: 5, bottom: 0, right: 0)
+		showCommentLabel?.tag = 101
+		
+		self.commentBadgeLabel = UILabel.init()
+		self.commentBadgeLabel?.backgroundColor = UIColor (red: 236/255.0, green: 82/255.0, blue: 82/255.0, alpha: 1)
+		self.commentBadgeLabel?.text = ""
+		self.commentBadgeLabel?.textColor = .white
+		self.commentBadgeLabel?.font = HZFont(fontSize: 8)
+		self.commentBadgeLabel?.textAlignment = .center
+		self.commentBadgeLabel?.layer.cornerRadius = 5;
+		self.commentBadgeLabel?.isHidden = true
+		self.commentBadgeLabel?.layer.masksToBounds = true
+		
+		showCommentLabel?.addSubview(self.commentBadgeLabel!)
+//		self.commentBadgeLabel?.snp.makeConstraints({ (make) in
+//			make.left.equalTo(self.showCommentLabel!.snp.centerX).offset(0)
+//			make.top.equalTo(self.showCommentLabel!.snp.top).offset(2)
+//			make.height.equalTo(10)
+//			make.width.greaterThanOrEqualTo(10).priority(900)
+//		})
+		
+		let showCommentItem = UIBarButtonItem.init(customView: self.showCommentLabel!)
+		
+		let spaceItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+		//收藏
+		self.likeBtn = UIButton (frame: CGRect (x: 0, y: 0, width: 80, height: height))
+        likeBtn?.setImage(UIImage (named: "likeicon_actionbar_details"), for: .normal)
+        likeBtn?.setImage(UIImage (named: "likeicon_actionbar_details_press"), for: .selected)
+        likeBtn?.imageEdgeInsets = UIEdgeInsets.init(top: 5, left: 10, bottom: 5, right: 45)
+        likeBtn?.titleEdgeInsets = UIEdgeInsets.init(top: 0, left: 2, bottom: 0, right: 0)
+        likeBtn?.setTitle("收藏", for: .normal)
+        likeBtn?.setTitle("已收藏", for: .selected)
+        likeBtn?.setTitleColor(UIColor.darkGray, for: .normal)
+        likeBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        likeBtn?.tag = 102
+		likeBtn?.addTarget(self, action:#selector(clickLikeBtn) , for: .touchUpInside)
+		let likeItem = UIBarButtonItem (customView: likeBtn!)
+		
+		toolBar.items = [addCommentItem, showCommentItem, spaceItem, likeItem]
+	}
 	
 	func dataRequest() -> Void {
 		self.detailDataRequest()
@@ -91,6 +183,12 @@ class HZHomeDetailViewController: HZBaseViewController {
 		self.rx.observe(String.self, "cellViewModel.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
 			if value?.lengthOfBytes(using: .utf8) ?? 0 > 0 {
 				self?.iconImageView.kf.setImage(with: URL.init(string: value!))
+			}
+		}).disposed(by: disposeBag)
+		
+		self.rx.observe(String.self, "cellViewModel.sc").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
+			if value?.lengthOfBytes(using: .utf8) ?? 0 > 0 {
+				self?.likeBtn?.isSelected = value == "1"
 			}
 		}).disposed(by: disposeBag)
 	}
@@ -126,7 +224,24 @@ class HZHomeDetailViewController: HZBaseViewController {
 			}
 			self?.tableView.reloadData()
 			
-			self?.tableView.reloadData()
+			if self?.commentDataArray.count == 0 {
+				self?.commentBadgeLabel?.isHidden = true
+			} else {
+				self?.commentBadgeLabel?.isHidden = false
+				let count = (self?.commentDataArray!.count)!;
+				var badgeValue :String!
+				if count > 99 {
+					badgeValue = "99+"
+				} else {
+					badgeValue = String.init(format: "%d", count)
+				}
+				let attrDict = [NSAttributedString.Key.font: self?.commentBadgeLabel?.font]
+				let attrValue = NSAttributedString.init(string: badgeValue, attributes: attrDict as [NSAttributedString.Key : Any])
+				let fontSize = attrValue.size()
+				self?.commentBadgeLabel!.text = badgeValue
+				self?.commentBadgeLabel!.frame = CGRect.init(x: 35.0, y: 13.0, width: fontSize.width + 5.0, height: 10.0)
+			}
+			
 			}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 	}
 	
@@ -160,6 +275,16 @@ class HZHomeDetailViewController: HZBaseViewController {
 		alertController.addAction(aciton)
 		alertController.addAction(cancelAciont)
 		self.navigationController?.present(alertController, animated: true, completion: nil)
+	}
+	
+	@objc func clickAddCommentBtn() -> Void {
+		//添加评论
+		let addCommentView = HZAddCommentView.init()
+		addCommentView.show(view: UIApplication.shared.keyWindow!)
+	}
+	
+	@objc func clickLikeBtn() -> Void {
+		
 	}
 }
 

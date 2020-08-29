@@ -22,6 +22,7 @@ class HZHomeCellViewModel: NSObject {
 	@objc dynamic open var status: Int = 0
 	@objc dynamic open var readCnt: Int = 0
 	@objc dynamic open var uid: String?
+	@objc dynamic open var sc: String?
 	
 	@objc dynamic open var avatar_thumb: String?
 	@objc dynamic open var nickName: String?
@@ -106,6 +107,10 @@ class HZHomeCellViewModel: NSObject {
 		
 		self.rx.observe(String.self, "homeModel.user.fanCnt").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
 			self?.fanCnt = value
+		}).disposed(by: disposeBag)
+		
+		self.rx.observe(String.self, "homeModel.sc").distinctUntilChanged().subscribe(onNext: { [weak self](value :String?) in
+			self?.sc = value
 		}).disposed(by: disposeBag)
 	}
 

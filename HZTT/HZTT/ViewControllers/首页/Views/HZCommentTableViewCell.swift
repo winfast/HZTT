@@ -38,6 +38,8 @@ class HZCommentTableViewCell: UITableViewCell {
 	
 	
 	func viewLayout() -> Void {
+		self.selectionStyle = .none
+		
 		self.iconImageView = UIImageView.init(image: UIImage.init(named: "avatar_default"))
 		self.iconImageView.backgroundColor = UIColor.clear
 		self.iconImageView.layer.cornerRadius = 15;

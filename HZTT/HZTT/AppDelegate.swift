@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "完成"
 		//控制点击背景是否收起键盘
 		IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+		//IQKeyboardManager.shared.disabledToolbarClasses = [HZHomeDetailViewController.Type]()
 	}
 }
 
