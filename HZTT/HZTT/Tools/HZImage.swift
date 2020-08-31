@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-func imageWithColor(color: UIColor) -> UIImage? {
+func HZImageWithColor(color: UIColor) -> UIImage? {
 	let rect = CGRect.init(x: 0, y: 0, width: 1, height: 1)
 	UIGraphicsBeginImageContext(rect.size)
 	let ctx = UIGraphicsGetCurrentContext()

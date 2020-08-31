@@ -45,7 +45,7 @@ class HZTopicViewController: HZBaseViewController {
     }
     
     func viewsLayout() -> Void {
-        self.navigationController?.navigationBar.shadowImage = imageWithColor(color: UIColorWith24Hex(rgbValue: 0xFF0000))
+        self.navigationController?.navigationBar.shadowImage = HZImageWithColor(color: UIColorWith24Hex(rgbValue: 0xFF0000))
         self.navigationItem.title = ""
         
         let titles = ["最新","热门"]

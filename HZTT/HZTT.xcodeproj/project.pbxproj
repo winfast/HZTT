@@ -48,6 +48,9 @@
 		04E4FCA424EA96DB00C5E5B0 /* HZColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4FCA324EA96DB00C5E5B0 /* HZColor.swift */; };
 		04E4FCA624EA998400C5E5B0 /* HZImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4FCA524EA998400C5E5B0 /* HZImage.swift */; };
 		04F4917A24F9FC5700125236 /* HZReleaseNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4917924F9FC5700125236 /* HZReleaseNewsViewController.swift */; };
+		04F4917D24FA4AD500125236 /* all_category_item.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04F4917C24FA4AD500125236 /* all_category_item.plist */; };
+		04F4917F24FA52F400125236 /* HZWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4917E24FA52F400125236 /* HZWebViewController.swift */; };
+		04F4918124FA533C00125236 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F4918024FA533C00125236 /* WebKit.framework */; };
 		C0D70ED209286186840E23D1 /* Pods_HZTT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B960D762B7832A7DA0C56283 /* Pods_HZTT.framework */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +99,9 @@
 		04E4FCA324EA96DB00C5E5B0 /* HZColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZColor.swift; sourceTree = "<group>"; };
 		04E4FCA524EA998400C5E5B0 /* HZImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZImage.swift; sourceTree = "<group>"; };
 		04F4917924F9FC5700125236 /* HZReleaseNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZReleaseNewsViewController.swift; sourceTree = "<group>"; };
+		04F4917C24FA4AD500125236 /* all_category_item.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = all_category_item.plist; sourceTree = "<group>"; };
+		04F4917E24FA52F400125236 /* HZWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZWebViewController.swift; sourceTree = "<group>"; };
+		04F4918024FA533C00125236 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		0D0F67B14D652898A24E16DA /* Pods-HZTT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZTT.debug.xcconfig"; path = "Target Support Files/Pods-HZTT/Pods-HZTT.debug.xcconfig"; sourceTree = "<group>"; };
 		A8FFFD6C6B940C9A5C44B88E /* Pods-HZTT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZTT.release.xcconfig"; path = "Target Support Files/Pods-HZTT/Pods-HZTT.release.xcconfig"; sourceTree = "<group>"; };
 		B960D762B7832A7DA0C56283 /* Pods_HZTT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HZTT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04F4918124FA533C00125236 /* WebKit.framework in Frameworks */,
 				C0D70ED209286186840E23D1 /* Pods_HZTT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,14 +251,13 @@
 		04E4FC7C24EA73A800C5E5B0 /* HZTT */ = {
 			isa = PBXGroup;
 			children = (
+				04F4917B24FA4AD500125236 /* Resource */,
 				04E4FC9524EA7A7600C5E5B0 /* Base */,
 				04E4FC9424EA7A6E00C5E5B0 /* Command */,
 				04E4FC9224EA7A6E00C5E5B0 /* Tools */,
 				04E4FC9324EA7A6E00C5E5B0 /* ViewControllers */,
 				04E4FC7D24EA73A800C5E5B0 /* AppDelegate.swift */,
-				04E4FC8624EA73AF00C5E5B0 /* Assets.xcassets */,
 				04E4FC8824EA73AF00C5E5B0 /* LaunchScreen.storyboard */,
-				04E4FC8B24EA73AF00C5E5B0 /* Info.plist */,
 			);
 			path = HZTT;
 			sourceTree = "<group>";
@@ -353,13 +359,25 @@
 			isa = PBXGroup;
 			children = (
 				04F4917924F9FC5700125236 /* HZReleaseNewsViewController.swift */,
+				04F4917E24FA52F400125236 /* HZWebViewController.swift */,
 			);
 			path = "发布动态";
+			sourceTree = "<group>";
+		};
+		04F4917B24FA4AD500125236 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				04E4FC8B24EA73AF00C5E5B0 /* Info.plist */,
+				04E4FC8624EA73AF00C5E5B0 /* Assets.xcassets */,
+				04F4917C24FA4AD500125236 /* all_category_item.plist */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		92C15AEDA21570FC267589F8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04F4918024FA533C00125236 /* WebKit.framework */,
 				B960D762B7832A7DA0C56283 /* Pods_HZTT.framework */,
 			);
 			name = Frameworks;
@@ -435,6 +453,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04F4917D24FA4AD500125236 /* all_category_item.plist in Resources */,
 				04E4FC8A24EA73AF00C5E5B0 /* LaunchScreen.storyboard in Resources */,
 				04E4FC8724EA73AF00C5E5B0 /* Assets.xcassets in Resources */,
 			);
@@ -524,6 +543,7 @@
 				042F2DCA24EE83940069FB39 /* HZHomeDetailNetworkManager.swift in Sources */,
 				047BF2C524EB6017002A39F3 /* HZHomeViewController.swift in Sources */,
 				042F2DD324EFBCF20069FB39 /* HZComplainViewController.swift in Sources */,
+				04F4917F24FA52F400125236 /* HZWebViewController.swift in Sources */,
 				04E4FCA424EA96DB00C5E5B0 /* HZColor.swift in Sources */,
 				04E31BCF24ED23F7002CF93E /* HZConstant.swift in Sources */,
 				047BF2D724EBA5C2002A39F3 /* HZHomeNetworkManager.swift in Sources */,
@@ -667,13 +687,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 579P9269QX;
-				INFOPLIST_FILE = HZTT/Info.plist;
+				INFOPLIST_FILE = HZTT/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.galanz.HZTT.HZTT;
+				PRODUCT_BUNDLE_IDENTIFIER = com.galanz.HZTT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/HZTT/Base/HZTT-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -690,13 +710,13 @@
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 579P9269QX;
-				INFOPLIST_FILE = HZTT/Info.plist;
+				INFOPLIST_FILE = HZTT/Resource/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.galanz.HZTT.HZTT;
+				PRODUCT_BUNDLE_IDENTIFIER = com.galanz.HZTT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = tongpeifu_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/HZTT/Base/HZTT-Bridging-Header.h";

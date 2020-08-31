@@ -139,7 +139,7 @@ class HZAddCommentView: UIView {
 		textView.placeholder = "认真评论是一种生活带胎..."
 		textView.placeholderTextColor = .lightGray
 		textView.layer.borderWidth = 1;
-		textView.layer.borderColor = UIColor.init(red: 231/255.0, green: 231/255.0, blue: 231/255.0, alpha: 1).cgColor
+		textView.layer.borderColor = UIColorWith24Hex(rgbValue: 0xE7E7E7).cgColor
 		textView.font = HZFont(fontSize: 16)
 		self.bgView.addSubview(textView)
 		self.textView.snp.makeConstraints { (make) in

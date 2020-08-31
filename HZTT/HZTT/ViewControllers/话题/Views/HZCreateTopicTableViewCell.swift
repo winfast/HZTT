@@ -103,7 +103,7 @@ class HZTopicImageTableViewCell: UITableViewCell {
 		
 		let flowerLayout = UICollectionViewFlowLayout.init()
         //let width: Double = (Double(HZSCreenWidth) - Double(3 * 20.0))/4.0
-		flowerLayout.itemSize = CGSize.init(width:(320.0 - 5*2.0 - 10*2.0)/3.0, height: 90.0)
+		flowerLayout.itemSize = CGSize.init(width:(HZSCreenWidth() - 5*2.0 - 10*2.0)/3.0, height: 90.0)
         flowerLayout.minimumLineSpacing = 5
         flowerLayout.minimumInteritemSpacing = 5
         self.collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: flowerLayout)

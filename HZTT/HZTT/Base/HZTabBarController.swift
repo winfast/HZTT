@@ -12,16 +12,31 @@ class HZTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
 		self.view.backgroundColor = .white;
-		
 		self.tabBar.isTranslucent = false;
 		self.initTabar()
-        // Do any additional setup after loading the view.
     }
 	
 	func initTabar() -> Void {
-		self.tabBar.barTintColor = UIColor.white;
 		self.delegate = self;
+		
+		if #available(iOS 13.0, *) {
+			let appearance = self.tabBar.standardAppearance
+			appearance.backgroundImage = HZImageWithColor(color: UIColorWith24Hex(rgbValue: 0xFFFFFF))
+			appearance.shadowImage = HZImageWithColor(color: UIColorWith24Hex(rgbValue: 0xEEEEEE))
+			appearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black];
+			//appearance.stackedLayoutAppearance.selected.titleTextAttributes = @{NSAttributedString.Key.foregroundColor : UIColorWith24Hex(rgbValue: 0xFF3F00)};
+			//appearance.stackedLayoutAppearance.normal.titlePositionAdjustment = UIOffsetMake(0, -2);
+			self.tabBar.standardAppearance = appearance;
+			
+		} else {
+			self.tabBar.backgroundImage = HZImageWithColor(color: UIColorWith24Hex(rgbValue: 0xFFFFFF))
+			self.tabBar.shadowImage = HZImageWithColor(color: UIColorWith24Hex(rgbValue: 0xEEEEEE))
+		}
+		
+		
 		let itemTitlesArray: Array<String> = [
 			"首页",
 			"话题",
@@ -69,23 +84,15 @@ class HZTabBarController: UITabBarController {
 		}
 		self.viewControllers = viewControllers;
 	}
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension HZTabBarController :UITabBarControllerDelegate {
 	func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
 		let tag = viewController.tabBarItem.tag
 		if 2 == tag {
+			let vc = HZReleaseNewsViewController.init()
+			let nav = HZNavigationController.init(rootViewController: vc)
+			self.present(nav, animated: true, completion: nil)
 			return false
 		} else {
 			return true
