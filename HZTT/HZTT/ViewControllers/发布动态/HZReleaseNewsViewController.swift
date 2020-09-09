@@ -76,8 +76,21 @@ class HZReleaseNewsViewController: HZBaseViewController {
 extension HZReleaseNewsViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		//选择类型,发布动态
-		let vc = HZWebViewController.init()
-		self.navigationController?.pushViewController(vc, animated: true)
+		
+		
+		
+		self.dismiss(animated: true) {
+			
+			let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! HZTabBarController
+			
+			let itemInfo = self.dataSource[indexPath.section][indexPath.item];
+//
+//			let pid: String = ["item_key"] as! String
+			let vc = HZWebViewController.init()
+			let nav = HZNavigationController.init(rootViewController: vc)
+			tabBarVC.present(nav, animated: true, completion: nil)
+			
+		}
 		
 		
 //		self.navigationController?.dismiss(animated: true, completion: {

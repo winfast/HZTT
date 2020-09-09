@@ -32,6 +32,8 @@ class HZLivelihoodTypeViewController: HZBaseViewController {
 		self.tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
+		self.tableView.rowHeight = UITableView.automaticDimension
+		self.tableView.estimatedRowHeight = 80
 		self.tableView.tableFooterView = UIView.init()
 		self.tableView.register(HZLivelihoodTableViewCell.self, forCellReuseIdentifier: "HZLivelihoodTableViewCell")
 		self.view.addSubview(self.tableView)

@@ -22,7 +22,10 @@ class HZWebViewController: HZBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
+
 		self.view.backgroundColor = .white
+		
+		self.navigationLayout()
 		
 		self.webView = WKWebView.init(frame: .zero)
 		self.webView?.scrollView.delegate = self
@@ -51,6 +54,20 @@ class HZWebViewController: HZBaseViewController {
 		
 		self.webView?.addObserver(self, forKeyPath: "estimatedProgress", options:NSKeyValueObservingOptions.new, context: nil)
     }
+	
+	func navigationLayout() -> Void {
+		let leftBtn :UIButton = UIButton.init(type: .custom)
+		leftBtn.frame = CGRect.init(x: 0, y: 0, width: 44, height: 44)
+		leftBtn.setImage(UIImage (named: "leftbackicon_sdk_login"), for: .normal)
+		leftBtn.contentHorizontalAlignment = .left
+		//backBtn.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -5, bottom: 0, right: 0)
+		leftBtn.addTarget(self, action: #selector(clickLeftBtn(_ :)), for: .touchUpInside)
+		self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftBtn)
+	}
+	
+	@objc func clickLeftBtn(_ sender: UIButton) -> Void {
+		self.dismiss(animated: true, completion: nil)
+	}
 	
 	
 	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
