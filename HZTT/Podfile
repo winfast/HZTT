@@ -33,6 +33,9 @@ target 'HZTT' do
 	pod 'TZImagePickerController'
 	pod 'SKPhotoBrowser'
 	
+	#版本兼容问题
+	#pod 'LinkLabel'
+	
 	
 
   # Pods for HZTT

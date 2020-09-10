@@ -48,6 +48,20 @@ class HZLoginViewController: HZBaseViewController {
 	@objc func clickBackBtn(_ sender: UIButton) -> Void {
 		self.dismiss(animated: true, completion: nil)
 	}
+	
+	func showForgetPasswordView() -> Void {
+		let vc = HZForgerPasswordViewController.init()
+		self.navigationController?.pushViewController(vc, animated: true)
+	}
+	
+	func showRegisterView() -> Void {
+		let vc = HZRegisterViewController.init()
+		self.navigationController?.pushViewController(vc, animated: true)
+	}
+	
+	func loginPassword(phone: String, password: String) -> Void {
+		
+	}
 }
 
 extension HZLoginViewController :UITableViewDelegate, UITableViewDataSource {
@@ -63,6 +77,19 @@ extension HZLoginViewController :UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "HZLoginTableViewCell") as! HZLoginTableViewCell
 		cell.backgroundColor = .white
+		cell.clickLoginCellBtnBlock = { [weak self] (sender) in
+			guard let weakself = self else {
+				return
+			}
+			let tag = sender?.tag
+			if tag == 0 {
+				weakself.loginPassword(phone: cell.phoneTextField.text!, password: cell.passwordTextField.text!)
+			} else if tag == 1 {
+				weakself.showRegisterView()
+			} else if tag == 2 {
+				weakself.showForgetPasswordView()
+			}
+		}
 		return cell
 	}
 }

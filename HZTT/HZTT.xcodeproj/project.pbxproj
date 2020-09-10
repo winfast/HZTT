@@ -11,6 +11,11 @@
 		041F0E3E2507730F00ED23AD /* HZAboutHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E3D2507730F00ED23AD /* HZAboutHeadView.swift */; };
 		041F0E462508C76400ED23AD /* HZLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E432508C76300ED23AD /* HZLoginViewController.swift */; };
 		041F0E482508C79100ED23AD /* HZLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E472508C79100ED23AD /* HZLoginTableViewCell.swift */; };
+		041F0E4A2508EEFD00ED23AD /* HZRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E492508EEFD00ED23AD /* HZRegisterViewController.swift */; };
+		041F0E4C2508F06100ED23AD /* HZForgerPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E4B2508F06100ED23AD /* HZForgerPasswordViewController.swift */; };
+		041F0E4E2508F1C300ED23AD /* HZRegisterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E4D2508F1C300ED23AD /* HZRegisterTableViewCell.swift */; };
+		041F0E502508F87500ED23AD /* HZForgetPasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E4F2508F87500ED23AD /* HZForgetPasswordTableViewCell.swift */; };
+		041F0E5D2509C8FA00ED23AD /* LinkLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E5C2509C8FA00ED23AD /* LinkLabel.m */; };
 		042E881D24EE1A46000053A0 /* HZHomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E881C24EE1A46000053A0 /* HZHomeDetailViewController.swift */; };
 		042E89F624EE54E6000053A0 /* HZHomeDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E89F524EE54E6000053A0 /* HZHomeDetailTableViewCell.swift */; };
 		042F2DCA24EE83940069FB39 /* HZHomeDetailNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F2DC924EE83940069FB39 /* HZHomeDetailNetworkManager.swift */; };
@@ -64,6 +69,12 @@
 		041F0E3D2507730F00ED23AD /* HZAboutHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZAboutHeadView.swift; sourceTree = "<group>"; };
 		041F0E432508C76300ED23AD /* HZLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZLoginViewController.swift; sourceTree = "<group>"; };
 		041F0E472508C79100ED23AD /* HZLoginTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZLoginTableViewCell.swift; sourceTree = "<group>"; };
+		041F0E492508EEFD00ED23AD /* HZRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZRegisterViewController.swift; sourceTree = "<group>"; };
+		041F0E4B2508F06100ED23AD /* HZForgerPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZForgerPasswordViewController.swift; sourceTree = "<group>"; };
+		041F0E4D2508F1C300ED23AD /* HZRegisterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZRegisterTableViewCell.swift; sourceTree = "<group>"; };
+		041F0E4F2508F87500ED23AD /* HZForgetPasswordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZForgetPasswordTableViewCell.swift; sourceTree = "<group>"; };
+		041F0E5B2509C8FA00ED23AD /* LinkLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkLabel.h; sourceTree = "<group>"; };
+		041F0E5C2509C8FA00ED23AD /* LinkLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkLabel.m; sourceTree = "<group>"; };
 		042E881C24EE1A46000053A0 /* HZHomeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailViewController.swift; sourceTree = "<group>"; };
 		042E89F524EE54E6000053A0 /* HZHomeDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailTableViewCell.swift; sourceTree = "<group>"; };
 		042F2DC924EE83940069FB39 /* HZHomeDetailNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailNetworkManager.swift; sourceTree = "<group>"; };
@@ -141,6 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				041F0E432508C76300ED23AD /* HZLoginViewController.swift */,
+				041F0E492508EEFD00ED23AD /* HZRegisterViewController.swift */,
+				041F0E4B2508F06100ED23AD /* HZForgerPasswordViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -149,6 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				041F0E472508C79100ED23AD /* HZLoginTableViewCell.swift */,
+				041F0E4D2508F1C300ED23AD /* HZRegisterTableViewCell.swift */,
+				041F0E4F2508F87500ED23AD /* HZForgetPasswordTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -158,6 +173,15 @@
 			children = (
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		041F0E5A2509C8FA00ED23AD /* LinkLabel */ = {
+			isa = PBXGroup;
+			children = (
+				041F0E5B2509C8FA00ED23AD /* LinkLabel.h */,
+				041F0E5C2509C8FA00ED23AD /* LinkLabel.m */,
+			);
+			path = LinkLabel;
 			sourceTree = "<group>";
 		};
 		0446B84724F35DA60079BC2C /* ViewControllers */ = {
@@ -329,6 +353,7 @@
 		04E4FC9224EA7A6E00C5E5B0 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				041F0E5A2509C8FA00ED23AD /* LinkLabel */,
 				04E4FCA324EA96DB00C5E5B0 /* HZColor.swift */,
 				04E4FCA524EA998400C5E5B0 /* HZImage.swift */,
 				047BF2CB24EB689A002A39F3 /* HZFont.swift */,
@@ -580,6 +605,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				041F0E462508C76400ED23AD /* HZLoginViewController.swift in Sources */,
+				041F0E502508F87500ED23AD /* HZForgetPasswordTableViewCell.swift in Sources */,
 				047BF2CC24EB689A002A39F3 /* HZFont.swift in Sources */,
 				046BABBA2507563F0028EA0E /* HZSettingViewController.swift in Sources */,
 				047BF2CE24EB7445002A39F3 /* HZScreen.swift in Sources */,
@@ -587,6 +613,7 @@
 				0075D63124F3CB7100902F77 /* MBProgressHudToast.swift in Sources */,
 				0446B86224F4B21F0079BC2C /* HZTopicListViewController.swift in Sources */,
 				0446B85124F365AD0079BC2C /* HZLivelihoodTableViewCell.swift in Sources */,
+				041F0E5D2509C8FA00ED23AD /* LinkLabel.m in Sources */,
 				047BF2D224EBA33C002A39F3 /* HZHomeCellViewModel.swift in Sources */,
 				04E4FCA624EA998400C5E5B0 /* HZImage.swift in Sources */,
 				04E4FC9A24EA80D500C5E5B0 /* HZBaseViewController.swift in Sources */,
@@ -610,8 +637,10 @@
 				0446B87324F631B30079BC2C /* HZCreateTopicTableViewCell.swift in Sources */,
 				0446B86524F4BA100079BC2C /* HZTopicListTableViewCell.swift in Sources */,
 				04E4FC9C24EA8D7B00C5E5B0 /* HZNavigationController.swift in Sources */,
+				041F0E4A2508EEFD00ED23AD /* HZRegisterViewController.swift in Sources */,
 				041F0E3E2507730F00ED23AD /* HZAboutHeadView.swift in Sources */,
 				047BF2D924EBAD63002A39F3 /* HZNetworkMoya.swift in Sources */,
+				041F0E4E2508F1C300ED23AD /* HZRegisterTableViewCell.swift in Sources */,
 				042F2DCC24EF500B0069FB39 /* HZCommentTableViewCell.swift in Sources */,
 				04E4FC7E24EA73A800C5E5B0 /* AppDelegate.swift in Sources */,
 				042F2DD124EF6C220069FB39 /* HZCommentCellViewModel.swift in Sources */,
@@ -623,6 +652,7 @@
 				04E4FCA424EA96DB00C5E5B0 /* HZColor.swift in Sources */,
 				04E31BCF24ED23F7002CF93E /* HZConstant.swift in Sources */,
 				047BF2D724EBA5C2002A39F3 /* HZHomeNetworkManager.swift in Sources */,
+				041F0E4C2508F06100ED23AD /* HZForgerPasswordViewController.swift in Sources */,
 				042E89F624EE54E6000053A0 /* HZHomeDetailTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

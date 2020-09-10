@@ -8,15 +8,26 @@
 
 import UIKit
 
+
 class HZLoginTableViewCell: UITableViewCell {
-	var appLogoImageView: UIImageView!
-	var phoneTextField: UITextField!
+	
+	public enum HZLoginCellBtnTag : Int {
+        case login = 0
+		case register = 1
+		case forget = 2
+    }
+	
+	open var appLogoImageView: UIImageView!
+	open var phoneTextField: UITextField!
 	var passwordTextField: UITextField!
 	var loginBtn: UIButton!
-//	var registerBtn: UIButton!
-//	var forgetPasswordBtn: UIButton!
+	var registerBtn: UIButton!
+	var forgetPasswordBtn: UIButton!
 	
 	let disposeBag = DisposeBag()
+	
+	typealias HZClickLoginCellBtnBlock = (_ btn :UIButton?) -> Void
+	open var clickLoginCellBtnBlock :HZClickLoginCellBtnBlock?
 	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -43,7 +54,7 @@ class HZLoginTableViewCell: UITableViewCell {
 		phoneTextField.backgroundColor = .clear
 		phoneTextField.placeholder = "请输入手机号"
 		phoneTextField.textAlignment = .center
-		phoneTextField.font = HZFont(fontSize: 16)
+		phoneTextField.font = HZFont(fontSize: 15)
 		phoneTextField.clearButtonMode = .whileEditing
 		phoneTextField.keyboardType = .numberPad
 		phoneTextField.textColor = UIColor.black
@@ -68,7 +79,7 @@ class HZLoginTableViewCell: UITableViewCell {
 		passwordTextField.backgroundColor = .clear
 		passwordTextField.placeholder = "请输入密码"
 		passwordTextField.textAlignment = .center
-		passwordTextField.font = HZFont(fontSize: 16)
+		passwordTextField.font = HZFont(fontSize: 15)
 		passwordTextField.textColor = UIColor.black
 		passwordTextField.isSecureTextEntry = true
 		passwordTextField.clearButtonMode = .whileEditing
@@ -96,13 +107,51 @@ class HZLoginTableViewCell: UITableViewCell {
 		self.loginBtn.setTitle("登录", for: .normal)
 		self.loginBtn.layer.cornerRadius = 5
 		self.loginBtn.isEnabled = false
+		self.loginBtn.tag = HZLoginCellBtnTag.login.rawValue
 		self.loginBtn.layer.masksToBounds = true
+		self.loginBtn.addTarget(self, action: #selector(clickLoginCellBtn(_ :)), for: .touchUpInside)
 		self.contentView.addSubview(self.loginBtn)
 		self.loginBtn.snp.makeConstraints { (make) in
-			make.leading.equalTo(10)
+			make.leading.equalTo(15)
 			make.trailing.equalTo(-10)
 			make.height.equalTo(45)
 			make.top.equalTo(self.passwordTextField.snp.bottom).offset(30)
+		}
+		
+		self.registerBtn = UIButton.init(type: .custom)
+		self.registerBtn.backgroundColor = .clear
+		self.registerBtn.setTitle("注册", for: .normal)
+		self.registerBtn.titleLabel?.font = HZFont(fontSize: 13)
+		self.registerBtn.contentHorizontalAlignment = .left
+		self.registerBtn.tag = HZLoginCellBtnTag.register.rawValue
+		self.registerBtn.setTitleColor(UIColor.init(red: 0.33, green: 0.33, blue: 0.33, alpha: 1), for: .normal)
+		self.registerBtn.addTarget(self, action: #selector(clickLoginCellBtn(_ :)), for: .touchUpInside)
+		self.contentView.addSubview(self.registerBtn)
+		self.registerBtn.snp.makeConstraints { (make) in
+			make.leading.equalTo(self.loginBtn.snp.leading).offset(15)
+			make.top.equalTo(self.loginBtn.snp.bottom).offset(10)
+			make.height.equalTo(30)
+		}
+		
+		self.forgetPasswordBtn = UIButton.init(type: .custom)
+		self.forgetPasswordBtn.backgroundColor = .clear
+		self.forgetPasswordBtn.setTitle("忘记密码", for: .normal)
+		self.forgetPasswordBtn.titleLabel?.font = HZFont(fontSize: 13)
+		self.forgetPasswordBtn.contentHorizontalAlignment = .right
+		self.forgetPasswordBtn.tag = HZLoginCellBtnTag.forget.rawValue
+		self.forgetPasswordBtn.setTitleColor(UIColor.init(red: 0.33, green: 0.33, blue: 0.33, alpha: 1), for: .normal)
+		self.forgetPasswordBtn.addTarget(self, action: #selector(clickLoginCellBtn(_ :)), for: .touchUpInside)
+		self.contentView.addSubview(self.forgetPasswordBtn)
+		self.forgetPasswordBtn.snp.makeConstraints { (make) in
+			make.trailing.equalTo(self.loginBtn.snp.trailing).offset(-15)
+			make.top.equalTo(self.registerBtn)
+			make.height.equalTo(30)
+		}
+	}
+	
+	@objc func clickLoginCellBtn(_ sender: UIButton) -> Void {
+		if self.clickLoginCellBtnBlock != nil {
+			self.clickLoginCellBtnBlock!(sender)
 		}
 	}
 	

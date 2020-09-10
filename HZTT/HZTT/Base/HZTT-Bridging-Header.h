@@ -14,6 +14,7 @@
 #import "HBDNavigationBar/HBDNavigationController.h"
 #import "HBDNavigationBar/UIViewController+HBD.h"
 #import "TZImagePickerController/TZImagePickerController.h"
+#import "LinkLabel.h"
 
 @import SnapKit;
 @import IQKeyboardManagerSwift;
