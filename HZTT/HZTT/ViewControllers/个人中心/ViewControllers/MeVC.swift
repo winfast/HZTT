@@ -24,7 +24,7 @@ class MeVC: HZBaseViewController {
 		self.navigationItem.title = "";
 		self.hbd_barAlpha = 0.0
 		self.hbd_barHidden = true
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor.init(red:244/255.0, green: 245/255.0, blue: 247/255.0, alpha: 1)
         
         setupTableView()
         setupTopView()
@@ -34,6 +34,7 @@ class MeVC: HZBaseViewController {
         self.tableView = UITableView(frame: self.view.frame)
         self.tableView.delegate = self
         self.tableView.dataSource = self
+		self.tableView.backgroundColor = .clear
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Mecell")
         self.view.addSubview(self.tableView)
         self.tableView.tableFooterView = UIView()
@@ -80,9 +81,12 @@ class MeVC: HZBaseViewController {
     }
 	
 	@objc func clickTopView(_ sender: UIControl) -> Void {
-		let vc = HZLoginViewController.init()
-		let nav = HZNavigationController.init(rootViewController: vc)
-		self.tabBarController?.present(nav, animated: true, completion: nil)
+//		let vc = HZLoginViewController.init()
+//		let nav = HZNavigationController.init(rootViewController: vc)
+//		self.tabBarController?.present(nav, animated: true, completion: nil)
+		
+		let vc = HZModifyInfoViewController.init()
+		self.navigationController?.pushViewController(vc, animated: true)
 	}
 }
 
@@ -100,6 +104,7 @@ extension MeVC :UITableViewDelegate, UITableViewDataSource {
         let cell: UITableViewCell =  tableView.dequeueReusableCell(withIdentifier: "Mecell")!
         cell.accessoryType = .disclosureIndicator
         cell.selectionStyle = .none
+		cell.backgroundColor = .white
         let name : String = dataArr[indexPath.row]
         let image : String = imageArr[indexPath.row]
         cell.textLabel?.text = name
@@ -111,11 +116,14 @@ extension MeVC :UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        // MBProgressHUD.showToast("暂未开通", inView: self.view)
 		//MBProgressHUD.showHub("124", inView: self.view)
-//		if <#condition#> {
-//			<#code#>
-//		}
-		let vc = HZSettingViewController.init()
-		self.navigationController?.pushViewController(vc, animated: true)
+		if indexPath.row == 0 {
+			let vc = HZMyHomePageViewController.init()
+			self.navigationController?.pushViewController(vc, animated: true)
+		} else {
+			let vc = HZSettingViewController.init()
+			self.navigationController?.pushViewController(vc, animated: true)
+		}
+
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -8,7 +8,15 @@
 
 import UIKit
 
+public enum HZRegisterCellBtnTag : Int {
+	case sendCode = 0
+	case register = 1
+	case agreement = 2
+}
+
 class HZRegisterTableViewCell: UITableViewCell {
+	
+
 
 	open var phoneTextField : UITextField!
 	open var codeTextField: UITextField!
@@ -20,6 +28,9 @@ class HZRegisterTableViewCell: UITableViewCell {
 	open var linkLabel: LinkLabel!
 	
 	let disposeBag = DisposeBag()
+	
+	typealias HZClickRegisterCellBtnBlock = (_ btn :UIView?) -> Void
+	open var clickRegisterCellBtnBlock :HZClickRegisterCellBtnBlock?
 
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -72,6 +83,7 @@ class HZRegisterTableViewCell: UITableViewCell {
 		codeBtn = UIButton.init(type: .custom)
 		codeBtn.setTitleColor(UIColor.init(red: 0.83, green: 0.15, blue: 0.22, alpha: 1), for: .normal)
 		codeBtn.setTitle("获取验证码", for: .normal)
+		codeBtn.tag = HZRegisterCellBtnTag.sendCode.rawValue
 		codeBtn.titleLabel?.font = HZFont(fontSize: 13)
 		self.contentView.addSubview(self.codeBtn)
 		self.codeBtn.snp.makeConstraints { (make) in
@@ -143,6 +155,7 @@ class HZRegisterTableViewCell: UITableViewCell {
 		self.registerBtn.setTitle("注册", for: .normal)
 		self.registerBtn.layer.cornerRadius = 5
 		self.registerBtn.isEnabled = false
+		self.registerBtn.tag = HZRegisterCellBtnTag.register.rawValue
 		self.registerBtn.layer.masksToBounds = true
 		self.registerBtn.addTarget(self, action: #selector(clickRegisterCellBtn(_ :)), for: .touchUpInside)
 		self.contentView.addSubview(self.registerBtn)
@@ -171,15 +184,21 @@ class HZRegisterTableViewCell: UITableViewCell {
 		self.linkLabel.font = HZFont(fontSize: 12)
 		self.linkLabel.textColor = UIColor.lightGray
 		self.linkLabel.text = "我已阅读并同意郸城头条“用户协议”"
+		self.linkLabel.tag = HZRegisterCellBtnTag.agreement.rawValue
 		self.linkLabel.textAlignment = .left
 		self.linkLabel.addRegularString("“用户协议”")
-		self.linkLabel.regularLinkClickBlock = { (clickedString) -> Void  in
+		self.linkLabel.regularLinkClickBlock = { [weak self] (clickedString) -> Void  in
+			guard let weakself = self else {
+				return
+			}
+			if weakself.clickRegisterCellBtnBlock != nil {
+				weakself.clickRegisterCellBtnBlock!(weakself.linkLabel)
+			}
 		}
 		self.contentView.addSubview(self.linkLabel)
 		self.linkLabel.snp.makeConstraints { (make) in
 			make.left.equalTo(self.readAgreementBtn.snp.right).offset(-6)
 			make.centerY.equalTo(self.readAgreementBtn.snp.centerY)
-			//make.width.equalTo(300)
 		}
 	
 	}
@@ -211,8 +230,8 @@ class HZRegisterTableViewCell: UITableViewCell {
 	
 
 	@objc func clickRegisterCellBtn(_ sender: UIButton) -> Void {
-		
+		if (self.clickRegisterCellBtnBlock != nil) {
+			self.clickRegisterCellBtnBlock!(sender)
+		}
 	}
-
-
 }

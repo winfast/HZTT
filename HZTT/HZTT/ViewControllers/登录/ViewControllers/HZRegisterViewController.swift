@@ -36,6 +36,20 @@ class HZRegisterViewController: HZBaseViewController {
 			make.edges.equalTo(0)
 		}
 	}
+	
+	func showAgreementView() -> Void {
+		let webVC = HZWebViewController.init()
+		webVC.url = "p/userAgreement.html"
+		self.navigationController?.pushViewController(webVC, animated: true)
+	}
+	
+	func registerRequest(phone: String, code: String, password: String) -> Void {
+		
+	}
+	
+	func sendCode(phone: String) -> Void {
+		
+	}
 }
 
 extension HZRegisterViewController :UITableViewDelegate, UITableViewDataSource {
@@ -51,7 +65,19 @@ extension HZRegisterViewController :UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "HZRegisterTableViewCell") as! HZRegisterTableViewCell
 		cell.selectionStyle = .none
-		
+		cell.clickRegisterCellBtnBlock = { [weak self] (sender: UIView?) -> Void in
+			guard let weakself = self else {
+				return
+			}
+			let tag: HZRegisterCellBtnTag = HZRegisterCellBtnTag(rawValue: sender!.tag) ?? HZRegisterCellBtnTag.register
+			if tag == HZRegisterCellBtnTag.register {
+				
+			} else if  tag == HZRegisterCellBtnTag.agreement {
+				weakself.showAgreementView()
+			} else {
+				
+			}
+		}
 		return cell
 	}
 }

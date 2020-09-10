@@ -13,7 +13,7 @@ class HZWebViewController: HZBaseViewController {
 	
 	var progressView: UIProgressView?
 	var webView: WKWebView?
-	var url: String?
+	open var url: String! = ""
 	
 	deinit {
 		self.webView?.removeObserver(self, forKeyPath: "estimatedProgress")
@@ -26,6 +26,10 @@ class HZWebViewController: HZBaseViewController {
 		self.view.backgroundColor = .white
 		
 		self.navigationLayout()
+		
+		if url.lengthOfBytes(using: .utf8) == 0 {
+			return
+		}
 		
 		self.webView = WKWebView.init(frame: .zero)
 		self.webView?.scrollView.delegate = self
@@ -48,7 +52,7 @@ class HZWebViewController: HZBaseViewController {
 			make.height.equalTo(2);
 		})
 		
-		var request: URLRequest = URLRequest.init(url: URL.init(string:"http://39.106.164.101:80/tt/" + "p/publishNotes.html")!)
+		var request: URLRequest = URLRequest.init(url: URL.init(string:"http://39.106.164.101:80/tt/" + url)!)
 		request.cachePolicy = .reloadIgnoringLocalCacheData
 		self.webView?.load(request)
 		
@@ -66,9 +70,12 @@ class HZWebViewController: HZBaseViewController {
 	}
 	
 	@objc func clickLeftBtn(_ sender: UIButton) -> Void {
+		if (self.navigationController?.viewControllers.count)! > 1 {
+			self.navigationController?.popViewController(animated: true)
+			return
+		}
 		self.dismiss(animated: true, completion: nil)
 	}
-	
 	
 	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
 		let progress: Float = change![NSKeyValueChangeKey.newKey] as! Float
