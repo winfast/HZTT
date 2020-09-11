@@ -75,8 +75,6 @@ class HZDataPickView: UIView {
 		return dataPickerView
 	}
 	
-	
-	
 	func viewsLayout() -> Void {
 		let tap = UITapGestureRecognizer.init(target: self, action: #selector(clickBgView(_ :)))
 		self.isUserInteractionEnabled = true

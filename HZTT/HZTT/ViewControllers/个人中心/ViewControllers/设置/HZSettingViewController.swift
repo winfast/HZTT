@@ -27,7 +27,7 @@ class HZSettingViewController: HZBaseViewController {
 	func viewsLayout() -> Void {
 		
 		self.dataSource = [
-			[["title":"编辑资料","className":"HZBaseViewController","param":""],
+			[["title":"修改资料","className":"HZModifyInfoViewController","param":""],
 			 ["title":"黑名单","className":"HZBaseViewController","param":""],
 			 ["title":"通知","className":"","param":""]],
 			[["title":"清空缓存","className":"","param":""],

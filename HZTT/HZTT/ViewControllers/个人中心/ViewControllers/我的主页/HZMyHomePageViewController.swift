@@ -20,7 +20,42 @@ class HZMyHomePageViewController: HZBaseViewController {
     }
 	
 	func viewsLayout() -> Void {
-		self.tableView = UITableView.init(frame: .zero, style: .plain)
+		let headerView = HZMyHomePageHeaderView.init()
+		headerView.frame = CGRect.init(x: 0, y: 0, width: HZSCreenWidth(), height: 220)
 		
+		self.tableView = UITableView.init(frame: .zero, style: .plain)
+		self.tableView.delegate = self
+		self.tableView.dataSource = self
+		self.tableView.separatorStyle = .none
+		self.tableView.tableHeaderView = headerView
+		self.view.addSubview(self.tableView)
+		self.tableView.snp.makeConstraints { (make) in
+			make.edges.equalTo(0)
+		}
+	}
+}
+
+extension HZMyHomePageViewController :UITableViewDelegate, UITableViewDataSource {
+	
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return 1
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 1
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		
+		return UITableViewCell.init()
+	}
+	
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		let point = scrollView.contentOffset
+		if point.y > 5 {
+			self.navigationItem.title = "123"
+		} else {
+			self.navigationItem.title = ""
+		}
 	}
 }

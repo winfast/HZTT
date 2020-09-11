@@ -11,6 +11,8 @@ import UIKit
 class HZLoginViewController: HZBaseViewController {
 	
 	var tableView: UITableView!
+	
+	let disposeBag: DisposeBag = DisposeBag.init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +62,18 @@ class HZLoginViewController: HZBaseViewController {
 	}
 	
 	func loginPassword(phone: String, password: String) -> Void {
+		self.view.endEditing(true)
 		
+		//登录请求
+		let d = ["phone_number":phone,
+				 "pwd":password]
+		
+		HZUserInfoNetworkManager.shared.login(d).subscribe(onNext: { (value) in
+			//登录接口
+			MBProgressHUD.showToast("登录成功", inView: self.view.window)
+			HZUserInfo.share().saveUserInfo(value)
+			self.dismiss(animated: true, completion: nil)
+		}).disposed(by: disposeBag)
 	}
 }
 

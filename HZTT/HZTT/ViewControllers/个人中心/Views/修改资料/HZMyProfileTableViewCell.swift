@@ -22,7 +22,19 @@ class HZMyProfileTableViewCell: UITableViewCell {
 	}
 	
 	func viewsLayout() -> Void {
-		
+		self.textView = IQTextView.init()
+		self.textView.placeholder = "介绍自己,让更多的人认识你."
+		self.textView.font = HZFont(fontSize: 15)
+		//self.textView.contentInset = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 20)
+		self.textView.backgroundColor = .white
+		self.contentView.addSubview(self.textView)
+		self.textView.snp.makeConstraints { (make) in
+			make.top.equalTo(0)
+			make.leading.equalTo(15)
+			make.trailing.equalTo(-15)
+			make.bottom.lessThanOrEqualTo(0).priority(900)
+			make.height.equalTo(200)
+		}
 	}
 
 }

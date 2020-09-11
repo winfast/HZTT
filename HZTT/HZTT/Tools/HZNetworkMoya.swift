@@ -18,6 +18,7 @@ enum HZHomeNetworkMoya {
 	case detail(_ param: [String:Any])
 	case comment(_ param: [String:Any])
 	case publish(_ param: [String:Any])
+	case login(_ param: [String:Any])
 }
 
 extension HZHomeNetworkMoya: TargetType {
@@ -31,19 +32,21 @@ extension HZHomeNetworkMoya: TargetType {
 			parammter = param
 		case let .comment(param):
 			parammter = param
+		case let .login(param):
+			parammter = param
 		default:
 			parammter = [:]
 		}
 		//添加常量
-		parammter.updateValue("ea27d51c1193b238f0c1ee9304ec5471", forKey: "t")
-		parammter.updateValue("1f431f1d98f169be4d2aaee70e14bfda", forKey: "uid")
+		//parammter.updateValue("ea27d51c1193b238f0c1ee9304ec5471", forKey: "t")
+		//parammter.updateValue("1f431f1d98f169be4d2aaee70e14bfda", forKey: "uid")
 		return .requestParameters(parameters: parammter, encoding: URLEncoding.default)
 	}
 	
 	var headers: [String : String]? {
 		//添加常量
-		//return [:]
-		return ["Authorization":"ea27d51c1193b238f0c1ee9304ec5471"]
+		return [:]
+		//return ["Authorization":"ea27d51c1193b238f0c1ee9304ec5471"]
 	}
 	
 	var path: String {
@@ -56,6 +59,8 @@ extension HZHomeNetworkMoya: TargetType {
 			return "comment.php"
 		case .publish:
 			return "publish.php"
+		case .login:
+			return "login.php"
 		default:
 			return ""
 		}
@@ -64,7 +69,7 @@ extension HZHomeNetworkMoya: TargetType {
 	//请求方式
 	var method: Moya.Method {
 		switch self {
-		case .getPostList,.detail,.comment:
+		case .getPostList,.detail,.comment,.login:
 			return .post
 		case .publish:
 			return .post

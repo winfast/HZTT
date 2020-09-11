@@ -16,7 +16,7 @@ class HZModifyInfoViewController: HZBaseViewController {
 	
 	var rx_nickName: BehaviorRelay<Any?> = BehaviorRelay.init(value: nil)
 	var rx_sex: BehaviorRelay<Any?>!
-	var rx_birthday: BehaviorRelay<Any?> = BehaviorRelay.init(value: nil)
+	var rx_birthday: BehaviorRelay<Any?>!
 	var rx_city: BehaviorRelay<Any?>!
 	
 	let disposeBag :DisposeBag = DisposeBag.init()
@@ -51,14 +51,12 @@ class HZModifyInfoViewController: HZBaseViewController {
 		self.tableView.tableHeaderView = headerView
 		self.tableView.separatorStyle = .none
 		self.tableView.register(HZModifyInfoTextFieldTableViewCell.self, forCellReuseIdentifier: "HZModifyInfoTextFieldTableViewCell")
+		self.tableView.register(HZModifyInfoLabelTableViewCell.self, forCellReuseIdentifier: "HZModifyInfoLabelTableViewCell")
+		self.tableView.register(HZMyProfileTableViewCell.self, forCellReuseIdentifier: "HZMyProfileTableViewCell")
 		self.view.addSubview(self.tableView)
 		self.tableView.snp.makeConstraints { (make) in
 			make.edges.equalTo(0)
 		}
-		
-//		self.rx_sex.asObservable().subscribe(onNext: { (value) in
-//			print(value)
-//		}).disposed(by: disposeBag)
 	}
 	
 	@objc func saveAction(_ sender: UIButton) -> Void {
@@ -82,23 +80,43 @@ extension HZModifyInfoViewController :UITableViewDelegate, UITableViewDataSource
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		if indexPath.section == 0 {
-			let cell = tableView.dequeueReusableCell(withIdentifier: "HZModifyInfoTextFieldTableViewCell") as! HZModifyInfoTextFieldTableViewCell
-			cell.selectionStyle = .none
-			cell.modifyTypeLabel.text = self.userDataInfoArray[indexPath.row]
-			if indexPath.row == 0 {
-				cell.accessoryType = .none
+			if 0 == indexPath.row {
+				let cell = tableView.dequeueReusableCell(withIdentifier: "HZModifyInfoTextFieldTableViewCell") as! HZModifyInfoTextFieldTableViewCell
+				cell.selectionStyle = .none
+				cell.modifyTypeLabel.text = self.userDataInfoArray[indexPath.row]
+				if indexPath.row == 0 {
+					cell.accessoryType = .none
+				} else {
+					cell.accessoryType = .disclosureIndicator
+				}
+				self.rx_nickName = cell.rx_CellTextField
+				return cell
 			} else {
-				cell.accessoryType = .disclosureIndicator
+				let cell = tableView.dequeueReusableCell(withIdentifier: "HZModifyInfoLabelTableViewCell") as! HZModifyInfoLabelTableViewCell
+				cell.selectionStyle = .none
+				cell.modifyTypeLabel.text = self.userDataInfoArray[indexPath.row]
+				if indexPath.row == 0 {
+					cell.accessoryType = .none
+				} else {
+					cell.accessoryType = .disclosureIndicator
+				}
+				
+				if 1 == indexPath.row {
+					self.rx_sex = cell.rx_CellLabel
+				} else if 2 == indexPath.row {
+					self.rx_birthday = cell.rx_CellLabel
+				}
+				else if 3 == indexPath.row {
+					self.rx_city = cell.rx_CellLabel
+				}
+				return cell
 			}
 			
-			if 1 == indexPath.row {
-				self.rx_sex = cell.rx_CellLabel
-			} else if 3 == indexPath.row {
-				self.rx_city = cell.rx_CellLabel
-			}
+		} else {
+			let cell = tableView.dequeueReusableCell(withIdentifier: "HZMyProfileTableViewCell") as! HZMyProfileTableViewCell
+			cell.selectionStyle = .none
 			return cell
 		}
-		return UITableViewCell.init()
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -114,7 +132,15 @@ extension HZModifyInfoViewController :UITableViewDelegate, UITableViewDataSource
 				}
 				weakself.rx_sex.accept(value)
 			}
-		} else if 3 == indexPath.row {
+		} else if 2 == indexPath.row {
+			let _ = HZDatePickView.showWithView(self.view.window) { [weak self] (value) in
+				guard let weakself = self else {
+					return
+				}
+				weakself.rx_birthday.accept(value)
+			}
+		}
+		else if 3 == indexPath.row {
 			let _ = HZDataPickView.showWithView(self.view.window, HZDataPickViewType.city.rawValue) { [weak self] (value) in
 				//NSlog
 				guard let weakself = self else {
@@ -123,15 +149,13 @@ extension HZModifyInfoViewController :UITableViewDelegate, UITableViewDataSource
 				weakself.rx_city.accept(value)
 			}
 		}
-		
-		
 	}
 	
 	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		if section == 0  {
 			return 45
 		} else {
-			return 0.0001
+			return 20
 		}
 	}
 	
@@ -148,10 +172,9 @@ extension HZModifyInfoViewController :UITableViewDelegate, UITableViewDataSource
 				make.top.equalTo(23)
 				make.leading.equalTo(20)
 			}
-			
 			return view
 		}
-		return nil
+		return UIView.init()
 	}
 	
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -161,4 +184,5 @@ extension HZModifyInfoViewController :UITableViewDelegate, UITableViewDataSource
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return 0.000001
 	}
+
 }
