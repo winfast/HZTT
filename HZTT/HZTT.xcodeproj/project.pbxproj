@@ -30,6 +30,7 @@
 		041F0E84250B329B00ED23AD /* HZUserInfoNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E83250B329B00ED23AD /* HZUserInfoNetworkManager.swift */; };
 		041F0E87250C56E800ED23AD /* HZAboutHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E86250C56E800ED23AD /* HZAboutHeadView.swift */; };
 		041F0E89250C574600ED23AD /* HZLoginoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E88250C574600ED23AD /* HZLoginoutTableViewCell.swift */; };
+		041F0E8C250CA65400ED23AD /* HZMeProfileNetwordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E8B250CA65400ED23AD /* HZMeProfileNetwordManager.swift */; };
 		042E881D24EE1A46000053A0 /* HZHomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E881C24EE1A46000053A0 /* HZHomeDetailViewController.swift */; };
 		042E89F624EE54E6000053A0 /* HZHomeDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E89F524EE54E6000053A0 /* HZHomeDetailTableViewCell.swift */; };
 		042F2DCA24EE83940069FB39 /* HZHomeDetailNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F2DC924EE83940069FB39 /* HZHomeDetailNetworkManager.swift */; };
@@ -101,6 +102,7 @@
 		041F0E83250B329B00ED23AD /* HZUserInfoNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZUserInfoNetworkManager.swift; sourceTree = "<group>"; };
 		041F0E86250C56E800ED23AD /* HZAboutHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZAboutHeadView.swift; sourceTree = "<group>"; };
 		041F0E88250C574600ED23AD /* HZLoginoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZLoginoutTableViewCell.swift; sourceTree = "<group>"; };
+		041F0E8B250CA65400ED23AD /* HZMeProfileNetwordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZMeProfileNetwordManager.swift; sourceTree = "<group>"; };
 		042E881C24EE1A46000053A0 /* HZHomeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailViewController.swift; sourceTree = "<group>"; };
 		042E89F524EE54E6000053A0 /* HZHomeDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailTableViewCell.swift; sourceTree = "<group>"; };
 		042F2DC924EE83940069FB39 /* HZHomeDetailNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailNetworkManager.swift; sourceTree = "<group>"; };
@@ -290,6 +292,14 @@
 				041F0E88250C574600ED23AD /* HZLoginoutTableViewCell.swift */,
 			);
 			path = "设置";
+			sourceTree = "<group>";
+		};
+		041F0E8A250CA62700ED23AD /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				041F0E8B250CA65400ED23AD /* HZMeProfileNetwordManager.swift */,
+			);
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 		0446B84724F35DA60079BC2C /* ViewControllers */ = {
@@ -514,6 +524,7 @@
 		04E4FC9D24EA949700C5E5B0 /* 个人中心 */ = {
 			isa = PBXGroup;
 			children = (
+				041F0E8A250CA62700ED23AD /* NetworkManager */,
 				046BABB625072BE10028EA0E /* Models */,
 				046BABB825072BE10028EA0E /* Views */,
 				0446B85A24F3BD430079BC2C /* ViewControllers */,
@@ -762,6 +773,7 @@
 				041F0E89250C574600ED23AD /* HZLoginoutTableViewCell.swift in Sources */,
 				0446B87324F631B30079BC2C /* HZCreateTopicTableViewCell.swift in Sources */,
 				0446B86524F4BA100079BC2C /* HZTopicListTableViewCell.swift in Sources */,
+				041F0E8C250CA65400ED23AD /* HZMeProfileNetwordManager.swift in Sources */,
 				04E4FC9C24EA8D7B00C5E5B0 /* HZNavigationController.swift in Sources */,
 				041F0E4A2508EEFD00ED23AD /* HZRegisterViewController.swift in Sources */,
 				047BF2D924EBAD63002A39F3 /* HZNetworkMoya.swift in Sources */,

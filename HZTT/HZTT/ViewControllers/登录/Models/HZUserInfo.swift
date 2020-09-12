@@ -40,6 +40,12 @@ class HZUserInfo : NSObject {
 	class func share() ->HZUserInfo {
 		guard let instance = userInfo else {
 			userInfo = HZUserInfo()
+			
+			let userDefault = UserDefaults.standard
+			let userDict: Dictionary<String, Any>? = userDefault.dictionary(forKey: "userInfo")
+			if userDict != nil {
+				userInfo!.saveUserInfo(JSON.init(userDict!))
+			}
 			return userInfo!
 		}
 		return instance
@@ -71,17 +77,58 @@ class HZUserInfo : NSObject {
 			showName = nickName
 		}
 		
-//		let userDefault = UserDefaults.standard
-//		userDefault.setValue(currUserInfo.dictionaryValue, forKeyPath: "userInfo")
-//		userDefault.synchronize()
+		do {
+			let jsonData: Data = try currUserInfo.rawData()
+			let dict = try? (JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as! [String:Any])
+			
+//			let resuslt = dict!.filter { (key: String, value: Any) -> Bool in
+//				if value is NSNull {
+//					return false
+//				}
+//				return true
+//			}
+			
+			let result = dict!.compactMapValues { (value) -> Any? in
+				return value is NSNull ? nil : value
+			}
+			
+			let userDefault = UserDefaults.standard
+			userDefault.setValue(result, forKeyPath: "userInfo")
+			userDefault.synchronize()
+		} catch  {
+			
+		}
+	}
+	
+	func updateUserInfo(_ userInfo: JSON) -> Void {
+		
+		let userDefault = UserDefaults.standard
+		var userDict: Dictionary<String, Any>? = userDefault.dictionary(forKey: "userInfo")
+		let updateUserInfo = userInfo.dictionaryObject?.filter({ (key: String, value: Any) -> Bool in
+			return value is NSNull ? false : true
+		})
+		
+		guard let userInfoItem = updateUserInfo else {
+			return
+		}
+		
+		userDict!.merge(userInfoItem, uniquingKeysWith: { (userDictItem, updateDictItem) -> Any in
+			return updateDictItem
+		})
+		
+		self.saveUserInfo(JSON.init(userDict!))
 	}
 	
 	func clearUserInfo(_ completeHandle:() -> Void) -> Void {
-		
+		self.token = nil;
+		let userDefault = UserDefaults.standard
+		userDefault.removeObject(forKey: "userInfo")
+		userDefault.synchronize()
+		completeHandle()
 	}
 	
 	func updateNickName(_ currNickName: String) -> Void {
-		nickName = currNickName
+		name = currNickName
 		showName = currNickName
 	}
 	

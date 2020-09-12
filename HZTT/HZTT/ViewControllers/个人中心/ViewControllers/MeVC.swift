@@ -40,6 +40,7 @@ class MeVC: HZBaseViewController {
 		
 		if HZUserInfo.isLogin() {
 			self.tableView.tableHeaderView = self.topView
+			self.dataRequest()
 		} else {
 			self.tableView.tableHeaderView = self.unLoginTopView;
 		}
@@ -145,7 +146,7 @@ class MeVC: HZBaseViewController {
 		pointLabel.font = HZFont(fontSize: 12)
 		self.topView.addSubview(pointLabel)
 		pointLabel.snp.makeConstraints { (make) in
-			make.trailing.equalTo(self.topView.snp.trailingMargin).offset(-50)
+			make.trailing.equalTo(self.topView.snp.trailingMargin).offset(-50).priority(900)
 			make.centerY.equalTo(likeLabel.snp.centerY)
 		}
 		
@@ -161,6 +162,7 @@ class MeVC: HZBaseViewController {
 		let infoBtn = UIButton.init(type: .custom)
 		infoBtn.backgroundColor = .clear
 		infoBtn.setImage(UIImage.init(named: "detail"), for: .normal)
+		infoBtn.addTarget(self, action: #selector(clickInfoBtn(_ :)), for: .touchDragInside)
 		self.topView.addSubview(infoBtn)
 		infoBtn.snp.makeConstraints { (make) in
 			make.leading.equalTo(pointLabel.snp.trailing).offset(5)
@@ -169,7 +171,7 @@ class MeVC: HZBaseViewController {
 		}
         
         self.avatarImageV.snp.makeConstraints { (make) in
-            make.right.equalTo(self.topView.snp_rightMargin).offset(-10)
+			make.right.equalTo(self.topView.snp_rightMargin).offset(-10).priority(900)
 			make.top.equalTo(self.topView.snp.topMargin).offset(40)
             make.width.height.equalTo(80)
         }
@@ -186,7 +188,7 @@ class MeVC: HZBaseViewController {
 		
 		lineView.snp.makeConstraints { (make) in
 			make.left.equalTo(self.titleLabel.snp.left).offset(5);
-			make.right.equalTo(self.topView.snp.right).offset(-30)
+			make.right.equalTo(self.topView.snp.right).offset(-30).priority(900)
 			make.height.equalTo(0.5)
 			make.bottom.equalTo(likeValueLabel.snp.top).offset(-10)
 		}
@@ -225,7 +227,7 @@ class MeVC: HZBaseViewController {
 		unLoginTopView.addSubview(accessIamgeView)
 		accessIamgeView.snp.makeConstraints { (make) in
 			make.centerY.equalTo(defaultImagView.snp.centerY)
-			make.trailing.equalTo(self.unLoginTopView.snp.trailing).offset(-30)
+			make.trailing.equalTo(self.unLoginTopView.snp.trailing).offset(-30).priority(900)
 			make.size.equalTo(CGSize.init(width: 16, height: 16))
 		}
 	}
@@ -260,6 +262,16 @@ class MeVC: HZBaseViewController {
 		}.bind(to: self.pointValueLabel.rx.text).disposed(by: disposeBag)
 	}
 	
+	func dataRequest() -> Void {
+		guard let uid = HZUserInfo.share().user_id else {
+			return
+		}
+		let d = ["uid":uid, "type":"3"]
+		HZMeProfileNetwordManager.shared.updateProfileUrl(d).subscribe(onNext: { (value) in
+			HZUserInfo.share().updateUserInfo(value)
+		}).disposed(by: disposeBag)
+	}
+	
 	@objc func clickTopView(_ sender: UIControl) -> Void {
 		if HZUserInfo.isLogin() == true {
 			let vc = HZModifyInfoViewController.init()
@@ -274,6 +286,10 @@ class MeVC: HZBaseViewController {
 //		let nav = HZNavigationController.init(rootViewController: vc)
 //		self.tabBarController?.present(nav, animated: true, completion: nil)
 
+	}
+	
+	@objc func clickInfoBtn(_ sender: UIButton) -> Void {
+		
 	}
 }
 

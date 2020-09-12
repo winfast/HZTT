@@ -11,6 +11,9 @@ import UIKit
 class HZMyProfileTableViewCell: UITableViewCell {
 	
 	var textView: IQTextView!
+	let disposeBag: DisposeBag! = DisposeBag.init()
+	
+	open var rx_CellTextView: BehaviorRelay<Any?>! = BehaviorRelay.init(value: nil)
 
     required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -19,6 +22,7 @@ class HZMyProfileTableViewCell: UITableViewCell {
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		self.viewsLayout()
+		self.createRACSignal()
 	}
 	
 	func viewsLayout() -> Void {
@@ -36,5 +40,10 @@ class HZMyProfileTableViewCell: UITableViewCell {
 			make.height.equalTo(200)
 		}
 	}
-
+	
+	func createRACSignal() -> Void {
+		self.textView.rx.text.subscribe(onNext: { (value) in
+			self.rx_CellTextView.accept(value)
+		}).disposed(by: disposeBag)
+	}
 }

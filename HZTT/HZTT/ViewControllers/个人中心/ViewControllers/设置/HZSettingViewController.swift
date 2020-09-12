@@ -62,18 +62,6 @@ class HZSettingViewController: HZBaseViewController {
 			}
 		}
 	}
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension HZSettingViewController :UITableViewDelegate, UITableViewDataSource {
@@ -160,12 +148,24 @@ extension HZSettingViewController :UITableViewDelegate, UITableViewDataSource {
 		
 		if indexPath.section == 2 {
 			//退出登录
-			HZUserInfo.share().clearUserInfo { [weak self] in
-				guard let weakself = self else {
-					return
-				}
-				weakself.navigationController?.popViewController(animated: true)
+			let cancelAction = UIAlertAction.init(title: "取消", style: .cancel) { (aciton) in
+				
 			}
+			
+			let okAction = UIAlertAction.init(title: "确定", style: .destructive) { (action) in
+				HZUserInfo.share().clearUserInfo { [weak self] in
+					guard let weakself = self else {
+						return
+					}
+					weakself.navigationController?.popViewController(animated: true)
+				}
+			}
+			
+			let alertController = UIAlertController.init(title: "提示", message: "此操作会清楚用户相关信息,确定退出", preferredStyle: .alert)
+			alertController.addAction(cancelAction)
+			alertController.addAction(okAction)
+			self.present(alertController, animated: true, completion: nil)
+			
 		} else {
 			if className.lengthOfBytes(using: .utf8) > 0 {
 				guard let nameSpace = Bundle.main.infoDictionary!["CFBundleExecutable"] as? String else {

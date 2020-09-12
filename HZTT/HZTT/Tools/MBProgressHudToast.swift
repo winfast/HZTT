@@ -22,9 +22,7 @@ extension MBProgressHUD {
         hud.mode = .text
         hud.label.text = text
         hud.removeFromSuperViewOnHide = true
-        
-        hud.hide(animated: true, afterDelay: 2.0)
-
+		hud.hide(animated: true, afterDelay: 1.5)
     }
 	
 	class func showHub(_ text: String, inView: UIView? = UIApplication.shared.keyWindow) -> Void {
@@ -39,8 +37,6 @@ extension MBProgressHUD {
 		//let image = UIImage.init(named: @"")
 		hub.mode = MBProgressHUDMode.indeterminate
 	}
-	
-	
 	
 	class func dismissHudView(_ view: UIView) {
 		MBProgressHUD.hide(for: view, animated: true)

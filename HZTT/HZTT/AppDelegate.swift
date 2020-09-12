@@ -21,6 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		self.initWindow()
 		self.initKeyboard()
 		
+//
+//		let dict = ["key1": 10, "key2": "22", "key3": nil] as [String : Any?]
+//		let result = dict.compactMapValues { (value) -> Any? in
+//			if value == nil {
+//				return nil
+//			} else {
+//				return value
+//			}
+//		}
+//		print(result) //["key1": 10]
+
 		
 //		self.user = HZUser.init()
 //		self.user?.name = "1234455"

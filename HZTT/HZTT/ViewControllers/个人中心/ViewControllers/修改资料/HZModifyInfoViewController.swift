@@ -18,6 +18,7 @@ class HZModifyInfoViewController: HZBaseViewController {
 	var rx_sex: BehaviorRelay<Any?>!
 	var rx_birthday: BehaviorRelay<Any?>!
 	var rx_city: BehaviorRelay<Any?>!
+	var rx_notes: BehaviorRelay<Any?>!
 	
 	let disposeBag :DisposeBag = DisposeBag.init()
 
@@ -89,7 +90,9 @@ extension HZModifyInfoViewController :UITableViewDelegate, UITableViewDataSource
 				} else {
 					cell.accessoryType = .disclosureIndicator
 				}
+				cell.modifyResultTextField.text = HZUserInfo.share().showName
 				self.rx_nickName = cell.rx_CellTextField
+				cell.rx_CellTextField.accept(HZUserInfo.share().showName)
 				return cell
 			} else {
 				let cell = tableView.dequeueReusableCell(withIdentifier: "HZModifyInfoLabelTableViewCell") as! HZModifyInfoLabelTableViewCell
@@ -102,12 +105,18 @@ extension HZModifyInfoViewController :UITableViewDelegate, UITableViewDataSource
 				}
 				
 				if 1 == indexPath.row {
+					cell.modifyResultLabel.text = HZUserInfo.share().sex == "0" ? "女" : "男"
 					self.rx_sex = cell.rx_CellLabel
+					cell.rx_CellLabel.accept(HZUserInfo.share().showName)
 				} else if 2 == indexPath.row {
 					self.rx_birthday = cell.rx_CellLabel
+					cell.modifyResultLabel.text = HZUserInfo.share().bornDate
+					cell.rx_CellLabel.accept(HZUserInfo.share().bornDate)
 				}
 				else if 3 == indexPath.row {
 					self.rx_city = cell.rx_CellLabel
+					cell.modifyResultLabel.text = HZUserInfo.share().location
+					cell.rx_CellLabel.accept(HZUserInfo.share().location)
 				}
 				return cell
 			}
@@ -115,6 +124,9 @@ extension HZModifyInfoViewController :UITableViewDelegate, UITableViewDataSource
 		} else {
 			let cell = tableView.dequeueReusableCell(withIdentifier: "HZMyProfileTableViewCell") as! HZMyProfileTableViewCell
 			cell.selectionStyle = .none
+			cell.textView.text = HZUserInfo.share().notes
+			self.rx_notes = cell.rx_CellTextView
+			cell.rx_CellTextView.accept(HZUserInfo.share().notes)
 			return cell
 		}
 	}
