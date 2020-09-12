@@ -27,17 +27,21 @@ class HZSettingViewController: HZBaseViewController {
 	func viewsLayout() -> Void {
 		
 		self.dataSource = [
-			[["title":"修改资料","className":"HZModifyInfoViewController","param":""],
-			 ["title":"黑名单","className":"HZBaseViewController","param":""],
-			 ["title":"通知","className":"","param":""]],
-			[["title":"清空缓存","className":"","param":""],
-			 ["title":"意见反馈","className":"HZBaseViewController","param":""],
-			 ["title":"前往评分","className":"HZBaseViewController","param":""],
-			 ["title":"关于我们","className":"HZAboutViewController","param":""]]]
+		[["title":"修改资料","className":"HZModifyInfoViewController","param":""],
+		 ["title":"黑名单","className":"HZBaseViewController","param":""],
+		 ["title":"通知","className":"","param":""]],
+		[["title":"清空缓存","className":"","param":""],
+		 ["title":"意见反馈","className":"HZBaseViewController","param":""],
+		 ["title":"前往评分","className":"HZBaseViewController","param":""],
+		 ["title":"关于我们","className":"HZAboutViewController","param":""]]]
+		
+		if HZUserInfo.isLogin() {
+			self.dataSource!.append([["title":"关于我们","className":"HZAboutViewController","param":""]] as [[String:Any]])
+		}
 		
 		self.tableView = UITableView.init(frame: .zero, style: .grouped)
-		self.tableView.rowHeight = UITableView.automaticDimension
-		self.tableView.estimatedRowHeight = 44
+		self.tableView.estimatedRowHeight = 50
+		self.tableView.rowHeight = 50
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.tableView.separatorStyle = .singleLine
@@ -83,6 +87,17 @@ extension HZSettingViewController :UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		
+		if indexPath.section == 2 {
+			var cell = tableView.dequeueReusableCell(withIdentifier: "HZLoginoutTableViewCell")
+			if cell == nil {
+				cell = HZLoginoutTableViewCell.init(style: .value1, reuseIdentifier: "HZLoginoutTableViewCell")
+				cell?.detailTextLabel?.font = HZFont(fontSize: 14)
+				cell?.selectionStyle = .none
+			}
+			return cell!
+		}
+		
 		var cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell")
 		if cell == nil {
 			cell = UITableViewCell.init(style: .value1, reuseIdentifier: "UITableViewCell")
@@ -108,8 +123,6 @@ extension HZSettingViewController :UITableViewDelegate, UITableViewDataSource {
 		} else {
 			cell?.detailTextLabel?.text = nil
 		}
-		
-		
 		return cell!
 	}
 	
@@ -118,11 +131,14 @@ extension HZSettingViewController :UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		if section == 2 {
+			return 15
+		}
 		return 40
 	}
 	
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		if section == 0 {
+		if section == 0 || section == 2 {
 			return UIView.init()
 		}
 		let view = UIView.init()
@@ -142,22 +158,30 @@ extension HZSettingViewController :UITableViewDelegate, UITableViewDataSource {
 		let cellInfo: [String:Any] = (self.dataSource?[indexPath.section][indexPath.row])!
 		let className = (cellInfo["className"] as! String)
 		
-		if className.lengthOfBytes(using: .utf8) > 0 {
-			guard let nameSpace = Bundle.main.infoDictionary!["CFBundleExecutable"] as? String else {
-				return;
+		if indexPath.section == 2 {
+			//退出登录
+			HZUserInfo.share().clearUserInfo { [weak self] in
+				guard let weakself = self else {
+					return
+				}
+				weakself.navigationController?.popViewController(animated: true)
 			}
-			
-			guard let currClassName = NSClassFromString(nameSpace + "." + className) as? HZBaseViewController.Type else {
-				return
-			}
-			
-			let letvc = currClassName.init()
-			self.navigationController?.pushViewController(letvc, animated: true)
 		} else {
-			
+			if className.lengthOfBytes(using: .utf8) > 0 {
+				guard let nameSpace = Bundle.main.infoDictionary!["CFBundleExecutable"] as? String else {
+					return;
+				}
+				
+				guard let currClassName = NSClassFromString(nameSpace + "." + className) as? HZBaseViewController.Type else {
+					return
+				}
+				
+				let letvc = currClassName.init()
+				self.navigationController?.pushViewController(letvc, animated: true)
+			} else {
+				
+			}
 		}
-		
-		
 		
 		/*
         // 准备工作: 命名空间: 必须指定那个bundle(包)

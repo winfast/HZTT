@@ -19,6 +19,10 @@ class MeVC: HZBaseViewController {
     var subTitleLabel : UILabel!
 	var unLoginTopView: UIControl!
 	
+	var likeValueLabel: UILabel!
+	var fanValueLabel: UILabel!
+	var pointValueLabel: UILabel!
+	
 	let disposeBag: DisposeBag = DisposeBag.init()
 
     override func viewDidLoad() {
@@ -80,17 +84,18 @@ class MeVC: HZBaseViewController {
         self.avatarImageV.layer.masksToBounds = true
         self.avatarImageV.image = UIImage(named: "unlogin_head")
         self.titleLabel = UILabel()
-        self.titleLabel.text = "夜空中最亮的星"
+        self.titleLabel.text = ""
+		self.titleLabel.font = HZFont(fontSize: 22)
         self.subTitleLabel = UILabel()
         self.subTitleLabel.text = "查看或编辑个人资料"
-        self.subTitleLabel.font = UIFont.systemFont(ofSize: 14)
+        self.subTitleLabel.font = UIFont.systemFont(ofSize: 15)
         self.subTitleLabel.textColor = UIColor.gray
         self.topView.addSubview(self.avatarImageV)
         self.topView.addSubview(self.titleLabel)
         self.topView.addSubview(self.subTitleLabel)
 		
 		let lineView = UIView.init()
-		lineView.backgroundColor = UIColor.init(red: 0.8, green: 0.8, blue: 08, alpha: 1)
+		lineView.backgroundColor = UIColor.init(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
 		self.topView.addSubview(lineView)
 		
 		let likeLabel = UILabel.init()
@@ -103,8 +108,9 @@ class MeVC: HZBaseViewController {
 			make.bottom.equalTo(-15)
 		}
 		
-		let likeValueLabel = UILabel.init()
+		likeValueLabel = UILabel.init()
 		likeValueLabel.font = HZBFont(fontSize: 16)
+		likeValueLabel.text = "0"
 		likeValueLabel.textColor = .black
 		self.topView.addSubview(likeValueLabel)
 		likeValueLabel.snp.makeConstraints { (make) in
@@ -123,7 +129,7 @@ class MeVC: HZBaseViewController {
 			make.centerY.equalTo(likeLabel.snp.centerY)
 		}
 		
-		let fanValueLabel = UILabel.init()
+		fanValueLabel = UILabel.init()
 		fanValueLabel.font = HZBFont(fontSize: 16)
 		fanValueLabel.textColor = .black
 		self.topView.addSubview(fanValueLabel)
@@ -143,7 +149,7 @@ class MeVC: HZBaseViewController {
 			make.centerY.equalTo(likeLabel.snp.centerY)
 		}
 		
-		let pointValueLabel = UILabel.init()
+		pointValueLabel = UILabel.init()
 		pointValueLabel.font = HZBFont(fontSize: 16)
 		pointValueLabel.textColor = .black
 		self.topView.addSubview(pointValueLabel)
@@ -163,14 +169,14 @@ class MeVC: HZBaseViewController {
 		}
         
         self.avatarImageV.snp.makeConstraints { (make) in
-            make.right.equalTo(self.topView.snp_rightMargin).offset(-20)
-            make.centerY.equalTo(self.topView.snp_centerYWithinMargins).offset(0)
+            make.right.equalTo(self.topView.snp_rightMargin).offset(-10)
+			make.top.equalTo(self.topView.snp.topMargin).offset(40)
             make.width.height.equalTo(80)
         }
         self.titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.topView).offset(25)
             make.right.equalTo(self.avatarImageV.snp_rightMargin).offset(-20)
-            make.centerY.equalTo(self.topView.snp_centerYWithinMargins).offset(-10)
+			make.centerY.equalTo(self.avatarImageV.snp.centerY).offset(-10)
         }
         self.subTitleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.topView).offset(25)
@@ -179,11 +185,14 @@ class MeVC: HZBaseViewController {
         }
 		
 		lineView.snp.makeConstraints { (make) in
-			make.left.equalTo(self.avatarImageV.snp.right).offset(5);
-			make.right.equalTo(self.topView.snp.right).offset(-25)
+			make.left.equalTo(self.titleLabel.snp.left).offset(5);
+			make.right.equalTo(self.topView.snp.right).offset(-30)
 			make.height.equalTo(0.5)
 			make.bottom.equalTo(likeValueLabel.snp.top).offset(-10)
 		}
+		
+		//数据绑定, 用户更新用户信息的时候, 不用发送通知刷新UI, 通过数据绑定直接刷新UI
+		self.createRACSignal()
     }
 	
 	func setupUnLoginTopView() -> Void {
@@ -219,6 +228,36 @@ class MeVC: HZBaseViewController {
 			make.trailing.equalTo(self.unLoginTopView.snp.trailing).offset(-30)
 			make.size.equalTo(CGSize.init(width: 16, height: 16))
 		}
+	}
+	
+	func createRACSignal() -> Void {
+		HZUserInfo.share().rx.observe(String.self, "showName").map { (value) -> String in
+			guard let currShowName = value else {
+				return ""
+			}
+			return currShowName
+		}.bind(to: self.titleLabel.rx.text).disposed(by: disposeBag)
+		
+		HZUserInfo.share().rx.observe(String.self, "fanCnt").map { (value) -> String in
+			guard let currFanCnt = value else {
+				return ""
+			}
+			return currFanCnt
+		}.bind(to: self.fanValueLabel.rx.text).disposed(by: disposeBag)
+		
+		HZUserInfo.share().rx.observe(String.self, "zanCnt").map { (value) -> String in
+			guard let currZanCnt = value else {
+				return ""
+			}
+			return currZanCnt
+		}.bind(to: self.likeValueLabel.rx.text).disposed(by: disposeBag)
+		
+		HZUserInfo.share().rx.observe(String.self, "score").map { (value) -> String in
+			guard let currScore = value else {
+				return ""
+			}
+			return currScore
+		}.bind(to: self.pointValueLabel.rx.text).disposed(by: disposeBag)
 	}
 	
 	@objc func clickTopView(_ sender: UIControl) -> Void {

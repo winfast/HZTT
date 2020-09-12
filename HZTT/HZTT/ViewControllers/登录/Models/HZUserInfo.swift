@@ -20,12 +20,12 @@ class HZUserInfo : NSObject {
 	open var bornDate: String?
 	open var avatar: String?
 	open var fans: String?  //粉丝数量
-	open var zanCnt: String? //
+	@objc open dynamic var zanCnt: String? //
 	@objc open dynamic var sex: String? // 0女性  1男性
 	open var name: String?
 	@objc open dynamic var avatar_thumb: String?
 	@objc open dynamic var notes: String?  //个人建议
-	open var score: String?
+	@objc open dynamic var  score: String?
 	@objc open dynamic var location: String?  //地址
 	@objc open dynamic var fanCnt: String?
 	@objc open dynamic var age: String?

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0075D63124F3CB7100902F77 /* MBProgressHudToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075D63024F3CB7100902F77 /* MBProgressHudToast.swift */; };
-		041F0E3E2507730F00ED23AD /* HZAboutHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E3D2507730F00ED23AD /* HZAboutHeadView.swift */; };
 		041F0E462508C76400ED23AD /* HZLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E432508C76300ED23AD /* HZLoginViewController.swift */; };
 		041F0E482508C79100ED23AD /* HZLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E472508C79100ED23AD /* HZLoginTableViewCell.swift */; };
 		041F0E4A2508EEFD00ED23AD /* HZRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E492508EEFD00ED23AD /* HZRegisterViewController.swift */; };
@@ -29,6 +28,8 @@
 		041F0E7D250A5D1500ED23AD /* HZMyHomePageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E7C250A5D1500ED23AD /* HZMyHomePageHeaderView.swift */; };
 		041F0E7F250B258A00ED23AD /* HZUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E7E250B258A00ED23AD /* HZUserInfo.swift */; };
 		041F0E84250B329B00ED23AD /* HZUserInfoNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E83250B329B00ED23AD /* HZUserInfoNetworkManager.swift */; };
+		041F0E87250C56E800ED23AD /* HZAboutHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E86250C56E800ED23AD /* HZAboutHeadView.swift */; };
+		041F0E89250C574600ED23AD /* HZLoginoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E88250C574600ED23AD /* HZLoginoutTableViewCell.swift */; };
 		042E881D24EE1A46000053A0 /* HZHomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E881C24EE1A46000053A0 /* HZHomeDetailViewController.swift */; };
 		042E89F624EE54E6000053A0 /* HZHomeDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E89F524EE54E6000053A0 /* HZHomeDetailTableViewCell.swift */; };
 		042F2DCA24EE83940069FB39 /* HZHomeDetailNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F2DC924EE83940069FB39 /* HZHomeDetailNetworkManager.swift */; };
@@ -77,7 +78,6 @@
 
 /* Begin PBXFileReference section */
 		0075D63024F3CB7100902F77 /* MBProgressHudToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBProgressHudToast.swift; sourceTree = "<group>"; };
-		041F0E3D2507730F00ED23AD /* HZAboutHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZAboutHeadView.swift; sourceTree = "<group>"; };
 		041F0E432508C76300ED23AD /* HZLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZLoginViewController.swift; sourceTree = "<group>"; };
 		041F0E472508C79100ED23AD /* HZLoginTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZLoginTableViewCell.swift; sourceTree = "<group>"; };
 		041F0E492508EEFD00ED23AD /* HZRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZRegisterViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +99,8 @@
 		041F0E7C250A5D1500ED23AD /* HZMyHomePageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZMyHomePageHeaderView.swift; sourceTree = "<group>"; };
 		041F0E7E250B258A00ED23AD /* HZUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZUserInfo.swift; sourceTree = "<group>"; };
 		041F0E83250B329B00ED23AD /* HZUserInfoNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZUserInfoNetworkManager.swift; sourceTree = "<group>"; };
+		041F0E86250C56E800ED23AD /* HZAboutHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZAboutHeadView.swift; sourceTree = "<group>"; };
+		041F0E88250C574600ED23AD /* HZLoginoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZLoginoutTableViewCell.swift; sourceTree = "<group>"; };
 		042E881C24EE1A46000053A0 /* HZHomeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailViewController.swift; sourceTree = "<group>"; };
 		042E89F524EE54E6000053A0 /* HZHomeDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailTableViewCell.swift; sourceTree = "<group>"; };
 		042F2DC924EE83940069FB39 /* HZHomeDetailNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeDetailNetworkManager.swift; sourceTree = "<group>"; };
@@ -281,6 +283,15 @@
 			path = NetworkManager;
 			sourceTree = "<group>";
 		};
+		041F0E85250C56E800ED23AD /* 设置 */ = {
+			isa = PBXGroup;
+			children = (
+				041F0E86250C56E800ED23AD /* HZAboutHeadView.swift */,
+				041F0E88250C574600ED23AD /* HZLoginoutTableViewCell.swift */,
+			);
+			path = "设置";
+			sourceTree = "<group>";
+		};
 		0446B84724F35DA60079BC2C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,9 +375,9 @@
 		046BABB825072BE10028EA0E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				041F0E85250C56E800ED23AD /* 设置 */,
 				041F0E7B250A5CF800ED23AD /* 我的主页 */,
 				041F0E6E250A11F700ED23AD /* 修改资料 */,
-				041F0E3D2507730F00ED23AD /* HZAboutHeadView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -716,6 +727,7 @@
 				047BF2CE24EB7445002A39F3 /* HZScreen.swift in Sources */,
 				04E31BCD24ED08EA002CF93E /* UIView+Extension.swift in Sources */,
 				041F0E70250A122000ED23AD /* HZModifyHeaderIconView.swift in Sources */,
+				041F0E87250C56E800ED23AD /* HZAboutHeadView.swift in Sources */,
 				0075D63124F3CB7100902F77 /* MBProgressHudToast.swift in Sources */,
 				0446B86224F4B21F0079BC2C /* HZTopicListViewController.swift in Sources */,
 				0446B85124F365AD0079BC2C /* HZLivelihoodTableViewCell.swift in Sources */,
@@ -747,11 +759,11 @@
 				042E881D24EE1A46000053A0 /* HZHomeDetailViewController.swift in Sources */,
 				041F0E7F250B258A00ED23AD /* HZUserInfo.swift in Sources */,
 				04E31BD124ED3441002CF93E /* HZHomeListViewController.swift in Sources */,
+				041F0E89250C574600ED23AD /* HZLoginoutTableViewCell.swift in Sources */,
 				0446B87324F631B30079BC2C /* HZCreateTopicTableViewCell.swift in Sources */,
 				0446B86524F4BA100079BC2C /* HZTopicListTableViewCell.swift in Sources */,
 				04E4FC9C24EA8D7B00C5E5B0 /* HZNavigationController.swift in Sources */,
 				041F0E4A2508EEFD00ED23AD /* HZRegisterViewController.swift in Sources */,
-				041F0E3E2507730F00ED23AD /* HZAboutHeadView.swift in Sources */,
 				047BF2D924EBAD63002A39F3 /* HZNetworkMoya.swift in Sources */,
 				041F0E4E2508F1C300ED23AD /* HZRegisterTableViewCell.swift in Sources */,
 				042F2DCC24EF500B0069FB39 /* HZCommentTableViewCell.swift in Sources */,
