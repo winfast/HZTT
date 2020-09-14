@@ -20,6 +20,7 @@ enum HZHomeNetworkMoya {
 	case publish(_ param: [String:Any])
 	case login(_ param: [String:Any])
 	case updateProfileUrl(_ param: [String:Any])
+	case getScUrl(_ param: [String:Any])
 }
 
 extension HZHomeNetworkMoya: TargetType {
@@ -36,6 +37,8 @@ extension HZHomeNetworkMoya: TargetType {
 		case let .login(param):
 			parammter = param
 		case let .updateProfileUrl(param):
+			parammter = param
+		case let .getScUrl(param):
 			parammter = param
 		default:
 			parammter = [:]

@@ -162,7 +162,7 @@ class MeVC: HZBaseViewController {
 		let infoBtn = UIButton.init(type: .custom)
 		infoBtn.backgroundColor = .clear
 		infoBtn.setImage(UIImage.init(named: "detail"), for: .normal)
-		infoBtn.addTarget(self, action: #selector(clickInfoBtn(_ :)), for: .touchDragInside)
+		infoBtn.addTarget(self, action: #selector(clickInfoBtn(_ :)), for: .touchUpInside)
 		self.topView.addSubview(infoBtn)
 		infoBtn.snp.makeConstraints { (make) in
 			make.leading.equalTo(pointLabel.snp.trailing).offset(5)
@@ -289,7 +289,9 @@ class MeVC: HZBaseViewController {
 	}
 	
 	@objc func clickInfoBtn(_ sender: UIButton) -> Void {
-		
+		let webVC = HZWebViewController.init()
+		webVC.url = "p/usehelp.html"
+		self.navigationController?.pushViewController(webVC, animated: true)
 	}
 }
 

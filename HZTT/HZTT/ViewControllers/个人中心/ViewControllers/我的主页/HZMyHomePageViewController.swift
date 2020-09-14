@@ -7,16 +7,20 @@
 //
 
 import UIKit
+import MJRefresh
 
 class HZMyHomePageViewController: HZBaseViewController {
 	
 	var tableView: UITableView!
+	let disposeBag: DisposeBag = DisposeBag.init()
+	//var dataSource: Array<>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
 		self.viewsLayout()
+		self.dataRequest()
     }
 	
 	func viewsLayout() -> Void {
@@ -32,6 +36,37 @@ class HZMyHomePageViewController: HZBaseViewController {
 		self.tableView.snp.makeConstraints { (make) in
 			make.edges.equalTo(0)
 		}
+		
+		self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { [weak self] in
+			self?.tableView.mj_footer.isHidden = false
+			self?.tableView.mj_footer.state = .idle
+			self?.dataRequest()
+		})
+	}
+	
+	func dataRequest() -> Void {
+		if HZUserInfo.isLogin() == false {
+			return
+		}
+		
+		let d = ["category":"sy" ,
+				 "uid": HZUserInfo.share().user_id! ,
+		"pageNumber":1,
+		"type":0,
+		] as [String : Any]
+		
+		let share = HZMeProfileNetwordManager.shared
+//		share.getScURL(d).subscribe(onNext: { (value) in
+//
+//		}).disposed(by: disposeBag)
+		
+		//HZMeProfileNetwordManager.shared.getScURL(d).subscribe(onNext: { (value) in
+			
+		//}).disposed(by: disposeBag)
+		
+		var a = 1
+		var b = 2
+		share.swapValues(&a, &b)
 	}
 }
 
@@ -53,7 +88,7 @@ extension HZMyHomePageViewController :UITableViewDelegate, UITableViewDataSource
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		let point = scrollView.contentOffset
 		if point.y > 5 {
-			self.navigationItem.title = "123"
+			self.navigationItem.title = HZUserInfo.share().showName
 		} else {
 			self.navigationItem.title = ""
 		}
