@@ -34,8 +34,13 @@ class HZFeedbackViewController: HZBaseViewController {
         rightbtn.setTitleColor(UIColor.darkGray , for: .normal)
         rightbtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         rightbtn.rx.tap
-            .subscribe(onNext: { () in
-                //保存
+            .subscribe(onNext: { [weak self] () in
+                //提交意见反馈
+				guard let weakself = self else {
+					return
+				}
+				weakself.view.endEditing(true)
+				//提交反馈
             })
             .disposed(by: disposeBag)
         let rightitem = UIBarButtonItem.init(customView: rightbtn)
@@ -46,31 +51,33 @@ class HZFeedbackViewController: HZBaseViewController {
         self.view.addSubview(self.bgView)
         self.bgView.snp.makeConstraints { (make) in
             make.leading.trailing.equalTo(0);
-            make.height.equalTo(200)
-            make.top.equalTo(20)
+            make.height.equalTo(160)
+            make.top.equalTo(35)
         }
         
+		self.textView = IQTextView.init()
         self.textView.backgroundColor = UIColor.white
         self.textView.font = HZFont(fontSize: 15)
-        self.view.addSubview(self.textView)
+		self.textView.delegate = self
+		self.textView.placeholder = "请输入内容"
+        self.bgView.addSubview(self.textView)
         self.textView.snp.makeConstraints { (make) in
             make.leading.equalTo(15)
             make.trailing.equalTo(15)
             make.top.equalTo(0)
-            make.bottom.equalTo(self.bgView.snp.bottom).offset(20)
+            make.bottom.equalTo(self.bgView.snp.bottom).offset(-40)
         }
         
         self.maxLenthLabel = UILabel.init()
         self.maxLenthLabel.textColor = UIColor.lightGray
         self.maxLenthLabel.text = "200个字以内"
         self.maxLenthLabel.font = HZFont(fontSize: 15)
-        self.view.addSubview(self.maxLenthLabel!)
+        self.bgView.addSubview(self.maxLenthLabel!)
         self.maxLenthLabel?.snp.makeConstraints({ (make) in
             make.right.equalTo(self.textView.snp.right).offset(-30)
-            make.bottom.lessThanOrEqualTo(-5).priority(900)
-            make.top.equalTo(self.textView.snp.bottom)
+			make.bottom.trailing.equalTo(self.bgView.snp.trailingMargin).offset(-11)
+            make.top.equalTo(self.textView.snp.bottomMargin)
         })
-        
         
         self.lookAnthorFeedbackBtn = UIButton.init(type: .custom)
         self.lookAnthorFeedbackBtn.setTitle("看看大伙说的啥", for: .normal)
@@ -85,19 +92,25 @@ class HZFeedbackViewController: HZBaseViewController {
                 
                 let vc = HZFeedbackListViewController.init()
                 weakself.navigationController?.pushViewController(vc, animated: true)
-                
             })
             .disposed(by: disposeBag)
+		self.lookAnthorFeedbackBtn.snp.makeConstraints { (make) in
+			make.leading.trailing.equalTo(10)
+			make.height.equalTo(50)
+			if #available(iOS 11.0, *) {
+				make.bottom.equalTo(self.bgView.safeAreaLayoutGuide.snp.bottom).offset(0)
+			} else {
+				make.bottom.equalTo(self.bgView.snp.bottom).offset(0)
+			}
+		}
     }
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+extension HZFeedbackViewController : UITextViewDelegate {
+	func textViewDidChange(_ textView: UITextView) {
+		let text = textView.text
+		if (text?.lengthOfBytes(using: .utf8))! > 200 {
+			textView.text = String(text!.suffix(200))
+		}
+	}
 }

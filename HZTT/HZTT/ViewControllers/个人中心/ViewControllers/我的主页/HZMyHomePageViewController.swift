@@ -54,19 +54,12 @@ class HZMyHomePageViewController: HZBaseViewController {
 		"pageNumber":1,
 		"type":0,
 		] as [String : Any]
+
 		
-		let share = HZMeProfileNetwordManager.shared
-//		share.getScURL(d).subscribe(onNext: { (value) in
-//
-//		}).disposed(by: disposeBag)
-		
-		//HZMeProfileNetwordManager.shared.getScURL(d).subscribe(onNext: { (value) in
+		HZMeProfileNetwordManager.shared.getScURL(d).subscribe(onNext: { (value) in
 			
-		//}).disposed(by: disposeBag)
+		}).disposed(by: disposeBag)
 		
-		var a = 1
-		var b = 2
-		share.swapValues(&a, &b)
 	}
 }
 

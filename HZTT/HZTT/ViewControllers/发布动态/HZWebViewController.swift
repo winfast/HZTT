@@ -78,8 +78,9 @@ class HZWebViewController: HZBaseViewController {
 	}
 	
 	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-		let progress: Float = change![NSKeyValueChangeKey.newKey] as! Float
-		if progress == 1  {
+		let progressNumber: NSNumber = change![NSKeyValueChangeKey.newKey] as! NSNumber;
+		let progress: Float = progressNumber.floatValue
+		if progress == 1.0  {
 			self.progressView?.setProgress(0, animated: true)
             self.progressView?.isHidden = true;
 		} else {

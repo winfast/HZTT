@@ -35,12 +35,12 @@ class HZMeProfileNetwordManager: NSObject {
 		}
 	}
 	
-	func getScURL<T>(_ param: [String:Any]) -> Observable<[T]?> {
-		return Observable<[T]?>.create { (observable) -> Disposable in
+	func getScURL(_ param: [String:Any]) -> Observable<[Any]?> {
+		return Observable<[Any]?>.create { (observable) -> Disposable in
 			let task = self.provider.request(.getScUrl(param), callbackQueue: DispatchQueue.main, progress: nil) { [weak self] response in
 				switch response {
 				case let .success(results):
-					let userInfo = self?.parseScList(results.data) as [T]?
+					let userInfo = self?.parseScList(results.data)
 					observable.onNext(userInfo)
 					
 					observable.onCompleted()
@@ -65,7 +65,7 @@ class HZMeProfileNetwordManager: NSObject {
 		}
 	}
 	
-	func parseScList<T>(_ data: Any) -> [T]? {
+	func parseScList(_ data: Any) -> [Any]? {
 		return nil
 	}
 	
