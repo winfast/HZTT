@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0075D63124F3CB7100902F77 /* MBProgressHudToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075D63024F3CB7100902F77 /* MBProgressHudToast.swift */; };
+		0406E198250E0BB8004B857F /* HZFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406E197250E0BB8004B857F /* HZFeedbackViewController.swift */; };
+		0406E19A250E0FFC004B857F /* HZFeedbackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406E199250E0FFC004B857F /* HZFeedbackListViewController.swift */; };
+		0406E19C250E11C0004B857F /* HZBlacklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406E19B250E11C0004B857F /* HZBlacklistViewController.swift */; };
 		041F0E462508C76400ED23AD /* HZLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E432508C76300ED23AD /* HZLoginViewController.swift */; };
 		041F0E482508C79100ED23AD /* HZLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E472508C79100ED23AD /* HZLoginTableViewCell.swift */; };
 		041F0E4A2508EEFD00ED23AD /* HZRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F0E492508EEFD00ED23AD /* HZRegisterViewController.swift */; };
@@ -80,6 +83,9 @@
 
 /* Begin PBXFileReference section */
 		0075D63024F3CB7100902F77 /* MBProgressHudToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBProgressHudToast.swift; sourceTree = "<group>"; };
+		0406E197250E0BB8004B857F /* HZFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZFeedbackViewController.swift; sourceTree = "<group>"; };
+		0406E199250E0FFC004B857F /* HZFeedbackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZFeedbackListViewController.swift; sourceTree = "<group>"; };
+		0406E19B250E11C0004B857F /* HZBlacklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZBlacklistViewController.swift; sourceTree = "<group>"; };
 		041F0E432508C76300ED23AD /* HZLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZLoginViewController.swift; sourceTree = "<group>"; };
 		041F0E472508C79100ED23AD /* HZLoginTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZLoginTableViewCell.swift; sourceTree = "<group>"; };
 		041F0E492508EEFD00ED23AD /* HZRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZRegisterViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +224,9 @@
 			children = (
 				041F0E5F250A0D9000ED23AD /* HZAboutViewController.swift */,
 				041F0E60250A0D9000ED23AD /* HZSettingViewController.swift */,
+				0406E197250E0BB8004B857F /* HZFeedbackViewController.swift */,
+				0406E199250E0FFC004B857F /* HZFeedbackListViewController.swift */,
+				0406E19B250E11C0004B857F /* HZBlacklistViewController.swift */,
 			);
 			path = "设置";
 			sourceTree = "<group>";
@@ -748,6 +757,7 @@
 				041F0E502508F87500ED23AD /* HZForgetPasswordTableViewCell.swift in Sources */,
 				047BF2CC24EB689A002A39F3 /* HZFont.swift in Sources */,
 				047BF2CE24EB7445002A39F3 /* HZScreen.swift in Sources */,
+				0406E19C250E11C0004B857F /* HZBlacklistViewController.swift in Sources */,
 				04E31BCD24ED08EA002CF93E /* UIView+Extension.swift in Sources */,
 				041F0E70250A122000ED23AD /* HZModifyHeaderIconView.swift in Sources */,
 				041F0E87250C56E800ED23AD /* HZAboutHeadView.swift in Sources */,
@@ -803,9 +813,11 @@
 				04F4917F24FA52F400125236 /* HZWebViewController.swift in Sources */,
 				04E4FCA424EA96DB00C5E5B0 /* HZColor.swift in Sources */,
 				04E31BCF24ED23F7002CF93E /* HZConstant.swift in Sources */,
+				0406E19A250E0FFC004B857F /* HZFeedbackListViewController.swift in Sources */,
 				047BF2D724EBA5C2002A39F3 /* HZHomeNetworkManager.swift in Sources */,
 				041F0E4C2508F06100ED23AD /* HZForgerPasswordViewController.swift in Sources */,
 				042E89F624EE54E6000053A0 /* HZHomeDetailTableViewCell.swift in Sources */,
+				0406E198250E0BB8004B857F /* HZFeedbackViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -942,6 +954,7 @@
 			baseConfigurationReference = 0D0F67B14D652898A24E16DA /* Pods-HZTT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 579P9269QX;
@@ -954,6 +967,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.galanz.HZTT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/HZTT/Base/HZTT-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -966,7 +980,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 579P9269QX;
 				INFOPLIST_FILE = HZTT/Resource/Info.plist;
@@ -978,7 +992,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.galanz.HZTT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = tongpeifu_dev;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/HZTT/Base/HZTT-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

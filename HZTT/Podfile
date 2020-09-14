@@ -22,7 +22,7 @@ target 'HZTT' do
 
 
 	pod 'MJRefresh','3.1.12'
-	pod 'Kingfisher', '~> 5.10'
+	pod 'Kingfisher'
 	pod 'IQKeyboardManagerSwift', '~> 6.0.0'
 	pod 'JXSegmentedView'
 	

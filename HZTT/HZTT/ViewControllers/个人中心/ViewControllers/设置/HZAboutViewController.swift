@@ -22,14 +22,16 @@ class HZAboutViewController: HZBaseViewController {
     }
 	
 	func viewsLayout() -> Void {
+        
+        
 		
 		self.dataSource = [
-			["title":"简介","className":"HZBaseViewController","param":""],
-			["title":"使用帮助","className":"HZBaseViewController","param":""],
-			["title":"用户协议","className":"HZBaseViewController","param":""],
-			["title":"隐私政策","className":"HZBaseViewController","param":""],
-			["title":"免责声明","className":"HZBaseViewController","param":""],
-			["title":"联系我们","className":"HZBaseViewController","param":""]]
+			["title":"简介","className":"HZWebViewController","param":""],
+			["title":"使用帮助","className":"HZWebViewController","param":""],
+			["title":"用户协议","className":"HZWebViewController","param":""],
+			["title":"隐私政策","className":"HZWebViewController","param":""],
+			["title":"免责声明","className":"HZWebViewController","param":""],
+			["title":"联系我们","className":"HZWebViewController","param":""]]
 		
 		let headView = HZAboutHeadView.init(frame: CGRect.init(x: 0, y: 0, width: HZSCreenWidth(), height: 200))
 		headView.backgroundColor = .clear
@@ -83,8 +85,9 @@ extension HZAboutViewController :UITableViewDelegate, UITableViewDataSource {
 			return
 		}
 		
-		let letvc = currClassName.init()
-		self.navigationController?.pushViewController(letvc, animated: true)
+		let webVC = currClassName.init() as! HZWebViewController
+        webVC.url = ""
+		self.navigationController?.pushViewController(webVC, animated: true)
 		
 		/*
         // 准备工作: 命名空间: 必须指定那个bundle(包)
