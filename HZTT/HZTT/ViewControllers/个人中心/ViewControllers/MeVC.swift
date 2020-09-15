@@ -278,7 +278,9 @@ class MeVC: HZBaseViewController {
 			self.navigationController?.pushViewController(vc, animated: true)
 		} else {
 			let vc = HZLoginViewController.init()
+			
 			let nav = HZNavigationController.init(rootViewController: vc)
+			nav.modalPresentationStyle = .fullScreen
 			self.present(nav, animated: true, completion: nil)
 		}
 		
@@ -323,6 +325,9 @@ extension MeVC :UITableViewDelegate, UITableViewDataSource {
 		//MBProgressHUD.showHub("124", inView: self.view)
 		if indexPath.row == 0 {
 			let vc = HZMyHomePageViewController.init()
+			self.navigationController?.pushViewController(vc, animated: true)
+		} else if (indexPath.row == 3) {  //粉丝关注
+			let vc = HZFansAndConcernViewController.init()
 			self.navigationController?.pushViewController(vc, animated: true)
 		} else {
 			let vc = HZSettingViewController.init()

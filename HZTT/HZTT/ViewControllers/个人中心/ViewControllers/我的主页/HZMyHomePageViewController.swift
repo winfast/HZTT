@@ -13,6 +13,7 @@ class HZMyHomePageViewController: HZBaseViewController {
 	
 	var tableView: UITableView!
 	let disposeBag: DisposeBag = DisposeBag.init()
+	var uid :String?
 	//var dataSource: Array<>!
 
     override func viewDidLoad() {
@@ -48,13 +49,20 @@ class HZMyHomePageViewController: HZBaseViewController {
 		if HZUserInfo.isLogin() == false {
 			return
 		}
-		
-		let d = ["category":"sy" ,
-				 "uid": HZUserInfo.share().user_id! ,
-		"pageNumber":1,
-		"type":0,
-		] as [String : Any]
-
+		var d : [String : Any];
+		if uid != nil || (uid?.lengthOfBytes(using: .utf8))! > 0 {
+				d = ["category":"sy" ,
+						 "uid": uid! ,
+				"pageNumber":1,
+				"type":0,
+				] as [String : Any]
+		} else {
+			d = ["category":"sy" ,
+						 "uid": HZUserInfo.share().user_id! ,
+				"pageNumber":1,
+				"type":0,
+				] as [String : Any]
+		}
 		
 		HZMeProfileNetwordManager.shared.getScURL(d).subscribe(onNext: { (value) in
 			

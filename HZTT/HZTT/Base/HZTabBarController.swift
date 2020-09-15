@@ -79,7 +79,12 @@ class HZTabBarController: UITabBarController {
 			viewControllers.append(navigation)
 			
 			if index == 2 {
-				barItem.imageInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -5, right: 0)
+				if #available(iOS 13.0, *) {
+					barItem.imageInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
+				} else {
+					barItem.imageInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -5, right: 0)
+				}
+				
 			}
 		}
 		self.viewControllers = viewControllers;
@@ -92,6 +97,7 @@ extension HZTabBarController :UITabBarControllerDelegate {
 		if 2 == tag {
 			let vc = HZReleaseNewsViewController.init()
 			let nav = HZNavigationController.init(rootViewController: vc)
+			nav.modalPresentationStyle = .fullScreen
 			self.present(nav, animated: true, completion: nil)
 			return false
 		} else {

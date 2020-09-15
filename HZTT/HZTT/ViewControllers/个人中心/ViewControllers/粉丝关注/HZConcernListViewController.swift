@@ -1,31 +1,28 @@
 //
-//  HZFeedbackListViewController.swift
+//  HZConcernListViewController.swift
 //  HZTT
 //
-//  Created by QinChuancheng on 2020/9/13.
+//  Created by QinChuancheng on 2020/9/14.
 //  Copyright © 2020 Galanz. All rights reserved.
 //
 
 import UIKit
+import JXSegmentedView
 import MJRefresh
 
-class HZFeedbackListViewController: HZBaseViewController {
-    
-    var tableView: UITableView!
-	var dataSource: Array<String>! = Array.init()
+class HZConcernListViewController: HZBaseViewController {
+	
+	var tableView: UITableView!
+	var dataSource: Array<String>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
 		self.viewsLayout()
-		self.dataRequest()
     }
-	
-	func viewsLayout() -> Void {
-		self.view.backgroundColor = .white
-		self.navigationItem.title = "最新留言"
-		
+    
+   	func viewsLayout() -> Void {
 		self.tableView = UITableView.init(frame: .zero, style: .plain)
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
@@ -39,7 +36,7 @@ class HZFeedbackListViewController: HZBaseViewController {
 			}
 			
 			weakself.dataSource.removeAll()
-			weakself.dataRequest();
+			weakself.dataRequest(1);
 		})
 		
 		self.tableView.mj_footer = MJRefreshAutoStateFooter.init(refreshingBlock: {  [weak self] () in
@@ -50,6 +47,7 @@ class HZFeedbackListViewController: HZBaseViewController {
 			let page: Int = weakself.dataSource.count/10 + 1
 			weakself.dataRequest(page);
 		})
+		
 		self.view.addSubview(self.tableView)
 		self.tableView.snp.makeConstraints { (make) in
 			make.edges.equalTo(0)
@@ -59,21 +57,33 @@ class HZFeedbackListViewController: HZBaseViewController {
 	func dataRequest(_ pageNumber: Int? = 1) -> Void {
 		
 	}
-
 }
 
-extension HZFeedbackListViewController :UITableViewDelegate, UITableViewDataSource {
+extension HZConcernListViewController :UITableViewDelegate, UITableViewDataSource {
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
+		return 0
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return dataSource.count
+		return 0
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
-		return UITableViewCell.init()
+		let cell = tableView.dequeueReusableCell(withIdentifier: "HZFansTableViewCell") as! HZFansTableViewCell
+		cell.selectionStyle = .none
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let vc = HZMyHomePageViewController.init()
+		vc.uid = "123123123"
+		self.navigationController?.pushViewController(vc, animated: true)
+	}
+}
+
+extension HZConcernListViewController : JXSegmentedListContainerViewListDelegate {
+	func listView() -> UIView {
+		return self.view
 	}
 }

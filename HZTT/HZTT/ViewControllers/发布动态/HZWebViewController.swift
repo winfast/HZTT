@@ -92,7 +92,10 @@ class HZWebViewController: HZBaseViewController {
 
 extension HZWebViewController : UIScrollViewDelegate, WKNavigationDelegate, WKUIDelegate {
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-		self.title = webView.title
+		if self.navigationItem.title == nil {
+			self.navigationItem.title = webView.title
+		}
+		
 		webView.evaluateJavaScript("document.documentElement.style.webkitUserSelect='none';", completionHandler: nil);
         webView.evaluateJavaScript("document.documentElement.style.webkitTouchCallout='none';", completionHandler: nil);
 	}

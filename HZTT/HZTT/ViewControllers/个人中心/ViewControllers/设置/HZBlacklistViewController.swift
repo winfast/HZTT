@@ -12,6 +12,7 @@ import MJRefresh
 class HZBlacklistViewController: HZBaseViewController {
     
     var tableView: UITableView!
+	var dataSource: Array<String>! = Array()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +24,15 @@ class HZBlacklistViewController: HZBaseViewController {
     
     
     func viewsLayout() -> Void {
+		self.navigationItem.title = "黑名单"
+		
         self.tableView = UITableView.init(frame: .zero, style: .plain)
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
         self.tableView.backgroundColor = .clear
+		self.tableView.estimatedRowHeight = 0;
+		self.tableView.rowHeight = UITableView.automaticDimension
+		self.tableView.register(HZFansTableViewCell.self, forCellReuseIdentifier: "HZFansTableViewCell")
         self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { [weak self] in
             guard let weakself = self else {
                 return
@@ -39,6 +45,9 @@ class HZBlacklistViewController: HZBaseViewController {
             guard let weakself = self else {
                 return
             }
+			
+			let page = weakself.dataSource.count/10 + 1
+			weakself.dataRequest(page)
         })
         
         self.view.addSubview(self.tableView)
@@ -59,7 +68,7 @@ extension HZBlacklistViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+		return self.dataSource.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -67,6 +76,9 @@ extension HZBlacklistViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell.init()
+		let cell = tableView.dequeueReusableCell(withIdentifier: "HZFansTableViewCell") as! HZFansTableViewCell
+		cell.selectionStyle = .none
+		cell.removeBtn.isHidden = false
+		return cell
     }
 }

@@ -15,8 +15,6 @@ public enum HZRegisterCellBtnTag : Int {
 }
 
 class HZRegisterTableViewCell: UITableViewCell {
-	
-
 
 	open var phoneTextField : UITextField!
 	open var codeTextField: UITextField!
@@ -27,7 +25,8 @@ class HZRegisterTableViewCell: UITableViewCell {
 	open var readAgreementBtn: UIButton!
 	open var linkLabel: LinkLabel!
 	
-	let disposeBag = DisposeBag()
+	let disposeBag: DisposeBag = DisposeBag.init()
+	var timer :Disposable?
 	
 	typealias HZClickRegisterCellBtnBlock = (_ btn :UIView?) -> Void
 	open var clickRegisterCellBtnBlock :HZClickRegisterCellBtnBlock?
@@ -48,6 +47,7 @@ class HZRegisterTableViewCell: UITableViewCell {
 		phoneTextField.backgroundColor = UIColor.clear
 		phoneTextField.clearButtonMode = .whileEditing
 		phoneTextField.placeholder = "输入手机号"
+		phoneTextField.keyboardType = .numberPad
 		phoneTextField.font = HZFont(fontSize: 15)
 		self.contentView.addSubview(phoneTextField)
 		phoneTextField.snp.makeConstraints { (make) in
@@ -85,6 +85,34 @@ class HZRegisterTableViewCell: UITableViewCell {
 		codeBtn.setTitle("获取验证码", for: .normal)
 		codeBtn.tag = HZRegisterCellBtnTag.sendCode.rawValue
 		codeBtn.titleLabel?.font = HZFont(fontSize: 13)
+		codeBtn.rx.tap
+		.subscribe(onNext: { [weak self] () in
+			guard let weakself = self else {
+				return
+			}
+			weakself.endEditing(true)
+			if weakself.phoneTextField.text?.lengthOfBytes(using: .utf8) != 11 {
+				MBProgressHUD.showToast("请输入正确的手机号码", inView: weakself.window)
+				return
+			}
+			
+			//启动定时器
+			weakself.timer = Observable<Int>.interval(1, scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] (value) in
+				guard let weakself = self else {
+					return
+				}
+				
+				if value > 10 {
+					weakself.codeBtn.isEnabled = true
+					weakself.codeBtn.setTitle("获取验证码", for: .normal)
+					weakself.timer!.dispose()
+					weakself.timer = nil
+				} else {
+					weakself.codeBtn.isEnabled = false
+					weakself.codeBtn.setTitle("\(value)" + "S", for: .normal)
+				}
+			})
+			}).disposed(by: disposeBag)
 		self.contentView.addSubview(self.codeBtn)
 		self.codeBtn.snp.makeConstraints { (make) in
 			make.right.equalTo(-20)
