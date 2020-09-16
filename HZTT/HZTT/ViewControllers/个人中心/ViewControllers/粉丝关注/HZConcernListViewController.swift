@@ -13,7 +13,7 @@ import MJRefresh
 class HZConcernListViewController: HZBaseViewController {
 	
 	var tableView: UITableView!
-	var dataSource: Array<String>!
+	var dataSource: Array<String>! = Array()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class HZConcernListViewController: HZBaseViewController {
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.tableView.separatorStyle = .none
-		self.tableView.estimatedRowHeight = 0
+		self.tableView.estimatedRowHeight = 80
 		self.tableView.rowHeight = UITableView.automaticDimension
 		self.tableView.register(HZFansTableViewCell.self, forCellReuseIdentifier: "HZFansTableViewCell")
 		self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { [weak self] () in

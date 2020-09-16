@@ -27,6 +27,7 @@ class MeVC: HZBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		
         
 		self.navigationItem.title = "";
 		self.hbd_barAlpha = 0.0
@@ -326,7 +327,10 @@ extension MeVC :UITableViewDelegate, UITableViewDataSource {
 		if indexPath.row == 0 {
 			let vc = HZMyHomePageViewController.init()
 			self.navigationController?.pushViewController(vc, animated: true)
-		} else if (indexPath.row == 3) {  //粉丝关注
+		} else if (1 == indexPath.row) {
+			let vc = HZMessageListViewController.init()
+			self.navigationController?.pushViewController(vc, animated: true)
+		}else if (indexPath.row == 3) {  //粉丝关注
 			let vc = HZFansAndConcernViewController.init()
 			self.navigationController?.pushViewController(vc, animated: true)
 		} else {
@@ -350,3 +354,4 @@ extension MeVC :UITableViewDelegate, UITableViewDataSource {
 		return view
 	}
 }
+

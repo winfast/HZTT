@@ -50,7 +50,7 @@ class HZMyHomePageViewController: HZBaseViewController {
 			return
 		}
 		var d : [String : Any];
-		if uid != nil || (uid?.lengthOfBytes(using: .utf8))! > 0 {
+		if uid != nil {
 				d = ["category":"sy" ,
 						 "uid": uid! ,
 				"pageNumber":1,

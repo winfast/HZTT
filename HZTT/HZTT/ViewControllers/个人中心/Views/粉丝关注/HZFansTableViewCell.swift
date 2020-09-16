@@ -84,9 +84,9 @@ class HZFansTableViewCell: UITableViewCell {
 		self.notesLabel.numberOfLines = 2;
 		self.notesLabel.font = HZFont(fontSize: 13)
 		self.notesLabel.textAlignment = .left
-		self.contentView.addSubview(self.userNameLabel)
-		self.userNameLabel.snp.makeConstraints { (make) in
-			make.leading.equalTo(self.userNameLabel.snp.trailing)
+		self.contentView.addSubview(self.notesLabel)
+		self.notesLabel.snp.makeConstraints { (make) in
+			make.leading.equalTo(self.userNameLabel.snp.leading)
 			make.top.equalTo(self.userNameLabel.snp.bottom).offset(5)
 			make.trailing.equalTo(self.userNameLabel.snp.trailing)
 		}

@@ -14,7 +14,7 @@ class HZModifyInfoViewController: HZBaseViewController {
 	
 	var userDataInfoArray: Array<String>!
 	
-	var rx_nickName: BehaviorRelay<Any?> = BehaviorRelay.init(value: nil)
+	var rx_nickName: BehaviorRelay<Any?>!
 	var rx_sex: BehaviorRelay<Any?>!
 	var rx_birthday: BehaviorRelay<Any?>!
 	var rx_city: BehaviorRelay<Any?>!
@@ -44,6 +44,29 @@ class HZModifyInfoViewController: HZBaseViewController {
 		self.userDataInfoArray = ["昵称：", "性别：", "生日：", "城市："];
 		
 		let headerView = HZModifyHeaderIconView.init(frame: CGRect.init(x: 0, y: 0, width: HZSCreenWidth(), height: 166))
+		headerView.modifyUserIconImage = { [weak self] () in
+			guard let weakself = self else {
+				return
+			}
+			
+			let cancelAction = UIAlertAction.init(title: "取消", style: UIAlertAction.Style.cancel) { (action) in
+				
+			}
+			
+			let cameraAction = UIAlertAction.init(title: "拍照", style: .default) { (action) in
+				self?.makePhote()
+			}
+			
+			let photeAction = UIAlertAction.init(title: "照片", style: .default) { (action) in
+				self?.choosePicture()
+			}
+			
+			let alert: UIAlertController = UIAlertController.init(title: "选择图片", message: nil, preferredStyle: .actionSheet)
+			alert.addAction(cancelAction)
+			alert.addAction(cameraAction)
+			alert.addAction(photeAction)
+			weakself.navigationController?.present(alert, animated: true, completion: nil)
+		}
 		headerView.backgroundColor = .clear
 		self.tableView = UITableView.init(frame: .zero, style: .grouped)
 		self.tableView.backgroundColor = .clear
@@ -61,7 +84,29 @@ class HZModifyInfoViewController: HZBaseViewController {
 	}
 	
 	@objc func saveAction(_ sender: UIButton) -> Void {
-        
+	
+	}
+	
+	func makePhote() -> Void {
+		if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+			let picker = UIImagePickerController.init()
+			picker.delegate = self
+			picker.allowsEditing = true
+			picker.sourceType = .camera
+			picker.modalPresentationStyle = .fullScreen
+			self.present(picker, animated: true, completion: nil)
+		}
+	}
+	
+	func choosePicture() -> Void {
+		if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
+			let picker = UIImagePickerController.init()
+			picker.delegate = self
+			picker.allowsEditing = true
+			picker.sourceType = .photoLibrary
+			picker.modalPresentationStyle = .fullScreen
+			self.present(picker, animated: true, completion: nil)
+		}
 	}
 
 }
@@ -107,7 +152,7 @@ extension HZModifyInfoViewController :UITableViewDelegate, UITableViewDataSource
 				if 1 == indexPath.row {
 					cell.modifyResultLabel.text = HZUserInfo.share().sex == "0" ? "女" : "男"
 					self.rx_sex = cell.rx_CellLabel
-					cell.rx_CellLabel.accept(HZUserInfo.share().showName)
+					cell.rx_CellLabel.accept(cell.modifyResultLabel.text)
 				} else if 2 == indexPath.row {
 					self.rx_birthday = cell.rx_CellLabel
 					cell.modifyResultLabel.text = HZUserInfo.share().bornDate
@@ -196,5 +241,31 @@ extension HZModifyInfoViewController :UITableViewDelegate, UITableViewDataSource
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return 0.000001
 	}
+
+}
+
+extension HZModifyInfoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+		picker.dismiss(animated: true) {
+			let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+			let headView: HZModifyHeaderIconView = self.tableView.tableHeaderView as! HZModifyHeaderIconView
+			headView.iconImageBtn.setImage(image, for: .normal)
+			if picker.sourceType == .camera {
+				UIImageWriteToSavedPhotosAlbum(image, self, #selector(HZModifyInfoViewController.savedPhotosAlbum(image: didFinishSavingWithError: contextInfo:)), nil)
+			}
+		}
+	}
+
+	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+		picker.dismiss(animated: true) {
+		}
+	}
+	
+	@objc func savedPhotosAlbum(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject) {
+        
+        if error != nil {
+        } else {
+        }
+    }
 
 }

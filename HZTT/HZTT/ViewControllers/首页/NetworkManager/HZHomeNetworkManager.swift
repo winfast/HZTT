@@ -15,9 +15,13 @@ import SwiftyJSON
 
 class HZHomeNetworkManager: NSObject {
 	static let shared = HZHomeNetworkManager()
-	private let provider = MoyaProvider<HZHomeNetworkMoya>()
+	lazy private var provider: MoyaProvider<HZHomeNetworkMoya> =  {
+		var item = MoyaProvider<HZHomeNetworkMoya>()
+		return item
+	}()
 	
 	func getPostList(_ param: [String: Any]) -> Observable<[HZHomeCellViewModel]> {
+		
 		return Observable<[HZHomeCellViewModel]>.create { (observable) -> Disposable in
 			self.provider.request(.getPostList(param), callbackQueue: DispatchQueue.main, progress: nil) { [weak self] response in
 				switch response {

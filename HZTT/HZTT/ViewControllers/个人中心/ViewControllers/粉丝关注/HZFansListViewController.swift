@@ -13,7 +13,7 @@ import MJRefresh
 class HZFansListViewController: HZBaseViewController {
 	
 	var tableView: UITableView!
-	var dataSource: Array<String>!
+	var dataSource: Array<String>! = Array.init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class HZFansListViewController: HZBaseViewController {
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.tableView.separatorStyle = .none
-		self.tableView.estimatedRowHeight = 0
+		self.tableView.estimatedRowHeight = 80
 		self.tableView.rowHeight = UITableView.automaticDimension
 		self.tableView.register(HZFansTableViewCell.self, forCellReuseIdentifier: "HZFansTableViewCell")
 		self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { [weak self] () in
@@ -61,11 +61,11 @@ class HZFansListViewController: HZBaseViewController {
 extension HZFansListViewController :UITableViewDelegate, UITableViewDataSource {
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
-		return 0
+		return 1
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 0
+		return self.dataSource.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

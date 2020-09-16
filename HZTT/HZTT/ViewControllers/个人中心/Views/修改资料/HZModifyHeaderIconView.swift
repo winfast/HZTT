@@ -12,6 +12,10 @@ class HZModifyHeaderIconView: UIView {
 	
 	var iconImageBtn: UIButton!
 	var contentLabel: UILabel!
+	let disposeBag: DisposeBag = DisposeBag.init()
+	
+	typealias HZModifyUserIconImage = () -> Void
+	var modifyUserIconImage : HZModifyUserIconImage?
 
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -25,13 +29,22 @@ class HZModifyHeaderIconView: UIView {
 	func viewsLayout() -> Void {
 		self.iconImageBtn = UIButton.init()
 		self.iconImageBtn.setImage(UIImage.init(named: "avatar_default"), for: .normal)
+		self.iconImageBtn.layer.cornerRadius = 45
+		self.iconImageBtn.layer.masksToBounds = true
+		self.iconImageBtn.rx.tap
+			.subscribe(onNext: { [weak self] () in
+				guard let weakself = self else {
+					return
+				}
+				weakself.modifyUserIconImage?()
+			})
+			.disposed(by: disposeBag)
 		self.addSubview(iconImageBtn)
 		self.iconImageBtn.snp.makeConstraints { (make) in
 			make.centerX.equalTo(self.snp.centerX)
 			make.top.equalTo(20)
 			make.size.equalTo(CGSize.init(width: 90, height: 90))
 		}
-		
 		
 		self.contentLabel = UILabel.init()
 		self.contentLabel.font = HZFont(fontSize: 14)

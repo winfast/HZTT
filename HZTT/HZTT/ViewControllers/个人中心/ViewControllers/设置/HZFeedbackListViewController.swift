@@ -30,7 +30,7 @@ class HZFeedbackListViewController: HZBaseViewController {
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.tableView.separatorStyle = .none
-		self.tableView.estimatedRowHeight = 0
+		self.tableView.estimatedRowHeight = 80
 		self.tableView.rowHeight = UITableView.automaticDimension
 		self.tableView.register(HZFansTableViewCell.self, forCellReuseIdentifier: "HZFansTableViewCell")
 		self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { [weak self] () in
