@@ -201,10 +201,10 @@ class HZLivelihoodTableViewCell: UITableViewCell {
 						self?.firstImageView.isHidden = false;
 						self?.firstImageView.kf.setImage(with: URL.init(string:imagePath))
 					} else if index == 1 {
-						self?.secondImageView.isHidden = false;
+						self?.secondImageView.isHidden = true;
 						self?.secondImageView.kf.setImage(with: URL.init(string:imagePath))
 					} else if index == 2 {
-						self?.thirdImageView.isHidden = false;
+						self?.thirdImageView.isHidden = true;
 						self?.thirdImageView.kf.setImage(with: URL.init(string:imagePath))
 					}
 				}

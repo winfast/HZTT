@@ -39,6 +39,10 @@ class HZHomeDetailViewController: HZBaseViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+	
+	deinit {
+		print(self)
+	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,14 +149,8 @@ class HZHomeDetailViewController: HZBaseViewController {
 		self.commentBadgeLabel?.layer.cornerRadius = 5;
 		self.commentBadgeLabel?.isHidden = true
 		self.commentBadgeLabel?.layer.masksToBounds = true
-		
 		showCommentLabel?.addSubview(self.commentBadgeLabel!)
-//		self.commentBadgeLabel?.snp.makeConstraints({ (make) in
-//			make.left.equalTo(self.showCommentLabel!.snp.centerX).offset(0)
-//			make.top.equalTo(self.showCommentLabel!.snp.top).offset(2)
-//			make.height.equalTo(10)
-//			make.width.greaterThanOrEqualTo(10).priority(900)
-//		})
+
 		
 		let showCommentItem = UIBarButtonItem.init(customView: self.showCommentLabel!)
 		
@@ -180,15 +178,21 @@ class HZHomeDetailViewController: HZBaseViewController {
 	}
 
 	func createRAC() -> Void {
-		self.rx.observe(String.self, "cellViewModel.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
+		self.rx.observeWeakly(String.self, "cellViewModel.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
+			guard let weakself = self else {
+				return
+			}
 			if value?.lengthOfBytes(using: .utf8) ?? 0 > 0 {
-				self?.iconImageView.kf.setImage(with: URL.init(string: value!))
+				weakself.iconImageView.kf.setImage(with: URL.init(string: value!))
 			}
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "cellViewModel.sc").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
+		self.rx.observeWeakly(String.self, "cellViewModel.sc").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
+			guard let weakself = self else {
+				return
+			}
 			if value?.lengthOfBytes(using: .utf8) ?? 0 > 0 {
-				self?.likeBtn?.isSelected = value == "1"
+				weakself.likeBtn?.isSelected = value == "1"
 			}
 		}).disposed(by: disposeBag)
 	}
@@ -312,34 +316,34 @@ extension HZHomeDetailViewController :UITableViewDelegate, UITableViewDataSource
 				let cell: HZHomeDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZHomeDetailTableViewCell") as! HZHomeDetailTableViewCell
 				
 				cell.viewModel = self.cellViewModel
-				cell.clickBtnBlock = { [weak self] (button: UIView?)->Void in
-					guard let weakself = self else {
-						return
-					}
-					if (button?.tag)! >= 100 {
-						//进入Brower
-						var images :[SKPhoto] = []
-						for imagePathItem in weakself.cellViewModel!.images! {
-							let photo = SKPhoto.photoWithImageURL(imagePathItem)
-							images.append(photo)
-						}
-						
-						SKPhotoBrowserOptions.enableZoomBlackArea = false
-						SKPhotoBrowserOptions.displayAction = false   //隐藏ToolBar
-						SKPhotoBrowserOptions.displayBackAndForwardButton = false
-						//SKPhotoBrowserOptions.displayToolbar = false
-						let imageView = button as! UIImageView
-						let browser = SKPhotoBrowser.init(originImage: imageView.image!, photos: images, animatedFromView: imageView)
-						browser.currentPageIndex = (button?.tag)! - 100
-						weakself.present(browser, animated: true, completion: nil)
-					} else {
-						if button?.tag == 0 {
-							
-						} else {
-							weakself.showComplainViewController()
-						}
-					}
-				}
+//				cell.clickBtnBlock = { [weak self] (button: UIView?)->Void in
+//					guard let weakself = self else {
+//						return
+//					}
+//					if (button?.tag)! >= 100 {
+//						//进入Brower
+//						var images :[SKPhoto] = []
+//						for imagePathItem in weakself.cellViewModel!.images! {
+//							let photo = SKPhoto.photoWithImageURL(imagePathItem)
+//							images.append(photo)
+//						}
+//
+//						SKPhotoBrowserOptions.enableZoomBlackArea = false
+//						SKPhotoBrowserOptions.displayAction = false   //隐藏ToolBar
+//						SKPhotoBrowserOptions.displayBackAndForwardButton = false
+//						//SKPhotoBrowserOptions.displayToolbar = false
+//						let imageView = button as! UIImageView
+//						let browser = SKPhotoBrowser.init(originImage: imageView.image!, photos: images, animatedFromView: imageView)
+//						browser.currentPageIndex = (button?.tag)! - 100
+//						weakself.present(browser, animated: true, completion: nil)
+//					} else {
+//						if button?.tag == 0 {
+//
+//						} else {
+//							weakself.showComplainViewController()
+//						}
+//					}
+//				}
 				
 				return cell
 			} else  {

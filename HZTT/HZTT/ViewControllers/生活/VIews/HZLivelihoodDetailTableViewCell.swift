@@ -49,14 +49,35 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 			make.right.equalTo(self.contentView.snp.right).offset(-10)
 		}
 		
-		self.firstImageView.snp.remakeConstraints { (make) in
-			make.left.equalTo(self.contentView.snp.left).offset(10)
+        self.collectionView.snp.remakeConstraints { (make) in
+            make.left.equalTo(0)
 			make.top.equalTo(self.messageContentLabel.snp.bottom).offset(17)
-			make.width.equalTo((HZSCreenWidth() - 20 - 2 * 2)/3.0)
-			make.height.equalTo(firstImageView.snp.width).multipliedBy(153.0/130);
-		}
+			make.width.equalTo(self.contentView.snp.width)
+			make.height.equalTo(1)
+        }
 		
 		self.layoutIfNeeded()
+		
+		self.disposable.dispose()
+		self.collectionView.rx.observe(CGSize.self, "contentSize").distinctUntilChanged().filter({ (value) -> Bool in
+			if value?.width == 0 {
+				return false
+			} else {
+				return true
+			}
+		}).subscribe(onNext: { [weak self] (value) in
+			guard let weakself = self else {
+				return
+			}
+
+			weakself.collectionView.snp.remakeConstraints { (make) in
+				make.left.equalTo(0)
+				make.top.equalTo(weakself.messageContentLabel.snp.bottom).offset(10)
+				make.width.equalTo(weakself.contentView.snp.width)
+				make.height.equalTo(value!.height + 1)
+			}
+			weakself.layoutIfNeeded()
+		}).disposed(by: disposeBag)
 	}
 	
 	override func createRAC() {
@@ -158,36 +179,27 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 		self.rx.observe(String.self, "viewModel.fanCnt").distinctUntilChanged().bind(to: self.upvoteBtn.rx.title(for: .normal)).disposed(by: disposeBag)
 		
 		self.rx.observe(Array<String>.self, "viewModel.images").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
+			guard let weakself = self else {
+				return
+			}
 			let x = value ?? []
-			self?.firstImageView.isHidden = true
-			self?.secondImageView.isHidden = true
-			self?.thirdImageView.isHidden = true
+			weakself.dataSource = x
+			weakself.collectionView.reloadData()
 			if x.count == 0 {
-				self?.readCountLbael.snp.remakeConstraints { (make) in
-					make.left.equalTo(self!.messageTitleLabel.snp.left)
-					make.top.equalTo(self!.messageContentLabel.snp.bottom).offset(20 + 15)
-					make.bottom.lessThanOrEqualTo(-15).priority(900)
+				weakself.collectionView.isHidden = true
+				weakself.readCountLbael.snp.remakeConstraints { (make) in
+					make.left.equalTo(weakself.messageTitleLabel.snp.left)
+					make.top.equalTo(weakself.messageTitleLabel.snp.bottom).offset(15 + 20)
 				}
-			}else {
-				self?.readCountLbael.snp.remakeConstraints { (make) in
-					make.left.equalTo(self!.messageTitleLabel.snp.left)
-					make.top.equalTo(self!.firstImageView.snp.bottom).offset(20)
-					make.bottom.lessThanOrEqualTo(-15).priority(900)
-				}
-				for index in 0..<x.count {
-					let imagePath = x[index]
-					if index == 0 {
-						self?.firstImageView.isHidden = false;
-						self?.firstImageView.kf.setImage(with: URL.init(string:imagePath))
-					} else if index == 1 {
-						self?.secondImageView.isHidden = false;
-						self?.secondImageView.kf.setImage(with: URL.init(string:imagePath))
-					} else if index == 2 {
-						self?.thirdImageView.isHidden = false;
-						self?.thirdImageView.kf.setImage(with: URL.init(string:imagePath))
-					}
+			} else {
+				
+				weakself.collectionView.isHidden = false
+				weakself.readCountLbael.snp.remakeConstraints { (make) in
+					make.left.equalTo(weakself.messageTitleLabel.snp.left)
+					make.top.equalTo(weakself.collectionView.snp.bottom).offset(20)
 				}
 			}
+			weakself.layoutIfNeeded()
 			self?.layoutIfNeeded()
 		}).disposed(by: disposeBag)
 	}

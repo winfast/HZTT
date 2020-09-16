@@ -24,7 +24,10 @@ class HZMessageListViewController: HZBaseViewController {
 		self.dataRequest()
 	}
 	
-	
+	deinit {
+		print(self)
+	}
+
 	func viewsLayout() -> Void {
 		self.navigationItem.title = "消息"
 		
@@ -50,11 +53,12 @@ class HZMessageListViewController: HZBaseViewController {
 		self.tableView.dataSource = self;
 		self.tableView.backgroundColor = .clear
 		self.tableView.separatorStyle = .none
-		self.tableView.estimatedRowHeight = 80;
+		self.tableView.estimatedRowHeight = 80
+		self.tableView.separatorStyle = .singleLine
 		self.tableView.rowHeight = UITableView.automaticDimension
 		self.tableView.tableFooterView = UIView.init()
 		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
-		self.tableView.register(HZFansTableViewCell.self, forCellReuseIdentifier: "HZFansTableViewCell")
+		self.tableView.register(HZMessageInfoTableViewCell.self, forCellReuseIdentifier: "HZMessageInfoTableViewCell")
 		self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { [weak self] in
 			guard let weakself = self else {
 				return
@@ -108,10 +112,9 @@ extension HZMessageListViewController : UITableViewDelegate, UITableViewDataSour
 			cell.isUserInteractionEnabled = false
 			return cell
 		} else {
-			let cell = tableView.dequeueReusableCell(withIdentifier: "HZFansTableViewCell") as! HZFansTableViewCell
+			let cell = tableView.dequeueReusableCell(withIdentifier: "HZMessageInfoTableViewCell") as! HZMessageInfoTableViewCell
 			cell.selectionStyle = .none
-			cell.accessoryType = .disclosureIndicator
-			cell.removeBtn.isHidden = false
+			cell.accessoryType = .none
 			return cell
 		}
 	}

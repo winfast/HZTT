@@ -94,6 +94,7 @@ class HZDatePickView: UIView {
 		self.datePickView.datePickerMode = .date
 		let locale = Locale.init(identifier: "Chinese")
 		self.datePickView.locale = locale
+		self.datePickView.maximumDate = Date.init()
 		
 		whiteView.addSubview(self.datePickView)
 		self.datePickView.snp.makeConstraints { (make) in

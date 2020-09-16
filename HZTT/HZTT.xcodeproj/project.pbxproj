@@ -81,6 +81,7 @@
 		04E9A732250F86C400244A4B /* HZFeedbackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9A731250F86C400244A4B /* HZFeedbackListTableViewCell.swift */; };
 		04E9A7342510675100244A4B /* HZProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9A7332510675100244A4B /* HZProtocol.swift */; };
 		04E9A7362510D45F00244A4B /* HZMessageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9A7352510D45F00244A4B /* HZMessageListViewController.swift */; };
+		04E9A73B251211A100244A4B /* HZMessageInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9A73A251211A100244A4B /* HZMessageInfoTableViewCell.swift */; };
 		04F4917A24F9FC5700125236 /* HZReleaseNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4917924F9FC5700125236 /* HZReleaseNewsViewController.swift */; };
 		04F4917D24FA4AD500125236 /* all_category_item.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04F4917C24FA4AD500125236 /* all_category_item.plist */; };
 		04F4917F24FA52F400125236 /* HZWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4917E24FA52F400125236 /* HZWebViewController.swift */; };
@@ -167,6 +168,7 @@
 		04E9A731250F86C400244A4B /* HZFeedbackListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZFeedbackListTableViewCell.swift; sourceTree = "<group>"; };
 		04E9A7332510675100244A4B /* HZProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZProtocol.swift; sourceTree = "<group>"; };
 		04E9A7352510D45F00244A4B /* HZMessageListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZMessageListViewController.swift; sourceTree = "<group>"; };
+		04E9A73A251211A100244A4B /* HZMessageInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZMessageInfoTableViewCell.swift; sourceTree = "<group>"; };
 		04F4917924F9FC5700125236 /* HZReleaseNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZReleaseNewsViewController.swift; sourceTree = "<group>"; };
 		04F4917C24FA4AD500125236 /* all_category_item.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = all_category_item.plist; sourceTree = "<group>"; };
 		04F4917E24FA52F400125236 /* HZWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZWebViewController.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 		046BABB825072BE10028EA0E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				04E9A7392512119000244A4B /* 消息 */,
 				04E9A72E250F46AF00244A4B /* 粉丝关注 */,
 				041F0E85250C56E800ED23AD /* 设置 */,
 				041F0E7B250A5CF800ED23AD /* 我的主页 */,
@@ -611,6 +614,14 @@
 				04E9A72F250F46EB00244A4B /* HZFansTableViewCell.swift */,
 			);
 			path = "粉丝关注";
+			sourceTree = "<group>";
+		};
+		04E9A7392512119000244A4B /* 消息 */ = {
+			isa = PBXGroup;
+			children = (
+				04E9A73A251211A100244A4B /* HZMessageInfoTableViewCell.swift */,
+			);
+			path = "消息";
 			sourceTree = "<group>";
 		};
 		04F4917724F9FB3300125236 /* 登录 */ = {
@@ -838,6 +849,7 @@
 				041F0E74250A150F00ED23AD /* HZMyProfileTableViewCell.swift in Sources */,
 				041F0E61250A0D9000ED23AD /* HZAboutViewController.swift in Sources */,
 				041F0E84250B329B00ED23AD /* HZUserInfoNetworkManager.swift in Sources */,
+				04E9A73B251211A100244A4B /* HZMessageInfoTableViewCell.swift in Sources */,
 				04E4FC7E24EA73A800C5E5B0 /* AppDelegate.swift in Sources */,
 				042F2DD124EF6C220069FB39 /* HZCommentCellViewModel.swift in Sources */,
 				047BF2D424EBA34C002A39F3 /* HZHomeModel.swift in Sources */,
