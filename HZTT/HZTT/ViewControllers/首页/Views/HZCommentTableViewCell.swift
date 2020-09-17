@@ -32,10 +32,13 @@ class HZCommentTableViewCell: UITableViewCell {
 	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
-		//self.viewLayout()
-		//self.createRAC()
+		self.viewLayout()
+		self.createRAC()
 	}
 	
+	deinit {
+		print(self)
+	}
 	
 	func viewLayout() -> Void {
 		self.selectionStyle = .none
@@ -89,10 +92,15 @@ class HZCommentTableViewCell: UITableViewCell {
 		self.complainBtn.titleLabel?.font = HZFont(fontSize: 12);
 		self.contentView.addSubview(self.complainBtn)
 		self.complainBtn.rx.tap.subscribe { [weak self](value) in
-			if self?.clickComplainBlock == nil {
+			guard let weakself = self else {
 				return
 			}
-			self?.clickComplainBlock!(self?.complainBtn)
+			
+			if weakself.clickComplainBlock == nil {
+				return
+			}
+			
+			weakself.clickComplainBlock!(weakself.complainBtn)
 		}.disposed(by: disposeBag)
 		self.complainBtn.snp.makeConstraints { (make) in
 			make.right.equalTo(self.contentView.snp.right).offset(-20);
@@ -102,27 +110,32 @@ class HZCommentTableViewCell: UITableViewCell {
 	}
 	
 	func createRAC() -> Void {
-		let nickNameObserve = self.rx.observe(String.self, "viewModel.u_nickName").distinctUntilChanged()
-		let nameObserve = self.rx.observe(String.self, "viewModel.u_name").distinctUntilChanged()
+		let nickNameObserve = self.rx.observeWeakly(String.self, "viewModel.u_nickName").distinctUntilChanged()
+		let nameObserve = self.rx.observeWeakly(String.self, "viewModel.u_name").distinctUntilChanged()
 		Observable.combineLatest(nickNameObserve, nameObserve).subscribe(onNext: { [weak self] value in
+			
+			guard let weakself = self else {
+				return
+			}
+			
 			let nickName = value.0;
 			let name = value.1
 			if name?.lengthOfBytes(using: .utf8) == 0 {
-				self?.userNameLabel.text = nickName
+				weakself.userNameLabel.text = nickName
 			} else {
-				self?.userNameLabel.text = name
+				weakself.userNameLabel.text = name
 			}
 			
 		}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "viewModel.u_avatar").distinctUntilChanged().filter { (value) -> Bool in
+		self.rx.observeWeakly(String.self, "viewModel.u_avatar").distinctUntilChanged().filter { (value) -> Bool in
 			return value == nil || value?.lengthOfBytes(using: .utf8) == 0 ? false : true
 		}.subscribe(onNext: { [weak self] (value) in
 			self?.iconImageView.kf.setImage(with: URL.init(string: value!))
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "viewModel.content").distinctUntilChanged().bind(to: self.commentContentLabel.rx.text).disposed(by: disposeBag)
-		self.rx.observe(String.self, "viewModel.date").distinctUntilChanged().map { (value) -> String in
+		self.rx.observeWeakly(String.self, "viewModel.content").distinctUntilChanged().bind(to: self.commentContentLabel.rx.text).disposed(by: disposeBag)
+		self.rx.observeWeakly(String.self, "viewModel.date").distinctUntilChanged().map { (value) -> String in
 			if value == nil {
 				return ""
 			}

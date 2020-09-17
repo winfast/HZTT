@@ -41,7 +41,7 @@ class HZHomeDetailViewController: HZBaseViewController {
     }
 	
 	deinit {
-		print(self)
+		print("deinit " + NSStringFromClass(self.classForCoder))
 	}
 
     override func viewDidLoad() {
@@ -108,7 +108,7 @@ class HZHomeDetailViewController: HZBaseViewController {
 		self.dataRequest()
 		self.createRAC()
     }
-	
+
 	func toolBarLayout(_ toolBar: UIToolbar) -> Void {
 		
 		var height = 49;
@@ -316,34 +316,34 @@ extension HZHomeDetailViewController :UITableViewDelegate, UITableViewDataSource
 				let cell: HZHomeDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZHomeDetailTableViewCell") as! HZHomeDetailTableViewCell
 				
 				cell.viewModel = self.cellViewModel
-//				cell.clickBtnBlock = { [weak self] (button: UIView?)->Void in
-//					guard let weakself = self else {
-//						return
-//					}
-//					if (button?.tag)! >= 100 {
-//						//进入Brower
-//						var images :[SKPhoto] = []
-//						for imagePathItem in weakself.cellViewModel!.images! {
-//							let photo = SKPhoto.photoWithImageURL(imagePathItem)
-//							images.append(photo)
-//						}
-//
-//						SKPhotoBrowserOptions.enableZoomBlackArea = false
-//						SKPhotoBrowserOptions.displayAction = false   //隐藏ToolBar
-//						SKPhotoBrowserOptions.displayBackAndForwardButton = false
-//						//SKPhotoBrowserOptions.displayToolbar = false
-//						let imageView = button as! UIImageView
-//						let browser = SKPhotoBrowser.init(originImage: imageView.image!, photos: images, animatedFromView: imageView)
-//						browser.currentPageIndex = (button?.tag)! - 100
-//						weakself.present(browser, animated: true, completion: nil)
-//					} else {
-//						if button?.tag == 0 {
-//
-//						} else {
-//							weakself.showComplainViewController()
-//						}
-//					}
-//				}
+				cell.clickBtnBlock = { [weak self] (button: UIView?)->Void in
+					guard let weakself = self else {
+						return
+					}
+					if (button?.tag)! >= 100 {
+						//进入Brower
+						var images :[SKPhoto] = []
+						for imagePathItem in weakself.cellViewModel!.images! {
+							let photo = SKPhoto.photoWithImageURL(imagePathItem)
+							images.append(photo)
+						}
+
+						SKPhotoBrowserOptions.enableZoomBlackArea = false
+						SKPhotoBrowserOptions.displayAction = false   //隐藏ToolBar
+						SKPhotoBrowserOptions.displayBackAndForwardButton = false
+						//SKPhotoBrowserOptions.displayToolbar = false
+						let imageView = button as! UIImageView
+						let browser = SKPhotoBrowser.init(originImage: imageView.image!, photos: images, animatedFromView: imageView)
+						browser.currentPageIndex = (button?.tag)! - 100
+						weakself.present(browser, animated: true, completion: nil)
+					} else {
+						if button?.tag == 0 {
+
+						} else {
+							weakself.showComplainViewController()
+						}
+					}
+				}
 				
 				return cell
 			} else  {
@@ -384,10 +384,10 @@ extension HZHomeDetailViewController :UITableViewDelegate, UITableViewDataSource
 			let cell: HZCommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZCommentTableViewCell") as! HZCommentTableViewCell
 			cell.viewModel = self.commentDataArray[indexPath.row]
 			cell.clickComplainBlock = { [weak self] (button: UIButton?) -> Void in
-				guard let weakSelf = self else {
-					return
-				}
-				weakSelf.showComplainViewController()
+//				guard let weakSelf = self else {
+//					return
+//				}
+//				weakSelf.showComplainViewController()
 			}
 			return cell
 		}

@@ -40,8 +40,6 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 	@objc dynamic open var viewModel: HZHomeCellViewModel?;  //KVO监听
 	var disposeBag = DisposeBag()
 	
-	var disposable :Disposable!
-	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
@@ -50,6 +48,10 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		viewsLayout()
 		createRAC()
+	}
+	
+	deinit {
+		print(self)
 	}
 	
 	func viewsLayout() -> Void {
@@ -121,7 +123,6 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		readCountLbael.textColor = UIColorWith24Hex(rgbValue: 0x999999)
 		readCountLbael.font = HZFont(fontSize: 12.0)
 		readCountLbael.textAlignment = .center
-		readCountLbael.backgroundColor = .red
 		self.contentView.addSubview(readCountLbael)
 		readCountLbael.snp.makeConstraints { (make) in
 			make.left.equalTo(self.messageTitleLabel.snp.left)
@@ -187,29 +188,31 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 			make.top.equalTo(self.readCountLbael.snp.bottom).offset(20)
 			make.bottom.lessThanOrEqualTo(-20).priority(900)
 		}
-		self.disposable = self.collectionView.rx.observe(CGSize.self, "contentSize").distinctUntilChanged().filter({ (value) -> Bool in
-			if value?.width == 0 {
-				return false
-			} else {
-				return true
-			}
-		}).subscribe(onNext: { [weak self] (value) in
-			guard let weakself = self else {
-				return
-			}
-			
-			weakself.collectionView.snp.remakeConstraints { (make) in
-				make.left.equalTo(0)
-				make.top.equalTo(weakself.messageTitleLabel.snp.bottom).offset(10)
-				make.width.equalTo(weakself.contentView.snp.width)
-				make.height.equalTo(value!.height + 1)
-			}
-			weakself.layoutIfNeeded()
-		})
-	}
-	
-	deinit {
-		self.disposable.disposed(by: disposeBag)
+		self.collectionView.rx.observe(CGSize.self, "contentSize").distinctUntilChanged()
+			.filter({ (value) -> Bool in
+				if value?.width == 0 {
+					return false
+				} else {
+					return true
+				}
+			})
+			.subscribe(onNext: { [weak self] (value) in
+				guard let weakself = self else {
+					return
+				}
+				
+				if weakself.isMember(of: HZHomeDetailTableViewCell.self) == false {
+					return
+				}
+				weakself.collectionView.snp.remakeConstraints { (make) in
+					make.left.equalTo(0)
+					make.top.equalTo(weakself.messageTitleLabel.snp.bottom).offset(10)
+					make.width.equalTo(weakself.contentView.snp.width)
+					make.height.equalTo(value!.height + 1)
+				}
+				weakself.layoutIfNeeded()
+			})
+			.disposed(by: disposeBag)
 	}
 	
 	func createRAC() -> Void {

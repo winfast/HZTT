@@ -58,7 +58,6 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 		
 		self.layoutIfNeeded()
 		
-		self.disposable.dispose()
 		self.collectionView.rx.observe(CGSize.self, "contentSize").distinctUntilChanged().filter({ (value) -> Bool in
 			if value?.width == 0 {
 				return false
@@ -67,6 +66,10 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 			}
 		}).subscribe(onNext: { [weak self] (value) in
 			guard let weakself = self else {
+				return
+			}
+			
+			if weakself.isMember(of: HZLivelihoodDetailTableViewCell.self) == false {
 				return
 			}
 
