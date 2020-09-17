@@ -199,10 +199,10 @@ class HZTopicListTableViewCell: UITableViewCell {
 						strongSelf.firstImageView.isHidden = false;
 						strongSelf.firstImageView.kf.setImage(with: URL.init(string:imagePath))
 					} else if index == 1 {
-						strongSelf.secondImageView.isHidden = false;
+						strongSelf.secondImageView.isHidden = true;
 						strongSelf.secondImageView.kf.setImage(with: URL.init(string:imagePath))
 					} else if index == 2 {
-						strongSelf.thirdImageView.isHidden = false;
+						strongSelf.thirdImageView.isHidden = true;
 						strongSelf.thirdImageView.kf.setImage(with: URL.init(string:imagePath))
 					}
 				}

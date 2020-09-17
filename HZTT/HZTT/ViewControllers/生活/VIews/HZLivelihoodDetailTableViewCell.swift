@@ -85,9 +85,9 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 	
 	override func createRAC() {
 		
-		let contentObserve = self.rx.observe(String.self, "viewModel.content").distinctUntilChanged()
-		let typeObserve = self.rx.observe(String.self, "viewModel.type").distinctUntilChanged()
-		Observable.combineLatest(contentObserve, typeObserve).subscribe(onNext: { [weak self] value in
+		let contentObserve = self.rx.observeWeakly(String.self, "viewModel.content").distinctUntilChanged()
+		let typeObserve = self.rx.observeWeakly(String.self, "viewModel.type").distinctUntilChanged()
+		Observable.combineLatest(contentObserve, typeObserve).subscribe(onNext: { [weak self] (value) in
 			guard let strongSelf = self else {return}
 			guard let content = value.0 else {return}
 			guard let type = value.1 else {return}
@@ -133,14 +133,9 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 			
 		}).disposed(by: disposeBag)
 		
-//		self.rx.observe(String.self, "viewModel.content").subscribe(onNext: { (value) in
-//
-//		}).disposed(by: disposeBag)
-		
-		
-		let nickNameObserve = self.rx.observe(String.self, "viewModel.nickName").distinctUntilChanged()
-		let nameObserve = self.rx.observe(String.self, "viewModel.name").distinctUntilChanged()
-		Observable.combineLatest(nickNameObserve, nameObserve).subscribe(onNext: { [weak self] value in
+		let nickNameObserve = self.rx.observeWeakly(String.self, "viewModel.nickName").distinctUntilChanged()
+		let nameObserve = self.rx.observeWeakly(String.self, "viewModel.name").distinctUntilChanged()
+		Observable.combineLatest(nickNameObserve, nameObserve).subscribe(onNext: { [weak self] (value) in
 			let nickName = value.0;
 			let name = value.1
 			if name?.lengthOfBytes(using: .utf8) == 0 {
@@ -151,11 +146,11 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 			
 		}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "viewModel.postDate").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
+		self.rx.observeWeakly(String.self, "viewModel.postDate").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
 			self?.userTimeLabel.text = value
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "viewModel.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
+		self.rx.observeWeakly(String.self, "viewModel.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
 			if value?.lengthOfBytes(using: .utf8) ?? 0 > 0 {
 				self?.iconImage.kf.setImage(with: URL.init(string: value!))
 			}
@@ -173,15 +168,15 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 //			self?.messageTitleLabel.attributedText = attr
 //		}).disposed(by: disposeBag)
 		
-		self.rx.observe(Int.self, "viewModel.readCnt").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
+		self.rx.observeWeakly(Int.self, "viewModel.readCnt").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
 			let x : Int = value ?? 0
 			let stringValue = x > 0 ? "\(x)" : ""
 			self?.readCountLbael.text = "阅读" + stringValue
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "viewModel.fanCnt").distinctUntilChanged().bind(to: self.upvoteBtn.rx.title(for: .normal)).disposed(by: disposeBag)
+		self.rx.observeWeakly(String.self, "viewModel.fanCnt").distinctUntilChanged().bind(to: self.upvoteBtn.rx.title(for: .normal)).disposed(by: disposeBag)
 		
-		self.rx.observe(Array<String>.self, "viewModel.images").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
+		self.rx.observeWeakly(Array<String>.self, "viewModel.images").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
 			guard let weakself = self else {
 				return
 			}
@@ -191,14 +186,14 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 			if x.count == 0 {
 				weakself.collectionView.isHidden = true
 				weakself.readCountLbael.snp.remakeConstraints { (make) in
-					make.left.equalTo(weakself.messageTitleLabel.snp.left)
-					make.top.equalTo(weakself.messageTitleLabel.snp.bottom).offset(15 + 20)
+					make.left.equalTo(weakself.messageContentLabel.snp.left)
+					make.top.equalTo(weakself.messageContentLabel.snp.bottom).offset(15 + 20)
 				}
 			} else {
 				
 				weakself.collectionView.isHidden = false
 				weakself.readCountLbael.snp.remakeConstraints { (make) in
-					make.left.equalTo(weakself.messageTitleLabel.snp.left)
+					make.left.equalTo(weakself.messageContentLabel.snp.left)
 					make.top.equalTo(weakself.collectionView.snp.bottom).offset(20)
 				}
 			}

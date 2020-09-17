@@ -32,7 +32,6 @@ class HZLivelihoodHeaderView: UIView {
     
     func viewsLayout() -> Void {
         let flowerLayout = UICollectionViewFlowLayout.init()
-        //let width: Double = (Double(HZSCreenWidth) - Double(3 * 20.0))/4.0
         flowerLayout.itemSize = CGSize.init(width:(HZSCreenWidth() - 10 * 3.0 - 10*2)/4.0, height: 80)
         flowerLayout.minimumLineSpacing = 10
         flowerLayout.minimumInteritemSpacing = 10

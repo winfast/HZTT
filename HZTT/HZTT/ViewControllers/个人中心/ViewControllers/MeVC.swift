@@ -330,14 +330,16 @@ extension MeVC :UITableViewDelegate, UITableViewDataSource {
 		} else if (1 == indexPath.row) {
 			let vc = HZMessageListViewController.init()
 			self.navigationController?.pushViewController(vc, animated: true)
-		}else if (indexPath.row == 3) {  //粉丝关注
+		} else if (2 == indexPath.row) {
+			let vc = HZLikeListViewController.init()
+			self.navigationController?.pushViewController(vc, animated: true)
+		} else if (indexPath.row == 3) {  //粉丝关注
 			let vc = HZFansAndConcernViewController.init()
 			self.navigationController?.pushViewController(vc, animated: true)
 		} else {
 			let vc = HZSettingViewController.init()
 			self.navigationController?.pushViewController(vc, animated: true)
 		}
-
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

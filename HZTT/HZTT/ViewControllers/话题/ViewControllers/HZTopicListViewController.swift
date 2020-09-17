@@ -38,7 +38,7 @@ class HZTopicListViewController: HZBaseViewController {
 		self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { [weak self] in
 			self?.tableView.mj_footer.isHidden = false
 			self?.tableView.mj_footer.state = .idle
-			self?.messageArray.removeAll();
+			
 			self?.dataRequest()
 		})
 		
@@ -57,27 +57,38 @@ class HZTopicListViewController: HZBaseViewController {
 					 "pageNumber":pageNumber as Any
 			] as [String:Any]
 		
-		HZHomeNetworkManager.shared.getPostList(param).subscribe(onNext: { [weak self] (value :[HZHomeCellViewModel]) in
-			if self?.tableView.mj_header.isRefreshing() == true {
-				self?.tableView.mj_header.endRefreshing()
-			}
-			
-			if self?.tableView.mj_footer.isRefreshing() == true {
-				self?.tableView.mj_footer.endRefreshing()
-			}
-			self?.messageArray = (self?.messageArray)! + value
-			if self?.messageArray!.count == 0 {
-				self?.tableView.mj_footer.isHidden = true
-				self?.tableView.mj_footer.state = .noMoreData
-			} else {
-				if value.count < 20 {
-					self?.tableView.mj_footer.state = .noMoreData
+		HZHomeNetworkManager.shared.getPostList(param)
+			.subscribe(onNext: { [weak self] (value :[HZHomeCellViewModel]) in
+				guard let weakself = self else {
+					return
 				}
-			}
-			
-			self?.tableView.reloadData()
-			self!.tableView.ex_makeViewVisible()
-			}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+				
+				if weakself.tableView.mj_header.isRefreshing() == true {
+					weakself.tableView.mj_header.endRefreshing()
+				}
+				
+				if weakself.tableView.mj_footer.isRefreshing() == true {
+					weakself.tableView.mj_footer.endRefreshing()
+				}
+				
+				if pageNumber == 1 {
+					weakself.messageArray.removeAll();
+				}
+				
+				weakself.messageArray = (self?.messageArray)! + value
+				if weakself.messageArray!.count == 0 {
+					weakself.tableView.mj_footer.isHidden = true
+					weakself.tableView.mj_footer.state = .noMoreData
+				} else {
+					if value.count < 20 {
+						weakself.tableView.mj_footer.state = .noMoreData
+					}
+				}
+				
+				weakself.tableView.reloadData()
+				weakself.tableView.ex_makeViewVisible()
+				}, onError: nil, onCompleted: nil, onDisposed: nil)
+			.disposed(by: disposeBag)
 	}
     
 

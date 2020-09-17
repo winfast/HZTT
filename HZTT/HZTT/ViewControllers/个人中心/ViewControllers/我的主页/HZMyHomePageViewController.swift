@@ -33,15 +33,20 @@ class HZMyHomePageViewController: HZBaseViewController {
 		self.tableView.dataSource = self
 		self.tableView.separatorStyle = .none
 		self.tableView.tableHeaderView = headerView
+		self.tableView.register(HZMyHomepageTableViewCell.self, forCellReuseIdentifier: "HZMyHomepageTableViewCell")
+		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
 		self.view.addSubview(self.tableView)
 		self.tableView.snp.makeConstraints { (make) in
 			make.edges.equalTo(0)
 		}
 		
 		self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { [weak self] in
-			self?.tableView.mj_footer.isHidden = false
-			self?.tableView.mj_footer.state = .idle
-			self?.dataRequest()
+			guard let weakself = self else {
+				return
+			}
+			weakself.tableView.mj_footer.isHidden = false
+			weakself.tableView.mj_footer.state = .idle
+			weakself.dataRequest()
 		})
 	}
 	
@@ -49,25 +54,24 @@ class HZMyHomePageViewController: HZBaseViewController {
 		if HZUserInfo.isLogin() == false {
 			return
 		}
-		var d : [String : Any];
+		var d: [String : Any];
 		if uid != nil {
-				d = ["category":"sy" ,
-						 "uid": uid! ,
-				"pageNumber":1,
-				"type":0,
+			d = ["category":"sy" ,
+				 "uid": uid! ,
+				 "pageNumber":1,
+				 "type":0,
 				] as [String : Any]
 		} else {
 			d = ["category":"sy" ,
-						 "uid": HZUserInfo.share().user_id! ,
-				"pageNumber":1,
-				"type":0,
+				 "uid": HZUserInfo.share().user_id! ,
+				 "pageNumber":1,
+				 "type":0,
 				] as [String : Any]
 		}
 		
 		HZMeProfileNetwordManager.shared.getScURL(d).subscribe(onNext: { (value) in
 			
 		}).disposed(by: disposeBag)
-		
 	}
 }
 
@@ -82,8 +86,9 @@ extension HZMyHomePageViewController :UITableViewDelegate, UITableViewDataSource
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
-		return UITableViewCell.init()
+		let cell = tableView.dequeueReusableCell(withIdentifier: "HZMyHomepageTableViewCell") as! HZMyHomepageTableViewCell
+		cell.selectionStyle = .none
+		return cell
 	}
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
