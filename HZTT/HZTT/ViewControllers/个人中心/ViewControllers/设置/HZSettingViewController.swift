@@ -28,8 +28,8 @@ class HZSettingViewController: HZBaseViewController {
 		
 		self.dataSource = [
 		[["title":"修改资料","className":"HZModifyInfoViewController","param":""],
-		 ["title":"黑名单","className":"HZBaseViewController","param":""],
-		 ["title":"通知","className":"HZBlacklistViewController","param":""]],
+		 ["title":"黑名单","className":"HZBlacklistViewController","param":""],
+		 ["title":"通知","className":"","param":""]],
 		[["title":"清空缓存","className":"","param":""],
 		 ["title":"意见反馈","className":"HZFeedbackViewController","param":""],
 		 ["title":"前往评分","className":"HZBaseViewController","param":""],

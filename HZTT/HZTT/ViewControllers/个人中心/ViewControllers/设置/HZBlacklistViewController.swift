@@ -32,6 +32,7 @@ class HZBlacklistViewController: HZBaseViewController {
         self.tableView.backgroundColor = .clear
 		self.tableView.estimatedRowHeight = 80
 		self.tableView.rowHeight = UITableView.automaticDimension
+		self.tableView.tableFooterView = UIView.init()
 		self.tableView.register(HZFansTableViewCell.self, forCellReuseIdentifier: "HZFansTableViewCell")
         self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { [weak self] in
             guard let weakself = self else {
