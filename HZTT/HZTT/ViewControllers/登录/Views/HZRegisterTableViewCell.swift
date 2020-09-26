@@ -31,6 +31,7 @@ class HZRegisterTableViewCell: UITableViewCell {
 	typealias HZClickRegisterCellBtnBlock = (_ btn :UIView?) -> Void
 	open var clickRegisterCellBtnBlock :HZClickRegisterCellBtnBlock?
 	
+	//保存按钮是否选择的状态
 	var rx_agreementBehaviorRelay: BehaviorRelay<Bool>! = BehaviorRelay.init(value: false)
 
 	required init?(coder: NSCoder) {
@@ -88,39 +89,41 @@ class HZRegisterTableViewCell: UITableViewCell {
 		codeBtn.tag = HZRegisterCellBtnTag.sendCode.rawValue
 		codeBtn.titleLabel?.font = HZFont(fontSize: 13)
 		codeBtn.rx.tap
-		.subscribe(onNext: { [weak self] () in
-			guard let weakself = self else {
-				return
-			}
-			weakself.endEditing(true)
-			if weakself.phoneTextField.text?.lengthOfBytes(using: .utf8) != 11 {
-				MBProgressHUD.showToast("请输入正确的手机号码", inView: weakself.window)
-				return
-			}
-			
-			//启动定时器
-			weakself.timer = Observable<Int>.interval(1, scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] (value) in
+			.subscribe(onNext: { [weak self] () in
 				guard let weakself = self else {
 					return
 				}
 				
-				if value > 10 {
-					weakself.codeBtn.isEnabled = true
-					weakself.codeBtn.setTitle("获取验证码", for: .normal)
-					weakself.timer!.dispose()
-					weakself.timer = nil
-				} else {
-					weakself.codeBtn.isEnabled = false
-					weakself.codeBtn.setTitle("\(value)" + "S", for: .normal)
+				weakself.endEditing(true)
+				if weakself.phoneTextField.text?.lengthOfBytes(using: .utf8) != 11 {
+					MBProgressHUD.showToast("请输入正确的手机号码", inView: weakself.window)
+					return
 				}
+				
+				//启动定时器
+				weakself.timer = Observable<Int>.interval(1, scheduler: MainScheduler.instance).subscribe(onNext: { [weak self] (value) in
+					guard let weakself = self else {
+						return
+					}
+					
+					if value > 60 {
+						weakself.codeBtn.isEnabled = true
+						weakself.codeBtn.setTitle("获取验证码", for: .normal)
+						weakself.timer!.dispose()
+						weakself.timer = nil
+					} else {
+						weakself.codeBtn.isEnabled = false
+						weakself.codeBtn.setTitle("\(60 - value)" + "S", for: .normal)
+					}
+				})
 			})
-			}).disposed(by: disposeBag)
+			.disposed(by: disposeBag)
 		self.contentView.addSubview(self.codeBtn)
 		self.codeBtn.snp.makeConstraints { (make) in
 			make.right.equalTo(-20)
 			make.width.equalTo(80)
 			make.height.equalTo(40)
-			make.bottom.equalTo(self.codeTextField.snp.bottom)
+			make.centerY.equalTo(self.codeTextField.snp.centerY)
 		}
 		
 		let codeLineView = UIView.init()
@@ -201,15 +204,16 @@ class HZRegisterTableViewCell: UITableViewCell {
 		self.readAgreementBtn.setImage(UIImage.init(named: "select_reviewbar_all"), for: .normal)
 		self.readAgreementBtn.setImage(UIImage.init(named: "select_reviewbar_all_press"), for: .selected)
 		self.readAgreementBtn.layer.masksToBounds = true
-		//self.readAgreementBtn.addTarget(self, action: #selector(clickRegisterCellBtn(_ :)), for: .touchUpInside)
-		self.readAgreementBtn.rx.tap.subscribe(onNext: { [weak self] () in
-			guard let weakself = self else {
-				return
-			}
-			
-			weakself.readAgreementBtn.isSelected = !weakself.readAgreementBtn.isSelected;
-			weakself.rx_agreementBehaviorRelay.accept(weakself.readAgreementBtn.isSelected)
-		}).disposed(by: disposeBag)
+		self.readAgreementBtn.rx.tap
+			.subscribe(onNext: { [weak self] () in
+				guard let weakself = self else {
+					return
+				}
+				
+				weakself.readAgreementBtn.isSelected = !weakself.readAgreementBtn.isSelected;
+				weakself.rx_agreementBehaviorRelay.accept(weakself.readAgreementBtn.isSelected)
+			})
+			.disposed(by: disposeBag)
 		self.contentView.addSubview(self.readAgreementBtn)
 		self.readAgreementBtn.snp.makeConstraints { (make) in
 			make.leading.equalTo(15)
@@ -238,7 +242,6 @@ class HZRegisterTableViewCell: UITableViewCell {
 			make.left.equalTo(self.readAgreementBtn.snp.right).offset(-6)
 			make.centerY.equalTo(self.readAgreementBtn.snp.centerY)
 		}
-	
 	}
 	
 	func createRACSignal() -> Void {
@@ -260,8 +263,6 @@ class HZRegisterTableViewCell: UITableViewCell {
 		let validPasswordObservable: Observable<Bool> = self.validPasswordTextField.rx.text.map { (value) -> Bool in
 			return value == nil ? false : true
 		}.share(replay: 1, scope: .whileConnected)
-		
-		//let readAgreementObservable: Observable<Bool> = self.readAgreementBtn.rx.isSelected.m
 		
 		Observable.combineLatest(phoneObservable, codeObservable, passwordObservable, validPasswordObservable, rx_agreementBehaviorRelay).map { (value) -> Bool in
 			return value.0 && value.1 && value.2 && value.3 && value.4

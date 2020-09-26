@@ -95,16 +95,20 @@ class HZTopicListViewController: HZBaseViewController {
 	}
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	func showCloseAlertView(_ messageId: String) -> Void {
+		let cancelAction = UIAlertAction.init(title: "取消", style: .cancel) { (action) in
+			
+		}
+		
+		let okAction = UIAlertAction.init(title: "确定", style: .destructive) { (action) in
+			//屏蔽消息接口, 肯定传消息ID
+		}
+		
+		let alertViewController = UIAlertController.init(title: "不喜欢这条动态,确定屏蔽", message: nil, preferredStyle: .alert)
+		alertViewController.addAction(cancelAction)
+		alertViewController.addAction(okAction)
+		self.navigationController?.present(alertViewController, animated: true, completion: nil)
+	}
 }
 
 extension HZTopicListViewController :UITableViewDelegate, UITableViewDataSource {
@@ -120,6 +124,13 @@ extension HZTopicListViewController :UITableViewDelegate, UITableViewDataSource 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell :HZTopicListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZTopicListTableViewCell") as! HZTopicListTableViewCell
 		cell.viewModel = self.messageArray[indexPath.row]
+		cell.clickCloseBlock = { [weak self] (_ btn :UIButton?) -> Void in
+			guard let weakself = self else {
+				return
+			}
+			
+			weakself.showCloseAlertView(cell.viewModel.pid!)
+		}
 		return cell
 	}
 	

@@ -29,6 +29,9 @@ class HZTopicListTableViewCell: UITableViewCell {
 	
 	var disposeBag: DisposeBag! = DisposeBag()
 	
+	typealias HZClickCloseBlock = (_ btn :UIButton?) -> Void
+	open var clickCloseBlock :HZClickCloseBlock?
+	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
@@ -150,10 +153,25 @@ class HZTopicListTableViewCell: UITableViewCell {
 			make.left.equalTo(self.userTimeLabel.snp.right).offset(5)
 			make.centerY.equalTo(self.userIconImageView.snp.centerY)
 		}
+		
+		closeBtn = UIButton.init(type: UIButton.ButtonType.custom)
+		closeBtn.backgroundColor = UIColor.clear
+		closeBtn.setImage(UIImage.init(named: "dislikeicon_details"), for: UIControl.State.normal);
+		bgView.addSubview(closeBtn)
+		closeBtn.rx.controlEvent(UIControl.Event.touchUpInside).subscribe(onNext: { [weak self] () -> Void in
+			if (self!.clickCloseBlock != nil) {
+				self!.clickCloseBlock!(self?.closeBtn)
+			}
+		}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+		closeBtn.snp.makeConstraints { (make) in
+			make.centerY.equalTo(self.userIconImageView.snp.centerY)
+			make.right.equalTo(self.bgView.snp.right).offset(-15)
+			make.size.equalTo(CGSize.init(width: 30, height: 20))
+		}
 	}
 	
 	func createRAC() -> Void {
-		self.rx.observe(String.self, "viewModel.content").filter { (value) -> Bool in
+		self.rx.observeWeakly(String.self, "viewModel.content").filter { (value) -> Bool in
 			if value == nil || value?.lengthOfBytes(using: .utf8) == 0 {
 				return false
 			}
@@ -171,7 +189,7 @@ class HZTopicListTableViewCell: UITableViewCell {
 			strongSelf.messageConentLabel.text = content.replacingOccurrences(of: "&&", with: " ")
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(Array<String>.self, "viewModel.images").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
+		self.rx.observeWeakly(Array<String>.self, "viewModel.images").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
 			guard let strongSelf = self else {return}
 			let x = value ?? []
 			self?.firstImageView.isHidden = true
@@ -210,15 +228,25 @@ class HZTopicListTableViewCell: UITableViewCell {
 			strongSelf.layoutIfNeeded()
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "viewModel.postDate").distinctUntilChanged().bind(to: self.userTimeLabel.rx.text).disposed(by: disposeBag)
+		self.rx.observeWeakly(String.self, "viewModel.postDate").distinctUntilChanged().map { (value) -> String in
+			guard let valueItem = value else {
+				return ""
+			}
+			
+			let timeArray = valueItem.split(separator: " ")
+			let firstStr = String(timeArray[0])
+			return firstStr
+			
+			
+		}.bind(to: self.userTimeLabel.rx.text).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "viewModel.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
+		self.rx.observeWeakly(String.self, "viewModel.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
 			if value?.lengthOfBytes(using: .utf8) ?? 0 > 0 {
 				self?.userIconImageView.kf.setImage(with: URL.init(string: value!))
 			}
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(Int.self, "viewModel.readCnt").distinctUntilChanged().map({ (value) -> String in
+		self.rx.observeWeakly(Int.self, "viewModel.readCnt").distinctUntilChanged().map({ (value) -> String in
 			if value == nil {
 				return ""
 			}
@@ -242,7 +270,7 @@ class HZTopicListTableViewCell: UITableViewCell {
 				strongSelf.userNameLabel.text = name
 			}
 			
-		}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+		}).disposed(by: disposeBag)
 		
 	}
 }

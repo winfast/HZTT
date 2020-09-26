@@ -14,7 +14,7 @@ class HZMyHomePageViewController: HZBaseViewController {
 	var tableView: UITableView!
 	let disposeBag: DisposeBag = DisposeBag.init()
 	var uid :String?
-	var dataSource: Array<String>!
+	var dataSource: Array<String>! = Array.init()
 
     override func viewDidLoad() {
         super.viewDidLoad()

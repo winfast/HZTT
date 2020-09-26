@@ -187,7 +187,29 @@ extension HZSettingViewController :UITableViewDelegate, UITableViewDataSource {
 				let letvc = currClassName.init()
 				self.navigationController?.pushViewController(letvc, animated: true)
 			} else {
-				
+				switch (indexPath.section, indexPath.row) {
+				case (1,0):  //清空缓存
+					DispatchQueue.main.async {
+						let cancelAction = UIAlertAction.init(title: "取消", style: .cancel) { (aciton) in
+							
+						}
+						let okAction = UIAlertAction.init(title: "确定", style: .destructive) { (action) in
+							HZUserInfo.share().clearUserInfo { [weak self] in
+								guard let weakself = self else {
+									return
+								}
+								weakself.navigationController?.popViewController(animated: true)
+							}
+						}
+						
+						let alertController = UIAlertController.init(title: "提示", message: "清除图片及缓存数据", preferredStyle: .alert)
+						alertController.addAction(cancelAction)
+						alertController.addAction(okAction)
+						self.present(alertController, animated: true, completion: nil)
+					}
+				default:
+					return
+				}
 			}
 		}
 		

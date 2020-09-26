@@ -120,7 +120,7 @@ class HZLoginTableViewCell: UITableViewCell {
 		
 		self.registerBtn = UIButton.init(type: .custom)
 		self.registerBtn.backgroundColor = .clear
-		self.registerBtn.setTitle("注册", for: .normal)
+		self.registerBtn.setTitle("注册账号", for: .normal)
 		self.registerBtn.titleLabel?.font = HZFont(fontSize: 13)
 		self.registerBtn.contentHorizontalAlignment = .left
 		self.registerBtn.tag = HZLoginCellBtnTag.register.rawValue
@@ -154,7 +154,6 @@ class HZLoginTableViewCell: UITableViewCell {
 			self.clickLoginCellBtnBlock!(sender)
 		}
 	}
-	
 	
 	func createRACSignal() -> Void {
 		let userNameValid :Observable<Bool> = self.phoneTextField.rx.text.orEmpty.map { (value) -> Bool in

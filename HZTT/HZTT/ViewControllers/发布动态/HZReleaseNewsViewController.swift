@@ -76,26 +76,27 @@ class HZReleaseNewsViewController: HZBaseViewController {
 extension HZReleaseNewsViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		//选择类型,发布动态
-		
-		
-		
-		self.dismiss(animated: true) {
+		let knowAciton = UIAlertAction.init(title: "知道了", style: .default) { (aciton) in
+			self.dismiss(animated: false, completion: nil)
 			
 			let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! HZTabBarController
-			
 			let itemInfo = self.dataSource[indexPath.section][indexPath.item];
-//
-//			let pid: String = ["item_key"] as! String
 			let vc = HZWebViewController.init()
 			let nav = HZNavigationController.init(rootViewController: vc)
-			tabBarVC.present(nav, animated: true, completion: nil)
-			
+			tabBarVC.present(nav, animated: true) {
+			}
 		}
 		
+		let notiAction = UIAlertAction.init(title: "发布须知", style: .default) { (aciton) in
+			let webView = HZWebViewController.init()
+			webView.url = "p/publishNotes.html"
+			self.navigationController?.pushViewController(webView, animated: true)
+		}
 		
-//		self.navigationController?.dismiss(animated: true, completion: {
-//			
-//		})
+		let alertViewController = UIAlertController.init(title: "提示", message: "请发布真实有效信息,否则审核无法通过", preferredStyle: .alert)
+		alertViewController.addAction(knowAciton)
+		alertViewController.addAction(notiAction)
+		self.navigationController?.present(alertViewController, animated: true, completion: nil)
 	}
 	
 	func numberOfSections(in collectionView: UICollectionView) -> Int {

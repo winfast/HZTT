@@ -40,7 +40,7 @@ class HZForgetPasswordTableViewCell: UITableViewCell {
 		phoneTextField.snp.makeConstraints { (make) in
 			make.leading.equalTo(30)
 			make.trailing.equalTo(-30)
-			make.top.equalTo(30)
+			make.top.equalTo(45)
 			make.height.equalTo(50)
 		}
 		
@@ -96,7 +96,7 @@ class HZForgetPasswordTableViewCell: UITableViewCell {
 					weakself.timer = nil
 				} else {
 					weakself.codeBtn.isEnabled = false
-					weakself.codeBtn.setTitle("\(value)" + "S", for: .normal)
+					weakself.codeBtn.setTitle("\(60 - value)" + "S", for: .normal)
 				}
 			})
 		}).disposed(by: disposeBag)
@@ -105,7 +105,7 @@ class HZForgetPasswordTableViewCell: UITableViewCell {
 			make.right.equalTo(-20)
 			make.width.equalTo(80)
 			make.height.equalTo(40)
-			make.bottom.equalTo(self.codeTextField.snp.bottom)
+			make.centerY.equalTo(self.codeTextField.snp.centerY)
 		}
 		
 		let codeLineView = UIView.init()

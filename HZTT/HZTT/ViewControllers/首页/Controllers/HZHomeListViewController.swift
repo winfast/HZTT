@@ -99,6 +99,21 @@ class HZHomeListViewController: HZBaseViewController {
 			self!.tableView.ex_makeViewVisible()
 			}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 	}
+	
+	func showCloseAlertView(_ messageId: String!) -> Void {
+		let cancelAction = UIAlertAction.init(title: "取消", style: .cancel) { (action) in
+			
+		}
+		
+		let okAction = UIAlertAction.init(title: "确定", style: .destructive) { (action) in
+			
+		}
+		
+		let alertViewController = UIAlertController.init(title: "不喜欢这条动态,确定屏蔽", message: nil, preferredStyle: .alert)
+		alertViewController.addAction(cancelAction)
+		alertViewController.addAction(okAction)
+		self.navigationController?.present(alertViewController, animated: true, completion: nil)
+	}
 }
 
 extension HZHomeListViewController :UITableViewDelegate, UITableViewDataSource {
@@ -115,6 +130,13 @@ extension HZHomeListViewController :UITableViewDelegate, UITableViewDataSource {
 		let cell: HZHomeTableViewCell =  tableView.dequeueReusableCell(withIdentifier: "HZHomeTableViewCell") as! HZHomeTableViewCell
 		cell.viewModel = self.messageList![indexPath.row]
 		cell.selectionStyle = .none
+		cell.clickCloseBlock = { [weak self] (_ btn :UIButton?) in
+			guard let weakself = self else {
+				return
+			}
+			
+			weakself.showCloseAlertView(cell.viewModel!.pid)
+		}
 		return cell
 	}
 	
