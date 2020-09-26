@@ -22,6 +22,9 @@ extension MBProgressHUD {
         hud.mode = .text
         hud.label.text = text
         hud.removeFromSuperViewOnHide = true
+		hud.bezelView.backgroundColor = UIColor.black
+        hud.contentColor = UIColor.white
+		hud.offset = CGPoint.init(x: 0, y: -30)
 		hud.hide(animated: true, afterDelay: 1.5)
     }
 	

@@ -14,7 +14,7 @@ class HZMyHomePageViewController: HZBaseViewController {
 	var tableView: UITableView!
 	let disposeBag: DisposeBag = DisposeBag.init()
 	var uid :String?
-	//var dataSource: Array<>!
+	var dataSource: Array<String>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,17 +40,26 @@ class HZMyHomePageViewController: HZBaseViewController {
 			make.edges.equalTo(0)
 		}
 		
+		self.tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: { [weak self] in
+			guard let weakself = self else {
+				return
+			}
+			
+			//继续请求列表
+			weakself.dataRequest()
+		})
+		
 		self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { [weak self] in
 			guard let weakself = self else {
 				return
 			}
-			weakself.tableView.mj_footer.isHidden = false
+			weakself.tableView.mj_footer?.isHidden = false
 			weakself.tableView.mj_footer.state = .idle
 			weakself.dataRequest()
 		})
 	}
 	
-	func dataRequest() -> Void {
+	func dataRequest(_ pageNumber: Int = 1) -> Void {
 		if HZUserInfo.isLogin() == false {
 			return
 		}
@@ -58,7 +67,7 @@ class HZMyHomePageViewController: HZBaseViewController {
 		if uid != nil {
 			d = ["category":"sy" ,
 				 "uid": uid! ,
-				 "pageNumber":1,
+				 "pageNumber":pageNumber,
 				 "type":0,
 				] as [String : Any]
 		} else {
@@ -82,7 +91,7 @@ extension HZMyHomePageViewController :UITableViewDelegate, UITableViewDataSource
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 1
+		return self.dataSource.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

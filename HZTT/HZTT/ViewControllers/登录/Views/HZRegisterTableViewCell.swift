@@ -30,6 +30,8 @@ class HZRegisterTableViewCell: UITableViewCell {
 	
 	typealias HZClickRegisterCellBtnBlock = (_ btn :UIView?) -> Void
 	open var clickRegisterCellBtnBlock :HZClickRegisterCellBtnBlock?
+	
+	var rx_agreementBehaviorRelay: BehaviorRelay<Bool>! = BehaviorRelay.init(value: false)
 
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -53,7 +55,7 @@ class HZRegisterTableViewCell: UITableViewCell {
 		phoneTextField.snp.makeConstraints { (make) in
 			make.leading.equalTo(30)
 			make.trailing.equalTo(-30)
-			make.top.equalTo(30)
+			make.top.equalTo(45)
 			make.height.equalTo(50)
 		}
 		
@@ -199,7 +201,15 @@ class HZRegisterTableViewCell: UITableViewCell {
 		self.readAgreementBtn.setImage(UIImage.init(named: "select_reviewbar_all"), for: .normal)
 		self.readAgreementBtn.setImage(UIImage.init(named: "select_reviewbar_all_press"), for: .selected)
 		self.readAgreementBtn.layer.masksToBounds = true
-		self.readAgreementBtn.addTarget(self, action: #selector(clickRegisterCellBtn(_ :)), for: .touchUpInside)
+		//self.readAgreementBtn.addTarget(self, action: #selector(clickRegisterCellBtn(_ :)), for: .touchUpInside)
+		self.readAgreementBtn.rx.tap.subscribe(onNext: { [weak self] () in
+			guard let weakself = self else {
+				return
+			}
+			
+			weakself.readAgreementBtn.isSelected = !weakself.readAgreementBtn.isSelected;
+			weakself.rx_agreementBehaviorRelay.accept(weakself.readAgreementBtn.isSelected)
+		}).disposed(by: disposeBag)
 		self.contentView.addSubview(self.readAgreementBtn)
 		self.readAgreementBtn.snp.makeConstraints { (make) in
 			make.leading.equalTo(15)
@@ -251,8 +261,10 @@ class HZRegisterTableViewCell: UITableViewCell {
 			return value == nil ? false : true
 		}.share(replay: 1, scope: .whileConnected)
 		
-		Observable.combineLatest(phoneObservable, codeObservable, passwordObservable, validPasswordObservable).map { (value) -> Bool in
-			return value.0 && value.1 && value.2 && value.3
+		//let readAgreementObservable: Observable<Bool> = self.readAgreementBtn.rx.isSelected.m
+		
+		Observable.combineLatest(phoneObservable, codeObservable, passwordObservable, validPasswordObservable, rx_agreementBehaviorRelay).map { (value) -> Bool in
+			return value.0 && value.1 && value.2 && value.3 && value.4
 		}.bind(to: self.registerBtn.rx.isEnabled).disposed(by: disposeBag)
 	}
 	
