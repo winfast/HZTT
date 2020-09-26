@@ -22,11 +22,11 @@ class HZComplainViewController: HZBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+        // Do any additional setup after loading the view.
 		self.navigationItem.title = "请输入举报原因"
 		self.navigationLayout()
 		self.viewsLayout()
-
-        // Do any additional setup after loading the view.
     }
 	
 	func navigationLayout() -> Void {
@@ -63,7 +63,6 @@ class HZComplainViewController: HZBaseViewController {
 		}
 	}
     
-	
 	@objc func clickLeftBtn(_sender: UIButton) -> Void {
 		self.navigationController?.dismiss(animated: true, completion: nil)
 	}
@@ -72,17 +71,6 @@ class HZComplainViewController: HZBaseViewController {
 		self.view.endEditing(true)
 		self.navigationController?.dismiss(animated: true, completion: nil)
 	}
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension HZComplainViewController :UITableViewDelegate, UITableViewDataSource {
@@ -102,13 +90,6 @@ extension HZComplainViewController :UITableViewDelegate, UITableViewDataSource {
 			cell.textView.rx.text.asObservable().subscribe(onNext: { (value) in
 				self.complainText = value
 			}).disposed(by: cell.disposeBag)
-			
-//			cell.textView.rx.text.subscribe { (value) in
-//				self.complainText = (value.event.element!!)
-//				print(self.complainText)
-//			}.disposed(by:cell.disposeBag)
-			
-			
             return cell
         } else {
             let cell :HZComplainTextFieldTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZComplainTextFieldTableViewCell") as! HZComplainTextFieldTableViewCell
@@ -136,7 +117,6 @@ extension HZComplainViewController :UITableViewDelegate, UITableViewDataSource {
 		return nil
 	}
 }
-
 
 class HZComplainTableViewCell : UITableViewCell {
 	

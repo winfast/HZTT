@@ -349,7 +349,7 @@ extension HZHomeDetailViewController :UITableViewDelegate, UITableViewDataSource
 			} else  {
 				let cell: HZLivelihoodDetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZLivelihoodDetailTableViewCell") as! HZLivelihoodDetailTableViewCell
 				cell.viewModel = self.cellViewModel
-				cell.clickBtnBlock = { [weak self] (button: UIView?)->Void in
+				cell.clickBtnBlock = { [weak self] (button: UIView?) -> Void in
 					guard let weakself = self else {
 						return
 					}
