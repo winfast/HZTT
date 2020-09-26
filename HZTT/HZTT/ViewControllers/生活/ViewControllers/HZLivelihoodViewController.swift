@@ -110,6 +110,21 @@ class HZLivelihoodViewController: HZBaseViewController {
 			strongself.tableView.ex_makeViewVisible()
 		}).disposed(by: disposeBag)
     }
+	
+	func showCloseAlertView(_ messageId: String!) -> Void {
+		let cancelAction = UIAlertAction.init(title: "取消", style: .cancel) { (action) in
+			
+		}
+		
+		let okAction = UIAlertAction.init(title: "确定", style: .destructive) { (action) in
+			
+		}
+		
+		let alertViewController = UIAlertController.init(title: "不喜欢这条动态,确定屏蔽", message: nil, preferredStyle: .alert)
+		alertViewController.addAction(cancelAction)
+		alertViewController.addAction(okAction)
+		self.navigationController?.present(alertViewController, animated: true, completion: nil)
+	}
 }
 
 extension HZLivelihoodViewController : UITableViewDelegate, UITableViewDataSource {
@@ -131,6 +146,13 @@ extension HZLivelihoodViewController : UITableViewDelegate, UITableViewDataSourc
 		let cell: HZLivelihoodTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZLivelihoodTableViewCell") as! HZLivelihoodTableViewCell
 		cell.selectionStyle = .none
 		cell.viewModel = self.messageList[indexPath.row]
+		cell.clickCloseBlock = { [weak self] (_ sender: UIButton?) -> Void in
+			guard let weakself = self else {
+				return
+			}
+			
+			weakself.showCloseAlertView(cell.viewModel!.pid)
+		}
 		return cell
     }
 	

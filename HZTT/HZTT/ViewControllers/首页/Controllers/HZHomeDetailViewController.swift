@@ -262,7 +262,7 @@ class HZHomeDetailViewController: HZBaseViewController {
 			}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 	}
 	
-	func showComplainViewController(_commentId: String? = nil) -> Void {
+	func showComplainViewController(_ commentId: String? = nil) -> Void {
 		let vc = HZComplainViewController.init()
 		let navigation = HZNavigationController.init(rootViewController: vc)
 		self.navigationController?.present(navigation, animated: true, completion: nil)
@@ -384,10 +384,10 @@ extension HZHomeDetailViewController :UITableViewDelegate, UITableViewDataSource
 			let cell: HZCommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZCommentTableViewCell") as! HZCommentTableViewCell
 			cell.viewModel = self.commentDataArray[indexPath.row]
 			cell.clickComplainBlock = { [weak self] (button: UIButton?) -> Void in
-//				guard let weakSelf = self else {
-//					return
-//				}
-//				weakSelf.showComplainViewController()
+				guard let weakSelf = self else {
+					return
+				}
+				weakSelf.showComplainViewController(cell.viewModel!.ID)
 			}
 			return cell
 		}
