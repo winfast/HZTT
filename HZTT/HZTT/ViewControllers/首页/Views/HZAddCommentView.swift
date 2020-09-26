@@ -141,6 +141,7 @@ class HZAddCommentView: UIView {
 		textView.layer.borderWidth = 1;
 		textView.layer.borderColor = UIColorWith24Hex(rgbValue: 0xE7E7E7).cgColor
 		textView.font = HZFont(fontSize: 16)
+		textView.addRightButtonOnKeyboardWithText("确定", target: self, action: #selector(clickSendBtn), shouldShowPlaceholder: true)
 		self.bgView.addSubview(textView)
 		self.textView.snp.makeConstraints { (make) in
 			make.left.equalTo(15)

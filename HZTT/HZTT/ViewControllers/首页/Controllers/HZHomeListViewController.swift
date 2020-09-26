@@ -58,7 +58,10 @@ class HZHomeListViewController: HZBaseViewController {
 		})
 		
 		let footer: MJRefreshAutoNormalFooter = MJRefreshAutoNormalFooter.init(refreshingBlock: { [weak self] in
-			self?.dataRequest(pageNumber: ((self?.messageList!.count)!/20 == 0 ? 1 : (self?.messageList!.count)!/20))
+			guard let weakself = self else {
+				return
+			}
+			weakself.dataRequest(pageNumber: (weakself.messageList!.count/20 == 0 ? 1 : weakself.messageList!.count/20 + 1))
 		})
 		footer.setTitle("已经是最后一条数据", for: .noMoreData)
 		self.tableView.mj_footer = footer

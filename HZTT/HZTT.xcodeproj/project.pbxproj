@@ -53,6 +53,7 @@
 		0446B86524F4BA100079BC2C /* HZTopicListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446B86424F4BA100079BC2C /* HZTopicListTableViewCell.swift */; };
 		0446B87124F5FD3D0079BC2C /* HZCreateTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446B87024F5FD3D0079BC2C /* HZCreateTopicViewController.swift */; };
 		0446B87324F631B30079BC2C /* HZCreateTopicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0446B87224F631B30079BC2C /* HZCreateTopicTableViewCell.swift */; };
+		0461CFBE251DBF0F002812B6 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0461CFBD251DBF0F002812B6 /* UserNotifications.framework */; };
 		047BF2C524EB6017002A39F3 /* HZHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2C424EB6017002A39F3 /* HZHomeViewController.swift */; };
 		047BF2CA24EB6088002A39F3 /* HZHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2C924EB6088002A39F3 /* HZHomeTableViewCell.swift */; };
 		047BF2CC24EB689A002A39F3 /* HZFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047BF2CB24EB689A002A39F3 /* HZFont.swift */; };
@@ -140,6 +141,8 @@
 		0446B86424F4BA100079BC2C /* HZTopicListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZTopicListTableViewCell.swift; sourceTree = "<group>"; };
 		0446B87024F5FD3D0079BC2C /* HZCreateTopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZCreateTopicViewController.swift; sourceTree = "<group>"; };
 		0446B87224F631B30079BC2C /* HZCreateTopicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZCreateTopicTableViewCell.swift; sourceTree = "<group>"; };
+		0461CFBD251DBF0F002812B6 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		0461CFBF251DBF82002812B6 /* HZTT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HZTT.entitlements; sourceTree = "<group>"; };
 		047BF2C424EB6017002A39F3 /* HZHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HZHomeViewController.swift; sourceTree = "<group>"; };
 		047BF2C924EB6088002A39F3 /* HZHomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZHomeTableViewCell.swift; sourceTree = "<group>"; };
 		047BF2CB24EB689A002A39F3 /* HZFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HZFont.swift; sourceTree = "<group>"; };
@@ -189,6 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0461CFBE251DBF0F002812B6 /* UserNotifications.framework in Frameworks */,
 				04F4918124FA533C00125236 /* WebKit.framework in Frameworks */,
 				C0D70ED209286186840E23D1 /* Pods_HZTT.framework in Frameworks */,
 			);
@@ -514,6 +518,7 @@
 		04E4FC7C24EA73A800C5E5B0 /* HZTT */ = {
 			isa = PBXGroup;
 			children = (
+				0461CFBF251DBF82002812B6 /* HZTT.entitlements */,
 				04F4917B24FA4AD500125236 /* Resource */,
 				04E4FC9524EA7A7600C5E5B0 /* Base */,
 				04E4FC9424EA7A6E00C5E5B0 /* Command */,
@@ -669,6 +674,7 @@
 		92C15AEDA21570FC267589F8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0461CFBD251DBF0F002812B6 /* UserNotifications.framework */,
 				04F4918024FA533C00125236 /* WebKit.framework */,
 				B960D762B7832A7DA0C56283 /* Pods_HZTT.framework */,
 			);
@@ -1014,6 +1020,7 @@
 			baseConfigurationReference = 0D0F67B14D652898A24E16DA /* Pods-HZTT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HZTT/HZTT.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -1039,6 +1046,7 @@
 			baseConfigurationReference = A8FFFD6C6B940C9A5C44B88E /* Pods-HZTT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HZTT/HZTT.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;

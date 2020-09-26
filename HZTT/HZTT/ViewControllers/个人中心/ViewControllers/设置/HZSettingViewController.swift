@@ -47,6 +47,7 @@ class HZSettingViewController: HZBaseViewController {
 		self.tableView.separatorStyle = .singleLine
 		self.tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 0)
 		//self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+		self.tableView.register(HZNotifyTableViewCell.self, forCellReuseIdentifier: "HZNotifyTableViewCell")
 		self.view.addSubview(self.tableView)
 		self.tableView.snp.makeConstraints { (make) in
 			make.edges.equalTo(0)
@@ -86,13 +87,20 @@ extension HZSettingViewController :UITableViewDelegate, UITableViewDataSource {
 			return cell!
 		}
 		
+		let cellInfo: [String:Any] = (self.dataSource?[indexPath.section][indexPath.row])!
+		if indexPath.section == 0 && indexPath.row == 2 {
+			let cell = tableView.dequeueReusableCell(withIdentifier: "HZNotifyTableViewCell") as! HZNotifyTableViewCell
+			cell.textLabel?.text = (cellInfo["title"] as! String)
+			cell.textLabel?.font = HZFont(fontSize: 16)
+			return cell
+		}
+		
 		var cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell")
 		if cell == nil {
 			cell = UITableViewCell.init(style: .value1, reuseIdentifier: "UITableViewCell")
 			cell?.detailTextLabel?.font = HZFont(fontSize: 14)
 			cell?.selectionStyle = .none
 		}
-		let cellInfo: [String:Any] = (self.dataSource?[indexPath.section][indexPath.row])!
 		cell?.textLabel?.text = (cellInfo["title"] as! String)
 		cell?.textLabel?.font = HZFont(fontSize: 16)
 		if (indexPath.section == 0 && indexPath.row == 2) || (indexPath.section == 1 && indexPath.row == 0) {
