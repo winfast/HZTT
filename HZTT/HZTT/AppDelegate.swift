@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //			} else {
 //				return value
 //			}
-//		}
+//		}.
 //		print(result) //["key1": 10]
 
 		

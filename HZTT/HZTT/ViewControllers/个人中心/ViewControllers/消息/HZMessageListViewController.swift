@@ -54,7 +54,7 @@ class HZMessageListViewController: HZBaseViewController {
 		self.tableView.backgroundColor = .clear
 		self.tableView.separatorStyle = .none
 		self.tableView.estimatedRowHeight = 80
-		self.tableView.separatorStyle = .singleLine
+		self.tableView.separatorStyle = .none
 		self.tableView.rowHeight = UITableView.automaticDimension
 		self.tableView.tableFooterView = UIView.init()
 		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
@@ -75,7 +75,7 @@ class HZMessageListViewController: HZBaseViewController {
 			let page = weakself.dataSource.count/10 + 1
 			weakself.dataRequest(page)
 		})
-		
+		self.tableView.mj_footer.isHidden = true
 		self.view.addSubview(self.tableView)
 		self.tableView.snp.makeConstraints { (make) in
 			make.edges.equalTo(0)

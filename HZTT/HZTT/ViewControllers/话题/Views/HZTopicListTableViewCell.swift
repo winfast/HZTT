@@ -117,6 +117,7 @@ class HZTopicListTableViewCell: UITableViewCell {
 		userIconImageView.backgroundColor = UIColor.clear
 		userIconImageView.contentMode = UIView.ContentMode.scaleToFill;
 		userIconImageView.layer.cornerRadius = 15
+		userIconImageView.image = UIImage.init(named: "avatar_default")
 		userIconImageView.layer.masksToBounds = true
 		bgView.addSubview(userIconImageView)
 		userIconImageView.snp.makeConstraints { (make) in
@@ -241,8 +242,13 @@ class HZTopicListTableViewCell: UITableViewCell {
 		}.bind(to: self.userTimeLabel.rx.text).disposed(by: disposeBag)
 		
 		self.rx.observeWeakly(String.self, "viewModel.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
+			guard let weakself = self else {
+				return
+			}
+			
 			if value?.lengthOfBytes(using: .utf8) ?? 0 > 0 {
-				self?.userIconImageView.kf.setImage(with: URL.init(string: value!))
+				//weakself.userIconImageView.kf.setImage(with: URL.init(string: value!))
+				weakself.userIconImageView.kf.setImage(with: URL.init(string: value!), placeholder: UIImage(named: "avatar_default"))
 			}
 		}).disposed(by: disposeBag)
 		

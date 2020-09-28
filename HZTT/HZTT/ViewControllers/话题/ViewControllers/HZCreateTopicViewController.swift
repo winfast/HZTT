@@ -103,7 +103,6 @@ extension HZCreateTopicViewController :UITableViewDelegate, UITableViewDataSourc
 			cell.selectionStyle = .none
 			cell.titleTextField.rx.text.asObservable().subscribe(onNext: { (value) in
 				self.topicTitle = value
-				print(self.topicTitle)
 			}).disposed(by: cell.disposeBag)
 			return cell
 		} else if 1 == indexPath.section {
