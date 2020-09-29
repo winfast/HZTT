@@ -54,6 +54,26 @@ class HZMeProfileNetwordManager: NSObject {
 		}
 	}
 	
+	func blackListURL(_ param: [String:Any]) -> Observable<[Any]?> {
+		return Observable<[Any]?>.create { (observable) -> Disposable in
+			let task = self.provider.request(.blackListUrl(param), callbackQueue: DispatchQueue.main, progress: nil) { [weak self] response in
+				switch response {
+				case let .success(results):
+					let balckList = self?.parseBlakcList(results.data)
+					observable.onNext(balckList)
+					
+					observable.onCompleted()
+				case let .failure(error):
+					observable.onError(error)
+				}
+			}
+			
+			return Disposables.create {
+				task.cancel()
+			}
+		}
+	}
+	
 	func parseUpdateProfileUrl(_ data: Any)->JSON? {
 		//let json = JSON(data)
 		let json = JSON(data)
@@ -62,6 +82,16 @@ class HZMeProfileNetwordManager: NSObject {
 			return JSON.init(dicts!["body"] as Any)
 		} else {
 			return nil
+		}
+	}
+	
+	func parseBlakcList(_ data: Any) -> [Any]? {
+		let json = JSON(data)
+		let dicts :[String:Any]? = json.dictionaryObject;
+		if dicts!["status"] as? Int == 200 {
+			return Array.init()
+		} else {
+			return Array.init()
 		}
 	}
 	

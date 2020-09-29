@@ -92,6 +92,7 @@ extension HZSettingViewController :UITableViewDelegate, UITableViewDataSource {
 			let cell = tableView.dequeueReusableCell(withIdentifier: "HZNotifyTableViewCell") as! HZNotifyTableViewCell
 			cell.textLabel?.text = (cellInfo["title"] as! String)
 			cell.textLabel?.font = HZFont(fontSize: 16)
+			cell.selectionStyle = .none
 			return cell
 		}
 		
