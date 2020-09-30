@@ -24,7 +24,6 @@ class HZFeedbackViewController: HZBaseViewController {
         self.viewsLayout()
     }
     
-    
     func viewsLayout() -> Void {
 		self.navigationItem.title = "意见反馈"
         self.view.backgroundColor = UIColor.init(red:244/255.0, green: 245/255.0, blue: 247/255.0, alpha: 1)
@@ -41,6 +40,18 @@ class HZFeedbackViewController: HZBaseViewController {
 				}
 				weakself.view.endEditing(true)
 				//提交反馈
+				
+				let content = weakself.textView.text
+				if content?.lengthOfBytes(using: .utf8) == 0 {
+					MBProgressHUD.showHub("输入内容不能为空")
+				}
+				
+				guard let userId = HZUserInfo.share().user_id else {
+					return
+				}
+				
+				let d = ["content" : content , "type":"add", "uid": userId]
+				weakself.feedback(d as [String : Any])
             })
             .disposed(by: disposeBag)
         let rightitem = UIBarButtonItem.init(customView: rightbtn)
@@ -106,6 +117,19 @@ class HZFeedbackViewController: HZBaseViewController {
 			}
 		}
     }
+	
+	func feedback(_ param: [String:Any]) -> Void {
+		func dataRequest(_ pageNumber: Int? = 1) -> Void {
+			HZMeProfileNetwordManager.shared.feedback(param).subscribe(onNext: { [weak self] (value) in
+				guard let weakself = self else {
+					return
+				}
+				
+				MBProgressHUD.showHub("提交成功,再次感谢您的支持和关注")
+				weakself.navigationController?.popViewController(animated: true)
+			}).disposed(by: disposeBag)
+		}
+	}
 }
 
 extension HZFeedbackViewController : UITextViewDelegate {

@@ -28,9 +28,10 @@ class HZLikeListViewController: HZBaseViewController {
 		self.tableView = UITableView.init(frame: .zero, style: .plain)
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
-		self.tableView.separatorStyle = .singleLine
+		self.tableView.separatorStyle = .none
 		self.tableView.estimatedRowHeight = 80
 		self.tableView.rowHeight = UITableView.automaticDimension
+		self.tableView.tableFooterView = UIView.init()
 		self.tableView.register(HZMyHomepageTableViewCell.self, forCellReuseIdentifier: "HZMyHomepageTableViewCell")
 		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
 		self.view.addSubview(self.tableView)
@@ -56,6 +57,7 @@ class HZLikeListViewController: HZBaseViewController {
 			let pageCount = weakself.dataSource.count/10 == 0 ? 1 : weakself.dataSource.count/10 + 1
 			weakself.dataRequest(pageNumber: pageCount)
 		})
+		self.tableView.mj_footer.isHidden = true
 	}
 	
 	func dataRequest(pageNumber count: Int = 1) -> Void {
@@ -80,7 +82,7 @@ class HZLikeListViewController: HZBaseViewController {
 				weakself.tableView.mj_header.endRefreshing()
 			}
 			
-			if pageNumber == 1 {
+			if count == 1 {
 				weakself.dataSource.removeAll()
 			}
 			weakself.tableView.reloadData()
@@ -95,13 +97,23 @@ extension HZLikeListViewController :UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return dataSource.count
+		return dataSource.count == 0 ? 1 : self.dataSource.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "HZMyHomepageTableViewCell") as! HZMyHomepageTableViewCell
-		cell.selectionStyle = .none
-		
-		return cell
+		if self.dataSource.count > 0  {
+			let cell = tableView.dequeueReusableCell(withIdentifier: "HZMyHomepageTableViewCell") as! HZMyHomepageTableViewCell
+			cell.selectionStyle = .none
+			return cell
+		} else {
+			let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell")!
+			cell.selectionStyle = .none
+			cell.textLabel?.text = "暂无收藏"
+			cell.textLabel?.textColor = .lightGray
+			cell.textLabel?.textAlignment = .center
+			cell.accessoryType = .none
+			cell.isUserInteractionEnabled = false
+			return cell
+		}
 	}
 }

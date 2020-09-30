@@ -110,7 +110,7 @@ class HZLivelihoodTableViewCell: UITableViewCell {
 			make.height.equalTo(30)
 		}
 		
-		userNameLabel.font = HZFont(fontSize: 10.0)
+		userNameLabel.font = HZFont(fontSize: 13.0)
 		userNameLabel.textColor = UIColorWith24Hex(rgbValue: 0x7A7A7A)
 		self.contentView.addSubview(userNameLabel)
 		userNameLabel.snp.makeConstraints { (make) in
@@ -127,9 +127,10 @@ class HZLivelihoodTableViewCell: UITableViewCell {
 		messageTypeLabel.snp.makeConstraints { (make) in
 			make.left.equalTo(self.userNameLabel.snp.right).offset(30)
 			make.centerY.equalTo(self.userNameLabel.snp.centerY)
+			make.height.equalTo(18)
 		}
 		
-		userTimeLabel.font = HZFont(fontSize: 10.0)
+		userTimeLabel.font = HZFont(fontSize: 13.0)
 		userTimeLabel.textColor = UIColorWith24Hex(rgbValue: 0x7A7A7A)
 		self.contentView.addSubview(userTimeLabel)
 		userTimeLabel.snp.makeConstraints { (make) in
@@ -137,7 +138,7 @@ class HZLivelihoodTableViewCell: UITableViewCell {
 			make.top.equalTo(self.userNameLabel.snp.bottom).offset(6)
 		}
 		
-		readCountLabel.font = HZFont(fontSize: 10.0)
+		readCountLabel.font = HZFont(fontSize: 13.0)
 		readCountLabel.layer.cornerRadius = 5
 		readCountLabel.textColor = UIColorWith24Hex(rgbValue: 0x7A7A7A)
 		self.contentView.addSubview(readCountLabel)
@@ -164,7 +165,7 @@ class HZLivelihoodTableViewCell: UITableViewCell {
 	}
 	
 	func createRAC() -> Void {
-		self.rx.observe(String.self, "viewModel.content").subscribe(onNext: { (value) in
+		self.rx.observeWeakly(String.self, "viewModel.content").subscribe(onNext: { (value) in
 			guard let ss = value else {return}
 			let cc = ss.replacingOccurrences(of: "\n", with: "&&")
 			let contentJson :JSON = JSON.init(parseJSON: cc)
@@ -174,7 +175,7 @@ class HZLivelihoodTableViewCell: UITableViewCell {
 			self.contentLabel.text = content.replacingOccurrences(of: "&&", with: " ")
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(Array<String>.self, "viewModel.images").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
+		self.rx.observeWeakly(Array<String>.self, "viewModel.images").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
 			let x = value ?? []
 			self?.firstImageView.isHidden = true
 			self?.secondImageView.isHidden = true
@@ -212,14 +213,14 @@ class HZLivelihoodTableViewCell: UITableViewCell {
 			self?.layoutIfNeeded()
 		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "viewModel.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
+		self.rx.observeWeakly(String.self, "viewModel.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
 			if value?.lengthOfBytes(using: .utf8) ?? 0 > 0 {
 				self?.userIconImageView.kf.setImage(with: URL.init(string: value!))
 			}
 		}).disposed(by: disposeBag)
 		
-		let nickNameObserve = self.rx.observe(String.self, "viewModel.nickName").distinctUntilChanged()
-		let nameObserve = self.rx.observe(String.self, "viewModel.name").distinctUntilChanged()
+		let nickNameObserve = self.rx.observeWeakly(String.self, "viewModel.nickName").distinctUntilChanged()
+		let nameObserve = self.rx.observeWeakly(String.self, "viewModel.name").distinctUntilChanged()
 		Observable.combineLatest(nickNameObserve, nameObserve).subscribe(onNext: { [weak self] value in
 			let nickName = value.0;
 			let name = value.1
@@ -229,15 +230,24 @@ class HZLivelihoodTableViewCell: UITableViewCell {
 				self?.userNameLabel.text = name
 			}
 			
-		}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "viewModel.postDate").bind(to: self.userTimeLabel.rx.text).disposed(by: disposeBag)
-		self.rx.observe(Int.self, "viewModel.readCnt").map { (value) -> String in
+		self.rx.observeWeakly(String.self, "viewModel.postDate").distinctUntilChanged().map({ (value) -> String in
+			guard let currValue = value else {
+				return ""
+			}
+			
+			let array: [Substring] = currValue.split(separator: " ")
+			return String(array[0])
+		}).bind(to: self.userTimeLabel.rx.text)
+		.disposed(by: disposeBag)
+		
+		self.rx.observeWeakly(Int.self, "viewModel.readCnt").map { (value) -> String in
 			guard let ss = value else {return ""}
 			return "阅读" + "\(ss)"
 		}.bind(to: self.readCountLabel.rx.text).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "viewModel.type").map { (value) -> String in
+		self.rx.observeWeakly(String.self, "viewModel.type").map { (value) -> String in
 			guard let ss = value else {return ""}
 			var type = "吃喝玩乐"
 			type = HZPublishTypeInfo[ss]!

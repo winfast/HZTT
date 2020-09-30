@@ -229,9 +229,14 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 			
 		}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 		
-		self.rx.observeWeakly(String.self, "viewModel.postDate").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
-			self?.userTimeLabel.text = value
-		}).disposed(by: disposeBag)
+		self.rx.observe(String.self, "viewModel.postDate").distinctUntilChanged().map { (value) -> String in
+			guard let currValue = value else {
+				return ""
+			}
+	
+			let array: [Substring] = currValue.split(separator: " ")
+			return String(array[0])
+		}.bind(to: self.userTimeLabel.rx.text).disposed(by: disposeBag)
 		
 		self.rx.observeWeakly(String.self, "viewModel.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
 			if value?.lengthOfBytes(using: .utf8) ?? 0 > 0 {

@@ -22,6 +22,7 @@ enum HZHomeNetworkMoya {
 	case updateProfileUrl(_ param: [String:Any])
 	case getScUrl(_ param: [String:Any])
 	case blackListUrl(_ param: [String:Any])
+	case feedBack(_ param: [String:Any])
 }
 
 extension HZHomeNetworkMoya: TargetType {
@@ -42,6 +43,8 @@ extension HZHomeNetworkMoya: TargetType {
 		case let .getScUrl(param):
 			parammter = param
 		case let .blackListUrl(param):
+			parammter = param
+		case let .feedBack(param):
 			parammter = param
 		default:
 			parammter = [:]
@@ -83,6 +86,8 @@ extension HZHomeNetworkMoya: TargetType {
 			return "getsc.php"
 		case .blackListUrl:
 			return "blackList.php"
+		case .feedBack:
+			return "feedback.php"
 		default:
 			return ""
 		}
@@ -91,7 +96,7 @@ extension HZHomeNetworkMoya: TargetType {
 	//请求方式
 	var method: Moya.Method {
 		switch self {
-		case .getPostList, .detail, .comment, .login, .updateProfileUrl, .getScUrl, .blackListUrl:
+		case .getPostList, .detail, .comment, .login, .updateProfileUrl, .getScUrl, .blackListUrl, .feedBack:
 			return .post
 		case .publish:
 			return .post

@@ -54,6 +54,29 @@ class HZMeProfileNetwordManager: NSObject {
 		}
 	}
 	
+	func feedback(_ param: [String:Any]) -> Observable<Any> {
+		return Observable<Any>.create { (observable) -> Disposable in
+			let task = self.provider.request(.feedBack(param)) { [weak self] (response) in
+				guard let weakself = self else {
+					return
+				}
+				
+				switch response {
+				case let .success(results):
+					//let userInfo = weakself.parseScList(results.data)
+					observable.onNext("success" as! Any)
+					observable.onCompleted()
+				case let .failure(error):
+					observable.onError(error)
+				}
+			}
+			
+			return Disposables.create {
+				task.cancel()
+			}
+		}
+	}
+	
 	func blackListURL(_ param: [String:Any]) -> Observable<[Any]?> {
 		return Observable<[Any]?>.create { (observable) -> Disposable in
 			let task = self.provider.request(.blackListUrl(param), callbackQueue: DispatchQueue.main, progress: nil) { [weak self] response in

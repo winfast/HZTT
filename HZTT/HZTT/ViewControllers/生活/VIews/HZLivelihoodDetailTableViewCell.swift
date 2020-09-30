@@ -146,27 +146,20 @@ class HZLivelihoodDetailTableViewCell: HZHomeDetailTableViewCell {
 			
 		}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 		
-		self.rx.observeWeakly(String.self, "viewModel.postDate").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
-			self?.userTimeLabel.text = value
-		}).disposed(by: disposeBag)
+		self.rx.observeWeakly(String.self, "viewModel.postDate").distinctUntilChanged().map({ (value) -> String in
+			guard let currValue = value else {
+				return ""
+			}
+			
+			let array: [Substring] = currValue.split(separator: " ")
+			return String(array[0])
+		}).bind(to: self.userTimeLabel.rx.text).disposed(by: disposeBag)
 		
 		self.rx.observeWeakly(String.self, "viewModel.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
 			if value?.lengthOfBytes(using: .utf8) ?? 0 > 0 {
 				self?.iconImage.kf.setImage(with: URL.init(string: value!))
 			}
 		}).disposed(by: disposeBag)
-		
-//		self.rx.observe(String.self, "viewModel.content").distinctUntilChanged().filter({ (value) -> Bool in
-//			return value != nil ? true: false
-//		}).subscribe(onNext: { [weak self] (value) in
-//			let paragraphStyle = NSMutableParagraphStyle.init()
-//			paragraphStyle.lineSpacing = 5;
-//			paragraphStyle.lineBreakMode = .byWordWrapping;
-//			paragraphStyle.firstLineHeadIndent = 32
-//			let dic: [NSAttributedString.Key:Any] = [NSAttributedString.Key.font: HZFont(fontSize: 17), NSAttributedString.Key.paragraphStyle:paragraphStyle, NSAttributedString.Key.kern: 1]
-//			let attr = NSAttributedString.init(string: value!, attributes: dic)
-//			self?.messageTitleLabel.attributedText = attr
-//		}).disposed(by: disposeBag)
 		
 		self.rx.observeWeakly(Int.self, "viewModel.readCnt").distinctUntilChanged().subscribe(onNext: { [weak self] (value) in
 			let x : Int = value ?? 0

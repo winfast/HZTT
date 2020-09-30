@@ -21,6 +21,7 @@ class HZSettingViewController: HZBaseViewController {
 
         // Do any additional setup after loading the view.
 		self.navigationItem.title = "设置"
+		self.view.backgroundColor = UIColor.init(red:244/255.0, green: 245/255.0, blue: 247/255.0, alpha: 1)
 		self.viewsLayout()
     }
 	
@@ -44,9 +45,9 @@ class HZSettingViewController: HZBaseViewController {
 		self.tableView.rowHeight = 50
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
+		self.tableView.backgroundColor = .clear
 		self.tableView.separatorStyle = .singleLine
 		self.tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 0)
-		//self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
 		self.tableView.register(HZNotifyTableViewCell.self, forCellReuseIdentifier: "HZNotifyTableViewCell")
 		self.view.addSubview(self.tableView)
 		self.tableView.snp.makeConstraints { (make) in
@@ -83,6 +84,7 @@ extension HZSettingViewController :UITableViewDelegate, UITableViewDataSource {
 				cell = HZLoginoutTableViewCell.init(style: .value1, reuseIdentifier: "HZLoginoutTableViewCell")
 				cell?.detailTextLabel?.font = HZFont(fontSize: 14)
 				cell?.selectionStyle = .none
+				cell?.backgroundColor = .white;
 			}
 			return cell!
 		}
@@ -93,6 +95,7 @@ extension HZSettingViewController :UITableViewDelegate, UITableViewDataSource {
 			cell.textLabel?.text = (cellInfo["title"] as! String)
 			cell.textLabel?.font = HZFont(fontSize: 16)
 			cell.selectionStyle = .none
+			cell.backgroundColor = .white;
 			return cell
 		}
 		
@@ -101,6 +104,7 @@ extension HZSettingViewController :UITableViewDelegate, UITableViewDataSource {
 			cell = UITableViewCell.init(style: .value1, reuseIdentifier: "UITableViewCell")
 			cell?.detailTextLabel?.font = HZFont(fontSize: 14)
 			cell?.selectionStyle = .none
+			cell?.backgroundColor = .white;
 		}
 		cell?.textLabel?.text = (cellInfo["title"] as! String)
 		cell?.textLabel?.font = HZFont(fontSize: 16)
@@ -155,10 +159,8 @@ extension HZSettingViewController :UITableViewDelegate, UITableViewDataSource {
 		let cellInfo: [String:Any] = (self.dataSource?[indexPath.section][indexPath.row])!
 		let className = (cellInfo["className"] as! String)
 		
-		if indexPath.section == 2 {
-			//退出登录
+		if indexPath.section == 2 {  //退出登录
 			let cancelAction = UIAlertAction.init(title: "取消", style: .cancel) { (aciton) in
-				
 			}
 			
 			let okAction = UIAlertAction.init(title: "确定", style: .destructive) { (action) in

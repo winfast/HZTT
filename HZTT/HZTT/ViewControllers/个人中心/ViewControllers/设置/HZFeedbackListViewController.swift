@@ -57,9 +57,7 @@ class HZFeedbackListViewController: HZBaseViewController {
 	}
 	
 	func dataRequest(_ pageNumber: Int? = 1) -> Void {
-		
 	}
-
 }
 
 extension HZFeedbackListViewController :UITableViewDelegate, UITableViewDataSource {
