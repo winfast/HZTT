@@ -65,7 +65,7 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		self.contentView.addSubview(iconImage)
 		iconImage.snp.makeConstraints({ (make) in
 			make.left.equalTo(self.contentView.snp.left).offset(16)
-			make.top.equalTo(10)
+			make.top.equalTo(15)
 			make.height.width.equalTo(40)
 		})
 		
@@ -227,9 +227,9 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 				self?.userNameLabel.text = name
 			}
 			
-		}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+		}).disposed(by: disposeBag)
 		
-		self.rx.observe(String.self, "viewModel.postDate").distinctUntilChanged().map { (value) -> String in
+		self.rx.observeWeakly(String.self, "viewModel.postDate").distinctUntilChanged().map { (value) -> String in
 			guard let currValue = value else {
 				return ""
 			}

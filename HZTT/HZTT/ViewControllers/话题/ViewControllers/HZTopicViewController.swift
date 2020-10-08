@@ -23,11 +23,21 @@ class HZTopicViewController: HZBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		self.initNavigationRightItem()
-        self.viewsLayout()
-
+		
         // Do any additional setup after loading the view.
+		self.initNavigationRightItem()
+		self.viewsLayout()
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		//navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
+	}
+	
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		
+	}
     
     func initNavigationRightItem() -> Void {
         let rightBtn: UIButton = UIButton.init(type: .custom)
@@ -88,7 +98,7 @@ extension HZTopicViewController: JXSegmentedViewDelegate, JXSegmentedListContain
 
     func segmentedView(_ segmentedView: JXSegmentedView, didClickSelectedItemAt index: Int) {
         // navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
-         navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
+        // navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
     }
     
     func numberOfLists(in listContainerView: JXSegmentedListContainerView) -> Int {

@@ -98,12 +98,10 @@ class HZTopicImageTableViewCell: UITableViewCell {
 	}
 	
 	func viewsLayout() -> Void {
-		
 		self.backgroundColor = UIColor.init(red:244/255.0, green: 245/255.0, blue: 247/255.0, alpha: 1);
 		
 		let flowerLayout = UICollectionViewFlowLayout.init()
-        //let width: Double = (Double(HZSCreenWidth) - Double(3 * 20.0))/4.0
-		flowerLayout.itemSize = CGSize.init(width:(HZSCreenWidth() - 5*2.0 - 10*2.0)/3.0, height: 90.0)
+		flowerLayout.itemSize = CGSize.init(width:(320 - 5*2.0 - 10*2.0)/3.0, height: 90.0)
         flowerLayout.minimumLineSpacing = 5
         flowerLayout.minimumInteritemSpacing = 5
         self.collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: flowerLayout)

@@ -24,6 +24,10 @@ class HZMyHomePageViewController: HZBaseViewController {
 		self.dataRequest()
     }
 	
+	deinit {
+		print("deinit " + NSStringFromClass(self.classForCoder))
+	}
+	
 	func viewsLayout() -> Void {
 		let headerView = HZMyHomePageHeaderView.init()
 		headerView.frame = CGRect.init(x: 0, y: 0, width: HZSCreenWidth(), height: 220)

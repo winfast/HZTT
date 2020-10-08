@@ -13,7 +13,6 @@ class HZAddCommentView: UIView {
 	var bgView :UIView! = UIView.init()
 	var textView: IQTextView! = IQTextView.init()
 	var sendBtn: UIButton! = UIButton.init(type: .custom)
-	var sendComment: Bool! = false
 	
 	deinit {
 		NotificationCenter.default.removeObserver(self)
@@ -25,12 +24,11 @@ class HZAddCommentView: UIView {
 		self.viewsLayout()
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_ :)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_ :)), name: UIResponder.keyboardWillHideNotification, object: nil)
 	}
 	
 	@objc func keyboardWillShow(_ noti:Notification) {
-		guard let info = noti.userInfo else { return }//UIKeyboardAnimationDurationUserInfoKey
+		guard let info = noti.userInfo else { return } //UIKeyboardAnimationDurationUserInfoKey
 		guard let rect = info[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else{
 			return
 		}
@@ -56,22 +54,20 @@ class HZAddCommentView: UIView {
 				
 			}
 		}
-		
 	}
 	
 	@objc func keyboardWillHide(_ noti:Notification)  {
-		if self.sendComment == true {
-			return
-		}
 		self.bgView.snp.remakeConstraints { (make) in
 			make.left.right.equalTo(0)
 			make.height.equalTo(80)
-			make.bottom.equalTo(self.maskBgView.snp.bottom).offset(0)
+			make.top.equalTo(self.maskBgView.snp.bottom).offset(0)
 		}
+		
 		UIView.animate(withDuration: 0.25, animations: {
+			self.maskBgView.backgroundColor = UIColor.black.withAlphaComponent(0.0)
 			self.layoutIfNeeded()
 		}) { (finish) in
-			
+			self.removeFromSuperview()
 		}
 	}
 	
@@ -91,7 +87,6 @@ class HZAddCommentView: UIView {
 	}
 	
 	@objc func clickSendBtn() -> Void {
-		self.sendComment = true
 		self.endEditing(true)
 		
 		self.bgView.snp.remakeConstraints { (make) in

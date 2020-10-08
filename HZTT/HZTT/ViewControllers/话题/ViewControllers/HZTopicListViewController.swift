@@ -135,6 +135,7 @@ extension HZTopicListViewController :UITableViewDelegate, UITableViewDataSource 
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
 		let pid = self.messageArray[indexPath.row].pid
 		let vc: HZHomeDetailViewController = HZHomeDetailViewController.init(pid, category: "zt")
 		self.navigationController?.pushViewController(vc, animated: true)
