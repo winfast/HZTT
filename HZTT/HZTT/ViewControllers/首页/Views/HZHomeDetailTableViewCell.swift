@@ -163,10 +163,14 @@ class HZHomeDetailTableViewCell: UITableViewCell {
 		complainBtn.layer.borderWidth = 0.5
 		complainBtn.backgroundColor = UIColor.clear
 		self.complainBtn.rx.tap.subscribe { [weak self] (value) in
-			if self?.clickBtnBlock == nil {
+			guard let weakself = self else {
 				return
 			}
-			self?.clickBtnBlock!(self?.complainBtn)
+			
+			if weakself.clickBtnBlock == nil {
+				return
+			}
+			weakself.clickBtnBlock!(weakself.complainBtn)
 		}.disposed(by: disposeBag)
 		self.contentView.addSubview(complainBtn)
 		complainBtn.snp.makeConstraints { (make) in

@@ -383,11 +383,12 @@ extension HZHomeDetailViewController :UITableViewDelegate, UITableViewDataSource
 		} else {
 			let cell: HZCommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: "HZCommentTableViewCell") as! HZCommentTableViewCell
 			cell.viewModel = self.commentDataArray[indexPath.row]
+			weak var weakcell = cell
 			cell.clickComplainBlock = { [weak self] (button: UIButton?) -> Void in
 				guard let weakSelf = self else {
 					return
 				}
-				weakSelf.showComplainViewController(cell.viewModel!.ID)
+				weakSelf.showComplainViewController(weakcell?.viewModel?.ID)
 			}
 			return cell
 		}

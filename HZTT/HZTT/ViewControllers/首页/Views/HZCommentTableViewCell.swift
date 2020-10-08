@@ -91,7 +91,7 @@ class HZCommentTableViewCell: UITableViewCell {
 		self.complainBtn.setTitle("举报", for: .normal)
 		self.complainBtn.titleLabel?.font = HZFont(fontSize: 12);
 		self.contentView.addSubview(self.complainBtn)
-		self.complainBtn.rx.tap.subscribe { [weak self](value) in
+		self.complainBtn.rx.tap.subscribe { [weak self] (value) in
 			guard let weakself = self else {
 				return
 			}
@@ -102,6 +102,7 @@ class HZCommentTableViewCell: UITableViewCell {
 			
 			weakself.clickComplainBlock!(weakself.complainBtn)
 		}.disposed(by: disposeBag)
+		
 		self.complainBtn.snp.makeConstraints { (make) in
 			make.right.equalTo(self.contentView.snp.right).offset(-20);
 			make.height.width.equalTo(CGSize.init(width: 50, height: 30));
@@ -113,20 +114,18 @@ class HZCommentTableViewCell: UITableViewCell {
 		let nickNameObserve = self.rx.observeWeakly(String.self, "viewModel.u_nickName").distinctUntilChanged()
 		let nameObserve = self.rx.observeWeakly(String.self, "viewModel.u_name").distinctUntilChanged()
 		Observable.combineLatest(nickNameObserve, nameObserve).subscribe(onNext: { [weak self] value in
-			
 			guard let weakself = self else {
 				return
 			}
 			
-			let nickName = value.0;
+			let nickName = value.0
 			let name = value.1
 			if name?.lengthOfBytes(using: .utf8) == 0 {
 				weakself.userNameLabel.text = nickName
 			} else {
 				weakself.userNameLabel.text = name
 			}
-			
-		}, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+		}).disposed(by: disposeBag)
 		
 		self.rx.observeWeakly(String.self, "viewModel.u_avatar").distinctUntilChanged().filter { (value) -> Bool in
 			return value == nil || value?.lengthOfBytes(using: .utf8) == 0 ? false : true
@@ -135,12 +134,12 @@ class HZCommentTableViewCell: UITableViewCell {
 		}).disposed(by: disposeBag)
 		
 		self.rx.observeWeakly(String.self, "viewModel.content").distinctUntilChanged().bind(to: self.commentContentLabel.rx.text).disposed(by: disposeBag)
+		
 		self.rx.observeWeakly(String.self, "viewModel.date").distinctUntilChanged().map { (value) -> String in
 			if value == nil {
 				return ""
 			}
 			return "发布与 " + value!
 		}.bind(to: self.commentTimeLabel.rx.text).disposed(by: disposeBag)
-		
 	}
 }
