@@ -376,7 +376,6 @@ extension HZHomeDetailViewController :UITableViewDelegate, UITableViewDataSource
 							weakself.showComplainViewController()
 						}
 					}
-					
 				}
 				return cell
 			}

@@ -229,7 +229,7 @@ class HZTopicListTableViewCell: UITableViewCell {
 			strongSelf.layoutIfNeeded()
 		}).disposed(by: disposeBag)
 		
-		self.rx.observeWeakly(String.self, "viewModel.postDate").distinctUntilChanged().map { (value) -> String in
+		self.rx.observeWeakly(String.self, "viewModel.postDate").distinctUntilChanged().map({ (value) -> String in
 			guard let valueItem = value else {
 				return ""
 			}
@@ -237,9 +237,7 @@ class HZTopicListTableViewCell: UITableViewCell {
 			let timeArray = valueItem.split(separator: " ")
 			let firstStr = String(timeArray[0])
 			return firstStr
-			
-			
-		}.bind(to: self.userTimeLabel.rx.text).disposed(by: disposeBag)
+		}).bind(to: self.userTimeLabel.rx.text).disposed(by: disposeBag)
 		
 		self.rx.observeWeakly(String.self, "viewModel.avatar_thumb").distinctUntilChanged().subscribe(onNext: { [weak self] (value :String?) in
 			guard let weakself = self else {
@@ -247,17 +245,12 @@ class HZTopicListTableViewCell: UITableViewCell {
 			}
 			
 			if value?.lengthOfBytes(using: .utf8) ?? 0 > 0 {
-				//weakself.userIconImageView.kf.setImage(with: URL.init(string: value!))
 				weakself.userIconImageView.kf.setImage(with: URL.init(string: value!), placeholder: UIImage(named: "avatar_default"))
 			}
 		}).disposed(by: disposeBag)
 		
 		self.rx.observeWeakly(Int.self, "viewModel.readCnt").distinctUntilChanged().map({ (value) -> String in
-			if value == nil {
-				return ""
-			}
-			
-			if value == 0 {
+			if value == nil || value == 0 {
 				return ""
 			}
 			

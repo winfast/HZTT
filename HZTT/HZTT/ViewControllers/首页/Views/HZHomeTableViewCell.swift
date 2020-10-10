@@ -22,6 +22,7 @@ class HZHomeTableViewCell: UITableViewCell {
 	open var messageTypeLabel: UILabel!
 	open var closeBtn: UIButton!
 	
+	
 	//中间三张图片 不一定有
 	open var firstImageView: UIImageView!
 	open var secondImageView: UIImageView!
@@ -202,7 +203,10 @@ class HZHomeTableViewCell: UITableViewCell {
 //		}).disposed(by: disposeBag)
 		
 		
-		
+//		self.rx.observeWeakly(String.self, "viewModel.postDate").distinctUntilChanged().asObservable().asDriver { (value) in
+//
+//		}.drive
+
 		self.rx.observe(String.self, "viewModel.postDate").distinctUntilChanged().map { (value) -> String in
 			guard let currValue = value else {
 				return ""
